@@ -6,10 +6,13 @@ import {
   X,
   Download,
   Copy,
-  Check
+  Check,
+  Printer,
+  Sparkles
 } from 'lucide-react';
 import { PERSONAL_INFO, EXPERIENCES, PROJECTS, CERTIFICATIONS } from '../data/portfolioData';
 import { TechIcon } from './TechIcon';
+import { downloadResume } from '../utils/resumeGenerator';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -19,32 +22,50 @@ interface ResumeModalProps {
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, darkMode = true }) => {
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   if (!isOpen) return null;
 
   const handleDownload = () => {
-    confetti({ particleCount: 50, spread: 60, origin: { y: 0.5 } });
-    window.open(PERSONAL_INFO.portfolioUrl, '_blank');
+    setDownloading(true);
+    try {
+      confetti({ particleCount: 60, spread: 70, origin: { y: 0.4 } });
+      const success = downloadResume();
+      if (success) {
+        setDownloaded(true);
+        setTimeout(() => setDownloaded(false), 3500);
+      }
+    } catch (err) {
+      console.error('Download error:', err);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   const handleCopyText = () => {
     const text = `
 UMESH KOTWAL
 ${PERSONAL_INFO.title}
-${PERSONAL_INFO.location} | ${PERSONAL_INFO.phone} | ${PERSONAL_INFO.email}
+${PERSONAL_INFO.location} | Phone: ${PERSONAL_INFO.phone} | Email: ${PERSONAL_INFO.email}
 Portfolio: ${PERSONAL_INFO.portfolioUrl} | GitHub: ${PERSONAL_INFO.githubUrl} | LinkedIn: ${PERSONAL_INFO.linkedinUrl}
 
 PROFESSIONAL SUMMARY
 ${PERSONAL_INFO.fullBio}
 
 PROFESSIONAL EXPERIENCE
-${EXPERIENCES.map((e) => `• ${e.role} at ${e.company} (${e.period}, ${e.location})\n  - ${e.summary}`).join('\n')}
+${EXPERIENCES.map((e) => `• ${e.role} at ${e.company} (${e.period}, ${e.location})\n  - ${e.summary}\n  Key Highlights:\n${e.responsibilities.map((r) => `    * ${r}`).join('\n')}`).join('\n\n')}
 
 KEY PROJECTS
-${PROJECTS.map((p) => `• ${p.title} (${p.subtitle}): ${p.description}`).join('\n')}
+${PROJECTS.map((p) => `• ${p.title} (${p.subtitle}): ${p.description}\n  Tech: ${p.techStack.join(', ')}\n${p.highlights.map((h) => `    * ${h}`).join('\n')}`).join('\n\n')}
 
-EDUCATION
+EDUCATION & CERTIFICATIONS
 ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.college} - CGPA: ${PERSONAL_INFO.cgpa}
+${CERTIFICATIONS.map((c) => `• ${c.title} - ${c.issuer} (${c.year})`).join('\n')}
     `.trim();
 
     navigator.clipboard.writeText(text);
@@ -53,24 +74,24 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md">
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.96 }}
-        className={`relative w-full max-w-4xl h-[85vh] border rounded-3xl shadow-2xl flex flex-col overflow-hidden text-left ${
+        className={`relative w-full max-w-4xl h-[90vh] sm:h-[85vh] border rounded-3xl shadow-2xl flex flex-col overflow-hidden text-left ${
           darkMode ? 'bg-[#09090b] border-white/[0.1] text-zinc-300' : 'bg-white border-black/[0.08] text-zinc-800'
         }`}
       >
         {/* Header */}
-        <div className={`px-6 py-4 border-b flex items-center justify-between shrink-0 ${
+        <div className={`px-4 sm:px-6 py-3.5 border-b flex flex-wrap items-center justify-between gap-2 shrink-0 ${
           darkMode ? 'bg-zinc-950/80 border-white/[0.06]' : 'bg-zinc-50 border-black/[0.06]'
         }`}>
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-xl border ${
               darkMode ? 'bg-zinc-900 border-white/[0.08] text-zinc-300' : 'bg-zinc-100 border-black/[0.06] text-zinc-700'
             }`}>
-              <FileText className="w-4 h-4 text-emerald-500" />
+              <FileText className="w-4 h-4 text-[#FF5722]" />
             </div>
             <div>
               <h3 className={`text-sm sm:text-base font-bold tracking-tight ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
@@ -83,7 +104,7 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopyText}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono flex items-center gap-1.5 border transition-colors ${
+              className={`hidden sm:flex px-3 py-1.5 rounded-full text-xs font-mono items-center gap-1.5 border transition-colors ${
                 darkMode ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-white/[0.08]' : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-black/[0.06]'
               }`}
               title="Copy Resume Plain Text"
@@ -93,13 +114,33 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
             </button>
 
             <button
-              onClick={handleDownload}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors ${
-                darkMode ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-zinc-950 text-white hover:bg-zinc-800'
+              onClick={handlePrint}
+              className={`hidden md:flex px-3 py-1.5 rounded-full text-xs font-mono items-center gap-1.5 border transition-colors ${
+                darkMode ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-white/[0.08]' : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-black/[0.06]'
               }`}
+              title="Print Resume"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download PDF</span>
+              <Printer className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Print</span>
+            </button>
+
+            <button
+              onClick={handleDownload}
+              disabled={downloading}
+              className="px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 bg-[#FF5722] hover:bg-[#F4511E] text-white shadow-md shadow-[#FF5722]/30 active:scale-95 cursor-pointer disabled:opacity-75"
+              id="btn-download-resume-pdf"
+            >
+              {downloaded ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-white" />
+                  <span>Downloaded!</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5 text-white" />
+                  <span>{downloading ? 'Generating...' : 'Download PDF'}</span>
+                </>
+              )}
             </button>
 
             <button
@@ -107,6 +148,7 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
               className={`p-1.5 rounded-full border transition-colors ${
                 darkMode ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-white/[0.08]' : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-black/[0.06]'
               }`}
+              aria-label="Close Resume Modal"
             >
               <X className="w-4 h-4" />
             </button>
@@ -114,12 +156,12 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
         </div>
 
         {/* Scrollable Resume Content */}
-        <div className="flex-1 p-6 sm:p-8 overflow-y-auto space-y-7 font-sans text-xs">
+        <div className="flex-1 p-5 sm:p-8 overflow-y-auto space-y-7 font-sans text-xs print:p-0">
           {/* Header Info */}
           <div className={`flex flex-col sm:flex-row items-center gap-5 border-b pb-6 text-center sm:text-left ${
             darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'
           }`}>
-            <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 shrink-0">
+            <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 shrink-0 shadow-md">
               <img
                 src={localStorage.getItem('umesh_custom_photo') || PERSONAL_INFO.avatarUrl}
                 alt={PERSONAL_INFO.name}
@@ -132,18 +174,18 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
               }`}>
                 UMESH KOTWAL
               </h1>
-              <p className="text-xs font-mono font-medium text-emerald-500">
+              <p className="text-xs font-mono font-semibold text-[#FF5722]">
                 FULL STACK DEVELOPER (REACT.JS / NEXT.JS / NODE.JS)
               </p>
               <p className={`text-[11px] font-mono ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                Surat, Gujarat, India | +91 6352001332 | umeshkotwal7@gmail.com
+                Surat, Gujarat, India | +91 6352001332 | {PERSONAL_INFO.email}
               </p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-2.5 text-xs font-mono pt-1">
-                <a href={PERSONAL_INFO.portfolioUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-zinc-200 underline underline-offset-2">Portfolio</a>
+                <a href={PERSONAL_INFO.portfolioUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-[#FF5722] underline underline-offset-2">Portfolio</a>
                 <span className="text-zinc-600">•</span>
-                <a href={PERSONAL_INFO.githubUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-zinc-200 underline underline-offset-2">GitHub</a>
+                <a href={PERSONAL_INFO.githubUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-[#FF5722] underline underline-offset-2">GitHub</a>
                 <span className="text-zinc-600">•</span>
-                <a href={PERSONAL_INFO.linkedinUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-zinc-200 underline underline-offset-2">LinkedIn</a>
+                <a href={PERSONAL_INFO.linkedinUrl} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-[#FF5722] underline underline-offset-2">LinkedIn</a>
               </div>
             </div>
           </div>
@@ -239,7 +281,7 @@ ${PERSONAL_INFO.degree} (${PERSONAL_INFO.graduationYear}) - ${PERSONAL_INFO.coll
                 <div className={`flex justify-between items-baseline font-bold text-xs sm:text-sm ${
                   darkMode ? 'text-zinc-100' : 'text-zinc-950'
                 }`}>
-                  <span>{exp.role} — <span className="text-emerald-500">{exp.company}</span></span>
+                  <span>{exp.role} — <span className="text-[#FF5722]">{exp.company}</span></span>
                   <span className={`font-mono text-[11px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{exp.period} | {exp.location}</span>
                 </div>
                 <ul className={`list-disc pl-4 space-y-1 text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>

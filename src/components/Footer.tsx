@@ -4,9 +4,10 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface FooterProps {
   darkMode: boolean;
+  onOpenResumeModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
+export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) => {
   const [localTime, setLocalTime] = useState('');
 
   useEffect(() => {
@@ -104,6 +105,36 @@ export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href="/sitemap.xml"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition-colors duration-150 hover:text-[#FF5722] flex items-center gap-1.5 ${
+                      darkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}
+                  >
+                    <span className="text-[10px] opacity-40">/</span>
+                    <span className="inline-flex items-center gap-1 font-mono">
+                      <span>XML Sitemap</span>
+                      <span className="text-[10px] px-1 py-0.2 rounded bg-[#FF5722]/10 text-[#FF5722] font-semibold">SEO</span>
+                    </span>
+                  </a>
+                </li>
+                {onOpenResumeModal && (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={onOpenResumeModal}
+                      className={`transition-colors duration-150 hover:text-[#FF5722] flex items-center gap-1.5 text-xs text-left cursor-pointer ${
+                        darkMode ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}
+                    >
+                      <span className="text-[10px] opacity-40">/</span>
+                      <span className="font-semibold text-[#FF5722]">Download Resume (CV)</span>
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -202,6 +233,16 @@ export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <span className="opacity-30">•</span>
               <a href="#contact" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
                 Disclaimer
+              </a>
+              <span className="opacity-30">•</span>
+              <a
+                href="/sitemap.xml"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF5722] transition-colors font-mono font-medium"
+                title="Google XML Sitemap"
+              >
+                Sitemap.xml
               </a>
             </div>
 

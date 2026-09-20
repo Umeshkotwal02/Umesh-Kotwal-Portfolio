@@ -1,0 +1,16 @@
+{
+  "name": "Umesh Kotwal Portfolio",
+  "short_name": "Umesh Kotwal",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#FF5722",
+  "background_color": "#09090b",
+  "display": "standalone",
+  "start_url": "/"
+}

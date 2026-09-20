@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import {
@@ -15,7 +15,8 @@ import {
   X,
   ChevronDown,
   Sparkles,
-  Paperclip
+  Paperclip,
+  AlertCircle
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -35,8 +36,28 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const [imageName, setImageName] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitFeedback, setSubmitFeedback] = useState<{ message: string; smtpDelivered: boolean } | null>(null);
+  const [errorText, setErrorText] = useState<string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [smtpStatus, setSmtpStatus] = useState<{ configured: boolean; recipient: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    fetch('/api/smtp/status')
+      .then((res) => res.json())
+      .then((data) => {
+        setSmtpStatus({
+          configured: Boolean(data.configured),
+          recipient: data.recipient || 'umeshkotwal658@gmail.com',
+        });
+      })
+      .catch(() => {
+        setSmtpStatus({
+          configured: false,
+          recipient: 'umeshkotwal658@gmail.com',
+        });
+      });
+  }, []);
 
   const BUDGET_OPTIONS = [
     '< $5,000 (Small Sprint / Consultation)',
@@ -74,13 +95,24 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
+    setErrorText(null);
 
     try {
-      await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, attachment: uploadedImage ? imageName : null }),
+        body: JSON.stringify({
+          ...formData,
+          imageAttachment: uploadedImage,
+          imageName: uploadedImage ? imageName : undefined,
+        }),
       });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || data.details || 'Failed to dispatch enquiry.');
+      }
 
       // Confetti burst
       confetti({
@@ -89,6 +121,10 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
         origin: { y: 0.6 }
       });
 
+      setSubmitFeedback({
+        message: data.message,
+        smtpDelivered: Boolean(data.smtpConfigured),
+      });
       setSubmitted(true);
       setFormData({
         name: '',
@@ -99,8 +135,9 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
       });
       setUploadedImage(null);
       setImageName('');
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      setErrorText(err.message || 'Error dispatching message. Please try again or email umeshkotwal658@gmail.com directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -258,26 +295,68 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               darkMode ? 'bg-zinc-900/50 border-white/[0.08]' : 'bg-white border-black/[0.06] shadow-zinc-200/50'
             }`}>
               <div className="p-7 sm:p-9">
+                {/* Header status strip */}
+                <div className={`flex items-center justify-between pb-4 mb-6 border-b ${
+                  darkMode ? 'border-white/[0.08]' : 'border-black/[0.06]'
+                }`}>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse" />
+                    <span className={`text-[11px] font-mono ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                      Inbox: <span className="font-semibold text-[#FF5722]">{smtpStatus?.recipient || 'umeshkotwal658@gmail.com'}</span>
+                    </span>
+                  </div>
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md border ${
+                    darkMode ? 'bg-white/[0.03] border-white/10 text-zinc-400' : 'bg-black/[0.02] border-black/10 text-zinc-600'
+                  }`}>
+                    {smtpStatus?.configured ? 'SMTP Active' : 'Direct Mail Relay'}
+                  </span>
+                </div>
+
                 {submitted ? (
-                  <div className="py-12 text-center space-y-4">
+                  <div className="py-10 text-center space-y-4">
                     <div className="w-14 h-14 rounded-full bg-[#FF5722]/10 text-[#FF5722] border border-[#FF5722]/20 flex items-center justify-center mx-auto">
                       <Check className="w-7 h-7" />
                     </div>
                     <h3 className={`text-2xl font-bold ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
-                      Message Delivered
+                      Enquiry Dispatched!
                     </h3>
                     <p className={`text-xs sm:text-sm max-w-md mx-auto leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                      Thank you for reaching out. Umesh Kotwal has received your message and will review your specifications shortly.
+                      {submitFeedback?.message || 'Thank you for reaching out. Umesh Kotwal has received your message and will review your specifications shortly.'}
                     </p>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="px-5 py-2.5 rounded-full font-semibold text-xs transition-transform bg-[#FF5722] text-white hover:bg-[#F4511E] shadow-md shadow-[#FF5722]/25"
-                    >
-                      Send Another Message
-                    </button>
+                    <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-[11px] font-mono ${
+                      darkMode ? 'bg-white/[0.03] border-white/10 text-zinc-300' : 'bg-black/[0.02] border-black/10 text-zinc-700'
+                    }`}>
+                      <Mail className="w-3.5 h-3.5 text-[#FF5722]" />
+                      <span>Notification sent to umeshkotwal658@gmail.com</span>
+                    </div>
+                    <div className="pt-2">
+                      <button
+                        onClick={() => {
+                          setSubmitted(false);
+                          setSubmitFeedback(null);
+                        }}
+                        className="px-5 py-2.5 rounded-full font-semibold text-xs transition-transform bg-[#FF5722] text-white hover:bg-[#F4511E] shadow-md shadow-[#FF5722]/25"
+                      >
+                        Send Another Message
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {errorText && (
+                      <div className="p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-300 text-xs flex items-start gap-2.5">
+                        <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                        <div>
+                          <p>{errorText}</p>
+                          <a
+                            href={`mailto:umeshkotwal658@gmail.com?subject=${encodeURIComponent(formData.subject || 'Project Inquiry')}`}
+                            className="underline font-semibold mt-1 inline-block text-rose-200"
+                          >
+                            Click here to email Umesh directly via your mail client
+                          </a>
+                        </div>
+                      </div>
+                    )}
                     {/* Row 1: Name & Email */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">

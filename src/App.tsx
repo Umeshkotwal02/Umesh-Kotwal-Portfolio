@@ -70,7 +70,10 @@ export default function App() {
             <Contact darkMode={darkMode} />
           </main>
 
-          <Footer darkMode={darkMode} />
+          <Footer
+            darkMode={darkMode}
+            onOpenResumeModal={() => setResumeModalOpen(true)}
+          />
 
           {/* AI Bot Assistant Modal */}
           <AiAssistantModal

@@ -96,7 +96,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                   src={project.image}
                   alt={project.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 opacity-85 group-hover:opacity-100"
+                  className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-[#09090b] via-zinc-950/40' : 'from-zinc-900/70 via-zinc-900/10'} to-transparent`} />
 
@@ -231,6 +231,32 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                 <h3 className={`text-xl sm:text-2xl font-bold ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
                   {activeModalProject.title}
                 </h3>
+              </div>
+
+              {/* Real Project Screenshot Preview Banner */}
+              <div className="relative w-full h-48 sm:h-60 rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 group">
+                <img
+                  src={activeModalProject.image}
+                  alt={activeModalProject.title}
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-zinc-300 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
+                    Live Production Screenshot
+                  </span>
+                  {activeModalProject.links.live && (
+                    <a
+                      href={activeModalProject.links.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#FF5722] text-white hover:bg-[#F4511E] transition-all shadow-md hover:shadow-orange-500/20"
+                    >
+                      <span>Visit Live Website</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
               </div>
 
               {/* Highlights */}

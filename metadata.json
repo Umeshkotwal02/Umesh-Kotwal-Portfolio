@@ -1,6 +1,6 @@
 {
   "name": "Umesh Kotwal Portfolio",
-  "description": "Full Stack Developer Portfolio showcasing microservices architecture, Next.js, Node.js, React, and real-time backend systems.",
+  "description": "Full Stack Developer & Microservices Lead Portfolio showcasing Node.js, Next.js, React, Redis, BullMQ, and Stripe Connect architecture.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

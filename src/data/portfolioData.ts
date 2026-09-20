@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     techStack: ["Node.js", "Express.js", "PostgreSQL", "Prisma ORM", "Redis", "BullMQ", "Stripe API", "REST API"],
     category: "microservices",
     featured: true,
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+    image: "/projects/vyonic.png",
     highlights: [
       "Served as Backend Team Lead, orchestrating cross-functional communications between frontend, mobile, and admin teams.",
       "Architected the complete user journey from goal-selection registration to paid session unlocking.",
@@ -45,7 +45,7 @@ export const PROJECTS: Project[] = [
     ],
     architectureDetails: "Built with Node.js and Express microservices connected to PostgreSQL via Prisma ORM. Utilized Redis for fast trainer availability lookups and BullMQ queues to handle async notification dispatching with DLQ retry guarantees.",
     links: {
-      live: "https://umeshkotwal.vercel.app/",
+      live: "https://vyonic-labs.com/",
       github: "https://github.com/Umeshkotwal02/",
     },
     metrics: ["10k+ Monthly Sessions", "<40ms Redis Cache Latency", "Zero Data Loss Queue"]
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     techStack: ["React.js", "Next.js", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe Connect", "QR Scanner"],
     category: "fullstack",
     featured: true,
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+    image: "/projects/vybemena.png",
     highlights: [
       "Integrated Stripe Connect for organizer KYC verification, bank account validation, and automated payouts 48 hours post-event.",
       "Implemented a 3% platform commission revenue model with automated split payments.",
@@ -81,7 +81,7 @@ export const PROJECTS: Project[] = [
     techStack: ["React.js", "Redux Toolkit", "SCSS", "React-Bootstrap", "Node.js", "Sitemap Engine"],
     category: "ecommerce",
     featured: true,
-    image: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80",
+    image: "/projects/kesaria-textile.png",
     highlights: [
       "Achieved Google #1 page ranking for multiple competitive high-volume textile keywords.",
       "Structured dynamic location-based landing pages across countries, states, and cities with automated dynamic sitemaps.",
@@ -95,15 +95,15 @@ export const PROJECTS: Project[] = [
     metrics: ["#1 Page Google SEO", "100k+ Indexed Dynamic Pages", "95+ Lighthouse Score"]
   },
   {
-    id: "erp-suite",
-    title: "ERP Sales & Accounting Suite",
-    subtitle: "Modular Sales, Inventory & Ledger System",
-    description: "Comprehensive enterprise resource planning software featuring real-time financial analytics dashboards and double-entry voucher ledger management (receipts, payments, contra, journal entries).",
+    id: "worcspace-erp",
+    title: "Worcspace Enterprise ERP",
+    subtitle: "Modular Workspace, Inventory & Ledger System",
+    description: "Comprehensive enterprise workspace and ERP suite featuring real-time financial analytics dashboards, project management, and double-entry voucher ledger management (receipts, payments, contra, journal entries).",
     clientLocation: "Surat / Enterprise Clients",
-    techStack: ["React.js", "Bootstrap", "Node.js", "MySQL", "Redux Toolkit", "Express"],
+    techStack: ["React.js", "Node.js", "MySQL", "Redux Toolkit", "Express", "Tailwind CSS"],
     category: "fullstack",
     featured: true,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    image: "/projects/worcspace.png",
     highlights: [
       "Built modular ERP architecture supporting Sales, Purchase, Inventory, and Accounting modules.",
       "Implemented double-entry voucher transaction state handling (receipt, payment, contra, and journal entries).",
@@ -111,21 +111,43 @@ export const PROJECTS: Project[] = [
     ],
     architectureDetails: "Stateful React application powered by Redux Toolkit and MySQL transaction safety with row-level locks for concurrent accounting ledger entries.",
     links: {
-      live: "https://umeshkotwal.vercel.app/",
-      github: "https://github.com/Umeshkotwal02/",
+      live: "https://worcspace.vercel.app/",
+      github: "https://github.com/Umeshkotwal02/worcspace",
     },
     metrics: ["Double-Entry Precision", "Real-Time Ledger Sync", "Role-Based Audit Trail"]
   },
   {
+    id: "ai-background-remover",
+    title: "AI Image Background Remover",
+    subtitle: "In-Browser WebAssembly Image Processing",
+    description: "High-performance browser-based background remover tool using React.js and client-side AI image segmentation models. Specifically optimized for instant passport-size photo preparation and product image processing.",
+    clientLocation: "Global SaaS / Open Source",
+    techStack: ["React.js", "WebAssembly", "Canvas API", "Tailwind CSS", "Vite"],
+    category: "realtime",
+    featured: true,
+    image: "/projects/background-remover.png",
+    highlights: [
+      "Implemented zero-latency client-side background removal using browser WebAssembly inference.",
+      "Engineered canvas tools for real-time photo scaling, background color replacement, and passport photo dimensions.",
+      "Zero server processing overhead and 100% user data privacy by processing images entirely on the client machine."
+    ],
+    architectureDetails: "Client-side WebAssembly inference engine coupled with HTML5 2D Canvas rendering for instant edge feathering and alpha channel masking.",
+    links: {
+      live: "https://image-background-remover-in-react-j.vercel.app",
+      github: "https://github.com/Umeshkotwal02/Image-Background-Remover-In-ReactJs",
+    },
+    metrics: ["100% Client-Side Privacy", "Sub-second Wasm Processing", "Passport Standard Export"]
+  },
+  {
     id: "pdf-editor-resume-builder",
-    title: "Fabric.js PDF Editor & Resume Builder",
+    title: "Fabric.js PDF Editor & Resume Suite",
     subtitle: "Interactive Document Suite with Payment Gateways",
     description: "Interactive browser PDF editor supporting real-time text placement, drag-and-drop annotations, export, and a full-stack Resume Builder with Razorpay/Stripe subscription plans.",
     clientLocation: "Global SaaS",
     techStack: ["React.js", "Fabric.js", "Node.js", "MySQL", "Razorpay", "Stripe"],
     category: "realtime",
     featured: false,
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=80",
+    image: "/projects/worcspace.png",
     highlights: [
       "Engineered visual PDF canvas editor using Fabric.js for real-time text editing and element dragging.",
       "Delivered full-stack Resume Builder platform with user authentication, template customization, and payment unlock.",
@@ -133,8 +155,8 @@ export const PROJECTS: Project[] = [
     ],
     architectureDetails: "Canvas object model with Fabric.js synchronized to backend storage, rendering pixel-perfect vector exports to high-res PDF downloads.",
     links: {
-      live: "https://umeshkotwal.vercel.app/",
-      github: "https://github.com/Umeshkotwal02/",
+      live: "https://full-stack-developer-umesh-kotwal.vercel.app/",
+      github: "https://github.com/Umeshkotwal02/Resume_Backend",
     },
     metrics: ["Real-time Canvas Rendering", "PDF Vector Export", "Multi-Gateway Support"]
   }
