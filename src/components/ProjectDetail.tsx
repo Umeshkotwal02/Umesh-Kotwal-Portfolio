@@ -59,11 +59,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           ...project.techStack,
           "Microservices Architecture"
         ]}
-        ogImage={project.image.startsWith('http') ? project.image : `https://full-stack-developer-umesh-kotwal.vercel.app${project.image}`}
+        ogImage={project.image.startsWith('http') ? project.image : `https://umeshcodes.vercel.app${project.image}`}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          "@id": `https://full-stack-developer-umesh-kotwal.vercel.app/projects/${project.id}#software`,
+          "@id": `https://umeshcodes.vercel.app/projects/${project.id}#software`,
           "name": project.title,
           "headline": project.subtitle,
           "description": project.description,
@@ -72,7 +72,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           "author": {
             "@type": "Person",
             "name": "Umesh Kotwal",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           }
         }}
       />

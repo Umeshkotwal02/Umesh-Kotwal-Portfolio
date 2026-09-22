@@ -41,13 +41,13 @@ export const StandalonePage: React.FC<StandalonePageProps> = ({
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": `https://full-stack-developer-umesh-kotwal.vercel.app${canonicalPath}#webpage`,
-          "url": `https://full-stack-developer-umesh-kotwal.vercel.app${canonicalPath}`,
+          "@id": `https://umeshcodes.vercel.app${canonicalPath}#webpage`,
+          "url": `https://umeshcodes.vercel.app${canonicalPath}`,
           "name": `${title} | Umesh Kotwal`,
           "description": description,
           "isPartOf": {
             "@type": "WebSite",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           }
         }}
       />

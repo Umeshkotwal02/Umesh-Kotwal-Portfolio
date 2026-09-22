@@ -24,7 +24,7 @@ interface SitemapPageProps {
 }
 
 export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }) => {
-  const BASE_URL = 'https://full-stack-developer-umesh-kotwal.vercel.app';
+  const BASE_URL = 'https://umeshcodes.vercel.app';
 
   const coreSections = [
     { title: 'Home Portfolio', path: '/', desc: 'Primary portfolio homepage featuring hero, overview, and architectural highlights.', priority: '1.0', freq: 'Weekly' },
@@ -65,13 +65,13 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": "https://full-stack-developer-umesh-kotwal.vercel.app/sitemap#webpage",
-          "url": "https://full-stack-developer-umesh-kotwal.vercel.app/sitemap",
+          "@id": "https://umeshcodes.vercel.app/sitemap#webpage",
+          "url": "https://umeshcodes.vercel.app/sitemap",
           "name": "HTML Sitemap & Directory | Umesh Kotwal",
           "description": "Comprehensive index of all web pages, architectural services, and production case studies on Umesh Kotwal's portfolio.",
           "isPartOf": {
             "@type": "WebSite",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           }
         }}
       />

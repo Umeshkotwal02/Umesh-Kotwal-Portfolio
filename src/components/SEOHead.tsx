@@ -10,7 +10,7 @@ export interface SEOHeadProps {
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const BASE_URL = 'https://full-stack-developer-umesh-kotwal.vercel.app';
+const BASE_URL = 'https://umeshcodes.vercel.app';
 const DEFAULT_IMAGE = `${BASE_URL}/assets/about-us-BJhTeHfc.jpeg`;
 
 export const SEOHead: React.FC<SEOHeadProps> = ({

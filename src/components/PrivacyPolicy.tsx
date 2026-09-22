@@ -57,13 +57,13 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ darkMode, onNaviga
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": "https://full-stack-developer-umesh-kotwal.vercel.app/privacy#webpage",
-          "url": "https://full-stack-developer-umesh-kotwal.vercel.app/privacy",
+          "@id": "https://umeshcodes.vercel.app/privacy#webpage",
+          "url": "https://umeshcodes.vercel.app/privacy",
           "name": "Privacy Policy | Umesh Kotwal",
           "description": "Comprehensive Privacy Policy detailing how personal data and technical requirements are protected by Umesh Kotwal.",
           "isPartOf": {
             "@type": "WebSite",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           },
           "about": {
             "@type": "Person",

@@ -59,13 +59,13 @@ export const TermsOfService: React.FC<TermsOfServiceProps> = ({ darkMode, onNavi
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": "https://full-stack-developer-umesh-kotwal.vercel.app/terms#webpage",
-          "url": "https://full-stack-developer-umesh-kotwal.vercel.app/terms",
+          "@id": "https://umeshcodes.vercel.app/terms#webpage",
+          "url": "https://umeshcodes.vercel.app/terms",
           "name": "Terms of Service & Engineering Engagement | Umesh Kotwal",
           "description": "Comprehensive legal terms for technical software engineering, source code transfer, and consulting services by Umesh Kotwal.",
           "isPartOf": {
             "@type": "WebSite",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           },
           "about": {
             "@type": "Person",

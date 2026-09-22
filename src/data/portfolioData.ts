@@ -155,7 +155,7 @@ export const PROJECTS: Project[] = [
     ],
     architectureDetails: "Canvas object model with Fabric.js synchronized to backend storage, rendering pixel-perfect vector exports to high-res PDF downloads.",
     links: {
-      live: "https://full-stack-developer-umesh-kotwal.vercel.app/",
+      live: "https://umeshcodes.vercel.app/",
       github: "https://github.com/Umeshkotwal02/Resume_Backend",
     },
     metrics: ["Real-time Canvas Rendering", "PDF Vector Export", "Multi-Gateway Support"]

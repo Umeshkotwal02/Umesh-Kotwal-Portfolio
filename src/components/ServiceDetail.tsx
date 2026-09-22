@@ -86,14 +86,14 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
-          "@id": `https://full-stack-developer-umesh-kotwal.vercel.app/services/${service.slug}#service`,
+          "@id": `https://umeshcodes.vercel.app/services/${service.slug}#service`,
           "name": service.title,
           "serviceType": service.shortTitle,
           "description": service.description,
           "provider": {
             "@type": "Person",
             "name": "Umesh Kotwal",
-            "url": "https://full-stack-developer-umesh-kotwal.vercel.app/"
+            "url": "https://umeshcodes.vercel.app/"
           },
           "areaServed": ["United Arab Emirates", "India", "United States", "Worldwide"]
         }}

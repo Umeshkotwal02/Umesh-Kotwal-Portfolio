@@ -72,7 +72,7 @@ Contact & Profiles:
 - Full Name: Umesh Kotwal
 - Email: umeshkotwal658@gmail.com
 - Phone / WhatsApp: +91 6352001332
-- Portfolio: https://full-stack-developer-umesh-kotwal.vercel.app/
+- Portfolio: https://umeshcodes.vercel.app/
 - LinkedIn: https://www.linkedin.com/in/umeshkotwal07/
 - GitHub: https://github.com/Umeshkotwal02/
 - Availability: Open for Full-Time Roles, Technical Consulting, and Contract Engagements (Worldwide / Remote / On-Site Dubai / India).
@@ -325,7 +325,7 @@ app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
   res.send(`User-agent: *
 Allow: /
-Sitemap: https://full-stack-developer-umesh-kotwal.vercel.app/sitemap.xml
+Sitemap: https://umeshcodes.vercel.app/sitemap.xml
 `);
 });
 
@@ -335,103 +335,103 @@ app.get('/sitemap.xml', (req, res) => {
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/</loc>
+    <loc>https://umeshcodes.vercel.app/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#about</loc>
+    <loc>https://umeshcodes.vercel.app/#about</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#projects</loc>
+    <loc>https://umeshcodes.vercel.app/#projects</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#experience</loc>
+    <loc>https://umeshcodes.vercel.app/#experience</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#skills</loc>
+    <loc>https://umeshcodes.vercel.app/#skills</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#architecture</loc>
+    <loc>https://umeshcodes.vercel.app/#architecture</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#simulator</loc>
+    <loc>https://umeshcodes.vercel.app/#simulator</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#services</loc>
+    <loc>https://umeshcodes.vercel.app/#services</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/microservices-architecture</loc>
+    <loc>https://umeshcodes.vercel.app/#service/microservices-architecture</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/stripe-connect-payments</loc>
+    <loc>https://umeshcodes.vercel.app/#service/stripe-connect-payments</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/custom-software-development</loc>
+    <loc>https://umeshcodes.vercel.app/#service/custom-software-development</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/qa-software-testing</loc>
+    <loc>https://umeshcodes.vercel.app/#service/qa-software-testing</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/real-time-systems</loc>
+    <loc>https://umeshcodes.vercel.app/#service/real-time-systems</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/devops-cloud-cicd</loc>
+    <loc>https://umeshcodes.vercel.app/#service/devops-cloud-cicd</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#achievements</loc>
+    <loc>https://umeshcodes.vercel.app/#achievements</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#testimonials</loc>
+    <loc>https://umeshcodes.vercel.app/#testimonials</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#contact</loc>
+    <loc>https://umeshcodes.vercel.app/#contact</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
