@@ -1,14 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp, Clock, MessageCircle, ExternalLink, Shield, Mail, Phone, MapPin, Building } from 'lucide-react';
+import { ArrowUp, Clock, MessageCircle, ExternalLink, Shield, Mail, Phone, MapPin, Building, Sparkles } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface FooterProps {
   darkMode: boolean;
   onOpenResumeModal?: () => void;
+  onNavigate?: (path: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) => {
+export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onNavigate }) => {
   const [localTime, setLocalTime] = useState('');
+  const [activeCursor, setActiveCursor] = useState<'reticle' | 'minimal' | 'difference'>('reticle');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('uk_cursor_mode') as 'reticle' | 'minimal' | 'difference';
+    if (saved && (saved === 'reticle' || saved === 'minimal' || saved === 'difference')) {
+      setActiveCursor(saved);
+    }
+
+    const handleStyleChange = (e: any) => {
+      if (e.detail && ['reticle', 'minimal', 'difference'].includes(e.detail)) {
+        setActiveCursor(e.detail);
+      }
+    };
+    window.addEventListener('cursor-style-change', handleStyleChange);
+    return () => window.removeEventListener('cursor-style-change', handleStyleChange);
+  }, []);
+
+  const handleCursorChange = (mode: 'reticle' | 'minimal' | 'difference') => {
+    setActiveCursor(mode);
+    localStorage.setItem('uk_cursor_mode', mode);
+    window.dispatchEvent(new CustomEvent('cursor-style-change', { detail: mode }));
+  };
 
   useEffect(() => {
     const updateClock = () => {
@@ -86,23 +109,33 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) =
               </p>
               <ul className="space-y-2 text-xs">
                 {[
-                  { name: 'Architectural Works', href: '#projects' },
-                  { name: 'Production Experience', href: '#experience' },
-                  { name: 'Core Skillset', href: '#skills' },
-                  { name: 'Live Architecture Simulator', href: '#simulator' },
-                  { name: 'Verified Achievements', href: '#achievements' },
-                  { name: 'Client Testimonials', href: '#testimonials' },
+                  { name: 'Core Overview & Bio', href: '/about' },
+                  { name: 'Architectural Works', href: '/projects' },
+                  { name: 'Production Experience', href: '/experience' },
+                  { name: 'Engineering Services', href: '/services' },
+                  { name: 'Core Skillset', href: '/skills' },
+                  { name: 'Architecture Simulator', href: '/simulator' },
+                  { name: 'Terms of Service', href: '/terms' },
+                  { name: 'Privacy Policy', href: '/privacy' },
+                  { name: 'HTML Sitemap', href: '/sitemap' },
                 ].map((item) => (
                   <li key={item.name}>
-                    <a
-                      href={item.href}
-                      className={`transition-colors duration-150 hover:text-[#FF5722] flex items-center gap-1.5 ${
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (onNavigate) {
+                          onNavigate(item.href);
+                        } else {
+                          window.location.href = item.href;
+                        }
+                      }}
+                      className={`transition-colors duration-150 hover:text-[#FF5722] flex items-center gap-1.5 text-left cursor-pointer ${
                         darkMode ? 'text-zinc-400' : 'text-zinc-600'
                       }`}
                     >
                       <span className="text-[10px] opacity-40">/</span>
                       <span>{item.name}</span>
-                    </a>
+                    </button>
                   </li>
                 ))}
                 <li>
@@ -138,33 +171,37 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) =
               </ul>
             </div>
 
-            {/* Col 3: Core Architecture Stack */}
+            {/* Col 3: Core Architecture Stack & Specialized Services */}
             <div className="lg:col-span-3 space-y-3">
               <p className={`text-xs font-mono uppercase tracking-wider font-semibold ${darkMode ? 'text-zinc-300' : 'text-zinc-900'}`}>
-                System Architecture
+                Services & System Architecture
               </p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-col gap-1.5 text-xs">
                 {[
-                  'Node.js Microservices',
-                  'BullMQ & DLQ',
-                  'Redis Sub-10ms Cache',
-                  'Next.js 14 App Router',
-                  'PostgreSQL ACID Locks',
-                  'Stripe Connect Payouts',
-                  'Nginx Ingress Proxy',
-                  'Docker Containers',
-                  'Agora RTC Streams',
-                ].map((tech) => (
-                  <span
-                    key={tech}
-                    className={`px-2.5 py-1 text-[11px] font-mono rounded-lg border ${
-                      darkMode
-                        ? 'bg-zinc-900/50 border-white/[0.06] text-zinc-300'
-                        : 'bg-white border-black/[0.06] text-zinc-700 shadow-2xs'
+                  { name: 'Microservices & API Architecture', slug: 'microservices-architecture' },
+                  { name: 'Payment Gateways & Stripe Connect', slug: 'stripe-connect-payments' },
+                  { name: 'DevOps & Cloud Automation', slug: 'devops-cloud-automation' },
+                  { name: 'Real-Time WebSockets & Agora', slug: 'realtime-websockets-agora' },
+                  { name: 'Full Stack SaaS Platforms', slug: 'fullstack-saas-engineering' },
+                  { name: 'QA Automation & Zero-Bug Delivery', slug: 'qa-automation-testing' },
+                ].map((serv) => (
+                  <button
+                    key={serv.slug}
+                    type="button"
+                    onClick={() => {
+                      if (onNavigate) {
+                        onNavigate(`/services/${serv.slug}`);
+                      } else {
+                        window.location.href = `/services/${serv.slug}`;
+                      }
+                    }}
+                    className={`text-left transition-colors duration-150 hover:text-[#FF5722] py-1 border-b text-[11px] font-mono flex items-center justify-between cursor-pointer group ${
+                      darkMode ? 'border-white/[0.04] text-zinc-400' : 'border-black/[0.04] text-zinc-600'
                     }`}
                   >
-                    {tech}
-                  </span>
+                    <span className="group-hover:translate-x-1 transition-transform truncate">{serv.name}</span>
+                    <span className="text-[#FF5722] opacity-0 group-hover:opacity-100 text-[10px]">→</span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -203,37 +240,285 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) =
             </div>
           </div>
 
-          {/* Top of Footer Watermark (inspired directly by Image 3) */}
-          <div className="pt-8 pb-4 border-t border-dashed" style={{ borderColor: darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' }}>
-            <div className="text-center overflow-hidden select-none pointer-events-none py-4">
-              <p className={`text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-[-0.04em] whitespace-nowrap transition-colors ${
-                darkMode ? 'text-zinc-900/90' : 'text-zinc-200/80'
-              }`}>
-                UMESH KOTWAL • FULL STACK
-              </p>
+          {/* Modern Infinite Architectural Typography Ribbon */}
+          <div className="pt-10 pb-6 border-t border-dashed" style={{ borderColor: darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}>
+            {/* Tech Spec Header */}
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4 text-[10px] font-mono tracking-widest uppercase">
+              <div className="flex items-center gap-2 text-[#FF5722] font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-ping" />
+                <span>// ENTERPRISE ARCHITECTURE & FULL STACK SYSTEMS</span>
+              </div>
+              <div className="text-zinc-500 hidden sm:block">
+                NODE.JS • REDIS CACHING • BULLMQ DLQ • STRIPE CONNECT • NEXT.JS 15
+              </div>
+              <div className="flex items-center gap-1.5 text-emerald-500 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>SURAT / DUBAI • AVAILABLE FOR HIRE</span>
+              </div>
+            </div>
+
+            {/* Seamless Infinite Marquee with Outline & Solid Typography and Kinetic Hover Animations */}
+            <div
+              className="relative overflow-hidden py-8 select-none group cursor-pointer"
+              data-cursor="FULL STACK"
+            >
+              {/* Subtle edge fade masks */}
+              <div className={`absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r ${
+                darkMode ? 'from-[#09090b] to-transparent' : 'from-[#fafafa] to-transparent'
+              }`} />
+              <div className={`absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l ${
+                darkMode ? 'from-[#09090b] to-transparent' : 'from-[#fafafa] to-transparent'
+              }`} />
+
+              <div className="animate-marquee flex items-center gap-10">
+                {/* Loop Chunk 1 */}
+                <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap">
+                  {/* 1. FULL STACK DEVELOP */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                      <span>⚡ ARCHITECT & LEAD ENGINEER</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
+                    }`}>
+                      FULL STACK DEVELOP
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 2. UMESH KOTWAL */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>✦ 5+ YRS DISTRIBUTED SYSTEMS</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
+                    }`}>
+                      UMESH KOTWAL
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 3. FULL STACK DEVELOPER */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />
+                      <span>🚀 NODE.JS • REACT • MICROSERVICES</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
+                    }`}>
+                      FULL STACK DEVELOPER
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 4. UMESH KOTWAL */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                      <span>⚡ ZERO DATA LOSS ARCHITECT</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
+                    }`}>
+                      UMESH KOTWAL
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+                </div>
+
+                {/* Loop Chunk 2 (Identical for seamless infinite wrapping) */}
+                <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap" aria-hidden="true">
+                  {/* 1. FULL STACK DEVELOP */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                      <span>⚡ ARCHITECT & LEAD ENGINEER</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
+                    }`}>
+                      FULL STACK DEVELOP
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 2. UMESH KOTWAL */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>✦ 5+ YRS DISTRIBUTED SYSTEMS</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
+                    }`}>
+                      UMESH KOTWAL
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 3. FULL STACK DEVELOPER */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />
+                      <span>🚀 NODE.JS • REACT • MICROSERVICES</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
+                    }`}>
+                      FULL STACK DEVELOPER
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+
+                  {/* 4. UMESH KOTWAL */}
+                  <div className="relative group/item inline-flex items-center">
+                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                      <span>⚡ ZERO DATA LOSS ARCHITECT</span>
+                    </span>
+                    <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
+                      darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
+                    }`}>
+                      UMESH KOTWAL
+                    </span>
+                  </div>
+
+                  {/* Animated Star */}
+                  <span className="text-[#FF5722] font-mono text-xl sm:text-3xl opacity-80 hover:rotate-180 hover:scale-150 transition-all duration-500 cursor-pointer inline-block">
+                    ✦
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Footer Bottom Line (Matching Image 3 copyright + legal links) */}
-          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono ${
+          {/* Footer Bottom Line with Cursor Style Switcher + Copyright + Legal */}
+          <div className={`pt-6 border-t flex flex-col lg:flex-row items-center justify-between gap-4 text-[11px] font-mono ${
             darkMode ? 'border-white/[0.06] text-zinc-400' : 'border-black/[0.06] text-zinc-500'
           }`}>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-3">
               <span>© {new Date().getFullYear()} Umesh Kotwal. All Rights Reserved.</span>
+
+              {/* Cursor Style Switcher */}
+              <div className="hidden md:flex items-center gap-1.5 pl-3 border-l border-zinc-500/20">
+                <span className="text-zinc-500 flex items-center gap-1 text-[10px]">
+                  <Sparkles className="w-2.5 h-2.5 text-[#FF5722]" />
+                  <span>Cursor:</span>
+                </span>
+                <div className={`inline-flex p-0.5 rounded-md border ${
+                  darkMode ? 'border-white/10 bg-zinc-900/90' : 'border-black/10 bg-zinc-100'
+                }`}>
+                  <button
+                    onClick={() => handleCursorChange('reticle')}
+                    className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all ${
+                      activeCursor === 'reticle'
+                        ? 'bg-[#FF5722] text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+                    }`}
+                    title="Precision Reticle with Signature Orange Core & Crosshair Ticks"
+                  >
+                    Reticle
+                  </button>
+                  <button
+                    onClick={() => handleCursorChange('minimal')}
+                    className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all ${
+                      activeCursor === 'minimal'
+                        ? 'bg-[#FF5722] text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+                    }`}
+                    title="Sleek Minimal Floating Ring"
+                  >
+                    Minimal
+                  </button>
+                  <button
+                    onClick={() => handleCursorChange('difference')}
+                    className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all ${
+                      activeCursor === 'difference'
+                        ? 'bg-[#FF5722] text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
+                    }`}
+                    title="Difference Invert Blend Mode Lens"
+                  >
+                    Invert
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4 text-xs">
-              <a href="#about" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-                Terms & Conditions
-              </a>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('/terms');
+                  } else {
+                    window.location.href = '/terms';
+                  }
+                }}
+                className="hover:text-[#FF5722] transition-colors cursor-pointer"
+              >
+                Terms of Service
+              </button>
               <span className="opacity-30">•</span>
-              <a href="#about" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+              <button
+                type="button"
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('/privacy');
+                  } else {
+                    window.location.href = '/privacy';
+                  }
+                }}
+                className="hover:text-[#FF5722] transition-colors cursor-pointer"
+              >
                 Privacy Policy
-              </a>
+              </button>
               <span className="opacity-30">•</span>
-              <a href="#contact" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-                Disclaimer
-              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('/sitemap');
+                  } else {
+                    window.location.href = '/sitemap';
+                  }
+                }}
+                className="hover:text-[#FF5722] transition-colors cursor-pointer"
+              >
+                HTML Sitemap
+              </button>
               <span className="opacity-30">•</span>
               <a
                 href="/sitemap.xml"
@@ -242,7 +527,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal }) =
                 className="hover:text-[#FF5722] transition-colors font-mono font-medium"
                 title="Google XML Sitemap"
               >
-                Sitemap.xml
+                XML Sitemap
               </a>
             </div>
 

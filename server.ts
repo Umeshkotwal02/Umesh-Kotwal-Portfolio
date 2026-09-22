@@ -66,52 +66,165 @@ function getGeminiClient() {
 
 // Knowledge Base about Umesh Kotwal for AI Assistant
 const UMESH_KNOWLEDGE_BASE = `
-You are an AI Assistant representing Umesh Kotwal, a Full Stack Developer (React.js / Next.js / Node.js) based in Surat, Gujarat, India.
-Contact: Email: umeshkotwal658@gmail.com | Phone: +91 6352001332 | Portfolio: https://umeshkotwal.vercel.app/ | GitHub: https://github.com/Umeshkotwal02/ | LinkedIn: https://www.linkedin.com/in/umeshkotwal07/
+You are the interactive, highly skilled AI Architecture Assistant representing Umesh Kotwal, an experienced Full Stack Developer & Microservices Lead based in Surat, Gujarat, India.
 
-Key Summary:
-- Full Stack Developer with 2+ years of experience building high-throughput backend architecture and modern frontend applications using React.js, Next.js, Node.js, and Express.js.
-- Specialized in microservices design, Redis caching, BullMQ job queues with Dead Letter Queue (DLQ) handling for zero data loss, and WebSockets real-time features.
-- Integrations: Stripe, Razorpay, Stripe Connect (KYC/payouts), Firebase Cloud Messaging (FCM), Agora SDK (live streaming).
-- DevOps & Deployment: AWS ECS, Docker, Jenkins, Bitbucket CI/CD, Contabo, Vercel, Hostinger.
-- Delivered solutions directly to Dubai-based enterprise clients (e.g., Vyonic health platform, Vybemena event management with Stripe Connect 48-hour payouts).
+Contact & Profiles:
+- Full Name: Umesh Kotwal
+- Email: umeshkotwal658@gmail.com
+- Phone / WhatsApp: +91 6352001332
+- Portfolio: https://full-stack-developer-umesh-kotwal.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/umeshkotwal07/
+- GitHub: https://github.com/Umeshkotwal02/
+- Availability: Open for Full-Time Roles, Technical Consulting, and Contract Engagements (Worldwide / Remote / On-Site Dubai / India).
+
+Core Background & Superpowers:
+- 2+ years of production experience crafting scalable, high-throughput microservices, fault-tolerant background queues, and responsive full-stack applications.
+- Current Position: Full Stack Developer at Code Expert Solutions (Mar 2026 – Present). Primary backend architecture lead for Dubai-based enterprise clients.
+- Previous Position: MERN Stack Developer at Enterprise Web Technologies (Sep 2024 – Feb 2026).
+- Core Stack: React 18/19, Next.js 14/15, Node.js, Express, TypeScript, Redis, BullMQ (with Dead Letter Queue strategy for zero data loss), PostgreSQL, MySQL, Prisma ORM, WebSockets.
+- Payment Engineering: Advanced Stripe integrations, Stripe Connect (multi-vendor KYC onboarding, automated 48-hour post-event payouts for Dubai platforms like Vybemena), Razorpay webhooks with transactional idempotency.
+- Cloud & Infrastructure: AWS ECS, Docker containerization, Jenkins CI/CD, Contabo, Vercel, Hostinger.
+- Real-Time & Media: Agora SDK live streaming, Firebase Cloud Messaging (FCM), Fabric.js interactive PDF canvas editor.
+- High-Profile Projects:
+  1. Vyonic (Dubai Health & Gym Ecosystem): Backend Team Lead; engineered trainer booking, session unlocking, member onboarding, and recurring subscription billing.
+  2. Vybemena (Dubai Event Management Platform): Full-stack ticketing platform with Stripe Connect KYC, 48-hour post-event payouts, 3% platform fee splitting, and secure QR check-in scanner.
+  3. Kesaria Textile: High-volume B2B marketplace optimized for SEO, achieving #1 page Google rank for competitive national keywords.
+  4. Enterprise ERP: Sales, accounting, and inventory suite with double-entry voucher state management and real-time ledger reporting.
 - Education: B.Tech in Computer Engineering (2019 - 2023) from KCE Society's College of Engineering & Management with CGPA 8.18.
-- Certifications: NPTEL Cloud Computing (IIT Kharagpur) and NPTEL Introduction to Industry 4.0 & Industrial IoT (IIT Kharagpur).
+- Certifications: NPTEL Cloud Computing (IIT Kharagpur) and NPTEL Industry 4.0 & Industrial IoT (IIT Kharagpur).
 
-Professional Experience:
-1. Full Stack Developer at Code Expert Solutions (Mar 2026 – Present):
-   - Microservices architecture, Node.js, Express, PostgreSQL/MySQL, Prisma ORM.
-   - Redis caching for high-speed data access.
-   - BullMQ with Dead Letter Queue (DLQ) strategy for fault-tolerant background processing and zero data loss.
-   - Primary backend contact for Dubai-based enterprise stakeholders.
-   - Deployment via Docker, Jenkins, Contabo, AWS ECS CI/CD pipelines.
-
-2. MERN Stack Developer at Enterprise Web Technologies (Sep 2024 – Feb 2026):
-   - React.js, Next.js, Redux Toolkit, RESTful APIs, Agora SDK live streaming.
-   - Stripe & Razorpay webhooks, subscription billing, Stripe Connect KYC.
-   - Document Management System (DMS) with RBAC & automated emails.
-   - Fabric.js interactive PDF editor with drag-and-drop annotations.
-   - Full-stack Resume Builder with Node.js/MySQL and payment gateway.
-   - SEO optimization ranking Kesaria Textile on 1st page of Google.
-
-Key Projects:
-- Vyonic: Dubai Health & Fitness Platform (Backend Team Lead, gym onboarding, trainer booking, session unlocking, Stripe payments).
-- Vybemena: Dubai Event Management Platform (Full stack ticketing, Stripe Connect KYC, 48h post-event payouts, 3% commission model, QR ticket check-in).
-- Kesaria Textile: SEO-Optimized B2B Marketplace (Ranked #1 page Google for high-volume keywords, dynamic sitemaps, location landing pages).
-- ERP Software: Sales, Inventory & Accounting Suite (Voucher transaction handling, real-time analytics).
-
-Services & Offerings:
-- Backend & Microservices Architecture (Node.js, Express, BullMQ, Redis)
-- Payment Gateways & Stripe Connect Monetization (KYC, automated payouts)
-- Full-Stack Web Development (React 18, Next.js 14, Tailwind CSS, TypeScript)
-- QA & Software Testing (Automation & Manual: Playwright, Cypress, Jest, Postman API collections, load testing)
-- DevOps & Cloud CI/CD (Docker, AWS ECS, Jenkins, Bitbucket)
-
-Guidelines for AI Responses:
-- Speak as a helpful, professional AI assistant on behalf of Umesh Kotwal.
-- Be concise, confident, precise, and highlight Umesh's backend engineering strengths (microservices, queue handling, payment integrations, Dubai client experience).
-- Answer recruiter/client questions accurately using the knowledge above.
+Response Guidelines:
+1. Always be conversational, helpful, natural, and engaging. Never repeat robotic, generic one-liners.
+2. If the user asks for code (e.g., "i want to cafe website code in js", "how to write a Redis queue worker", "create an AI agent"), provide high-quality, practical code snippets with modern JavaScript/TypeScript best practices, and explain how Umesh can build or scale this into a production-ready solution.
+3. If the user asks about collaboration (e.g., "can i create the ai agent from Umesh", "can Umesh build my app?"), explain enthusiastically how Umesh architects full-stack AI agents, backend APIs, and web apps, and invite them to discuss their requirements or reach out at umeshkotwal658@gmail.com / +91 6352001332.
+4. If the user asks about Umesh's background, projects, fees, or technologies, answer accurately using the verified knowledge above.
+5. Format your answers with clear markdown headers, bold highlights, bullet points, and code blocks for readability.
 `;
+
+// Helper: Smart contextual fallback when AI API is unavailable
+function generateSmartFallback(question: string): string {
+  const q = question.toLowerCase();
+
+  if (q.includes('cafe') || q.includes('restaurant') || q.includes('food')) {
+    return `### Building a Modern Cafe Website
+
+Umesh can build a complete, high-performance Cafe & Restaurant web platform! Here is a core JavaScript/React architecture blueprint:
+
+\`\`\`javascript
+// Sample Cafe Menu & Order Cart Component (React / Next.js)
+import React, { useState } from 'react';
+
+export default function CafeMenu() {
+  const [cart, setCart] = useState([]);
+  
+  const menuItems = [
+    { id: 1, name: 'Artisan Espresso', price: 4.50, category: 'Coffee' },
+    { id: 2, name: 'Vanilla Bean Latte', price: 5.25, category: 'Coffee' },
+    { id: 3, name: 'Almond Croissant', price: 4.00, category: 'Pastry' },
+  ];
+
+  const addToCart = (item) => setCart((prev) => [...prev, item]);
+
+  return (
+    <div className="cafe-container p-6 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4">Artisan Cafe & Roastery</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {menuItems.map(item => (
+          <div key={item.id} className="border p-4 rounded-xl flex justify-between items-center">
+            <div>
+              <h3 className="font-semibold">{item.name}</h3>
+              <p className="text-zinc-500">\${item.price.toFixed(2)}</p>
+            </div>
+            <button 
+              onClick={() => addToCart(item)}
+              className="bg-amber-600 text-white px-3 py-1.5 rounded-lg"
+            >
+              Add to Order
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 p-4 bg-zinc-100 rounded-xl">
+        <p className="font-bold">Total Items: {cart.length}</p>
+      </div>
+    </div>
+  );
+}
+\`\`\`
+
+**Enterprise Features Umesh Typically Implements for F&B Clients:**
+- **Online Table Booking & Live Order Tracking** (WebSockets)
+- **Stripe / Razorpay Instant Checkout** with automatic invoice generation
+- **Menu Management Dashboard** with real-time inventory updates
+- **SEO & Google Local Business optimization**
+
+Feel free to connect with Umesh directly at **umeshkotwal658@gmail.com** to architect your cafe platform!`;
+  }
+
+  if (q.includes('agent') || q.includes('ai') || q.includes('bot') || q.includes('llm')) {
+    return `### Building AI Agents with Umesh Kotwal
+
+**Yes, absolutely!** You can definitely build an intelligent AI agent, autonomous assistant, or LLM-integrated workflow with Umesh.
+
+**How Umesh Architects AI Agents:**
+1. **Agent Logic & Reasoning:** Integrating Gemini SDK, OpenAI Assistants, or LangChain with custom system prompts and function calling.
+2. **Backend Tool Calling (APIs & Databases):** Hooking agents into PostgreSQL/Prisma or REST endpoints so the agent can query databases, perform bookings, or dispatch emails.
+3. **Queue & Background Execution:** Using **BullMQ with Redis** to handle long-running agent tasks asynchronously without blocking web requests.
+4. **Interactive UI:** Building fast, responsive chat interfaces in React / Next.js with streaming responses (SSE).
+
+Let's turn your AI idea into a deployed product! Reach out directly via:
+- **Email:** [umeshkotwal658@gmail.com](mailto:umeshkotwal658@gmail.com)
+- **Phone / WhatsApp:** +91 6352001332`;
+  }
+
+  if (q.includes('stripe') || q.includes('payment') || q.includes('payout') || q.includes('vybemena')) {
+    return `### Umesh's Stripe Connect & Payment Architecture
+
+Umesh has engineered production multi-party payment systems for Dubai clients like **Vybemena**:
+- **Stripe Connect KYC:** Automated merchant onboarding & bank verification.
+- **Timed Escrow Payouts:** Automated payout releases 48 hours post-event.
+- **Platform Monetization:** Automatic splitting of platform commission (e.g., 3%) and merchant revenue.
+- **Webhook State Machines:** Idempotent event processing with Redis locks to prevent duplicate credit cards charges.
+
+Interested in integrating robust payment gateways? Contact Umesh at **umeshkotwal658@gmail.com**!`;
+  }
+
+  if (q.includes('microservice') || q.includes('bullmq') || q.includes('redis') || q.includes('queue') || q.includes('backend')) {
+    return `### Umesh's Backend & Microservices Architecture
+
+Umesh specializes in fault-tolerant, high-concurrency Node.js microservices:
+- **BullMQ + Dead Letter Queue (DLQ):** Background job orchestration with automatic retry exponential backoff for guaranteed zero data loss.
+- **Redis Caching:** Sub-millisecond latency for hot database queries and distributed rate limiting.
+- **Prisma & PostgreSQL:** Clean relational schema design with transactional consistency.
+- **AWS ECS & Docker:** Containerized zero-downtime CI/CD deployments.
+
+Have a backend scalability challenge? Reach Umesh at **umeshkotwal658@gmail.com**!`;
+  }
+
+  if (q.includes('hire') || q.includes('contact') || q.includes('email') || q.includes('available') || q.includes('rate') || q.includes('cost')) {
+    return `### Contact & Hiring Umesh Kotwal
+
+Umesh is actively available for **Full-Time Software Engineering Roles**, **Contract Backend Engineering**, and **Full-Stack Project Development**!
+
+- **Email:** [umeshkotwal658@gmail.com](mailto:umeshkotwal658@gmail.com)
+- **Phone / WhatsApp:** +91 6352001332
+- **Location:** Surat, Gujarat, India (Available for Remote Worldwide & Dubai Onsite)
+- **LinkedIn:** [linkedin.com/in/umeshkotwal07](https://www.linkedin.com/in/umeshkotwal07/)
+- **GitHub:** [github.com/Umeshkotwal02](https://github.com/Umeshkotwal02/)
+
+Feel free to send a message via the Contact section below or email directly to schedule a technical discussion!`;
+  }
+
+  return `Hello! I am Umesh Kotwal's AI Architecture Assistant. 
+
+Umesh is a Full Stack Developer & Microservices Lead with 2+ years of production experience specializing in **Node.js, Next.js, React, Redis caching, BullMQ queues, and Stripe Connect payment workflows**.
+
+How can I assist you today? I can help you with:
+- **Architecture & System Design** (Microservices, Redis, BullMQ, WebSockets)
+- **Custom App & Web Development** (React 19, Next.js 15, Node.js)
+- **Payment & Fintech Integrations** (Stripe Connect, Razorpay)
+- **Hiring & Collaboration Inquiries** for Umesh Kotwal (umeshkotwal658@gmail.com)`;
+}
 
 // API Routes
 app.get('/api/health', (req, res) => {
@@ -120,46 +233,89 @@ app.get('/api/health', (req, res) => {
 
 app.post('/api/ai/ask', async (req, res) => {
   try {
-    const { question } = req.body;
+    const { question, history } = req.body;
     if (!question || typeof question !== 'string') {
       return res.status(400).json({ error: 'Question is required.' });
     }
 
     const ai = getGeminiClient();
     if (!ai) {
-      // Fallback smart response generator when API key is missing or not configured
-      const qLower = question.toLowerCase();
-      let answer = "Umesh Kotwal is a Senior Full Stack Engineer specializing in microservices, Node.js, Next.js, Redis, BullMQ queues, and Stripe payment architecture with 2+ years of production experience.";
-      
-      if (qLower.includes('stripe') || qLower.includes('payment') || qLower.includes('vybemena')) {
-        answer = "Umesh has deep experience with payment integrations, including Stripe Connect for multi-party payouts (48-hour post-event release for Vybemena), Razorpay webhook transaction state machines, and recurring subscription billing.";
-      } else if (qLower.includes('microservices') || qLower.includes('bullmq') || qLower.includes('redis') || qLower.includes('backend')) {
-        answer = "In backend architecture, Umesh designs microservices using Node.js and Prisma ORM, implements Redis caching to reduce database load on high-traffic endpoints, and builds BullMQ job queues with Dead Letter Queue (DLQ) retry strategies to ensure zero data loss.";
-      } else if (qLower.includes('dubai') || qLower.includes('client') || qLower.includes('experience')) {
-        answer = "Umesh serves as the primary backend lead for Dubai-based enterprise clients, gathering requirements, architecting systems, and delivering solutions like Vyonic (health & gym platform) and Vybemena (event ticketing & payouts).";
-      } else if (qLower.includes('contact') || qLower.includes('email') || qLower.includes('hire')) {
-        answer = "You can contact Umesh directly via email at umeshkotwal658@gmail.com or call +91 6352001332. He is actively open for Full Stack & Senior Backend roles!";
-      }
-
-      return res.json({ answer, source: 'fallback' });
+      const fallbackText = generateSmartFallback(question);
+      return res.json({ answer: fallbackText, source: 'smart-fallback' });
     }
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: question,
-      config: {
-        systemInstruction: UMESH_KNOWLEDGE_BASE,
-        temperature: 0.7,
-      },
-    });
+    // Prepare multi-turn conversational contents
+    let contents: any = question;
+    if (Array.isArray(history) && history.length > 0) {
+      const formattedHistory: any[] = [];
+      for (const msg of history) {
+        if (!msg || typeof msg.text !== 'string' || !msg.text.trim()) continue;
+        formattedHistory.push({
+          role: msg.sender === 'user' ? 'user' : 'model',
+          parts: [{ text: String(msg.text) }],
+        });
+      }
+      formattedHistory.push({
+        role: 'user',
+        parts: [{ text: question }],
+      });
+      contents = formattedHistory;
+    }
 
-    const text = response.text || "Thank you for asking! Umesh is experienced in React, Next.js, Node.js microservices, Redis caching, and Stripe payments.";
-    res.json({ answer: text, source: 'gemini' });
+    // Try primary recommended model first, then fallback models if 503 or transient failure
+    const candidateModels = [
+      'gemini-flash-latest',
+      'gemini-3.1-flash-lite',
+      'gemini-3.8-flash',
+    ];
+
+    let generatedText: string | null = null;
+    let successfulModel: string | null = null;
+    let lastError: any = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        const response = await ai.models.generateContent({
+          model: modelName,
+          contents,
+          config: {
+            systemInstruction: UMESH_KNOWLEDGE_BASE,
+            temperature: 0.7,
+          },
+        });
+
+        if (response && response.text) {
+          generatedText = response.text;
+          successfulModel = modelName;
+          break;
+        }
+      } catch (err: any) {
+        lastError = err;
+        console.warn(`Model ${modelName} encountered error:`, err?.message?.slice(0, 120));
+      }
+    }
+
+    if (generatedText) {
+      return res.json({
+        answer: generatedText,
+        source: 'gemini',
+        model: successfulModel,
+      });
+    }
+
+    console.error('All Gemini candidate models failed, engaging smart fallback:', lastError?.message);
+    const fallbackAnswer = generateSmartFallback(question);
+    return res.json({
+      answer: fallbackAnswer,
+      source: 'smart-fallback',
+      notice: 'Served via contextual offline engine.',
+    });
   } catch (error: any) {
-    console.error('Gemini API Error:', error);
-    res.status(500).json({
-      answer: "Umesh Kotwal is a Full Stack Developer specializing in Node.js microservices, Next.js, Redis caching, and Stripe Connect integrations. Feel free to contact him directly at umeshkotwal658@gmail.com!",
-      error: error.message,
+    console.error('General AI Route Error:', error);
+    const safeFallback = generateSmartFallback(req.body?.question || '');
+    res.json({
+      answer: safeFallback,
+      source: 'error-fallback',
     });
   }
 });
@@ -223,7 +379,43 @@ app.get('/sitemap.xml', (req, res) => {
   <url>
     <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#services</loc>
     <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/microservices-architecture</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/stripe-connect-payments</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/custom-software-development</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/qa-software-testing</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/real-time-systems</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://full-stack-developer-umesh-kotwal.vercel.app/#service/devops-cloud-cicd</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>

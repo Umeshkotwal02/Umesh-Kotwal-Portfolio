@@ -47,8 +47,24 @@
     transform: rotateY(180deg);
   }
 
+  /* High-Contrast Accessible Text Selection for Light & Dark Mode */
   ::selection {
-    background: rgba(255, 255, 255, 0.2);
+    background: #FF5722;
+    color: #ffffff;
+  }
+  ::-moz-selection {
+    background: #FF5722;
+    color: #ffffff;
+  }
+
+  .dark ::selection,
+  html.dark ::selection {
+    background: rgba(255, 87, 34, 0.45);
+    color: #ffffff;
+  }
+  .dark ::-moz-selection,
+  html.dark ::-moz-selection {
+    background: rgba(255, 87, 34, 0.45);
     color: #ffffff;
   }
 
@@ -113,6 +129,40 @@
 
 .animate-floatSlow {
   animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.text-stroke-subtle {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes textGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(255, 87, 34, 0.85));
+  }
+}
+
+.animate-text-glow {
+  animation: textGlowPulse 2.5s ease-in-out infinite;
 }
 
 

@@ -55,11 +55,33 @@ export interface Certification {
 
 export interface Service {
   id: string;
+  slug: string;
   title: string;
+  shortTitle: string;
+  subtitle?: string;
+  category?: 'enterprise' | 'web' | 'cloud' | 'all';
+  tagline: string;
   description: string;
+  fullDescription: string;
   icon: string;
+  image: string;
   deliverables: string[];
   technologies: string[];
+  techBadges?: string[];
+  architectureDiagram?: string;
+  architecturePoints: string[];
+  caseStudy?: {
+    projectId: string;
+    projectTitle: string;
+    client: string;
+    location: string;
+    image: string;
+    summary: string;
+    impact: string;
+  };
+  workflow: { step: string; title: string; desc: string }[];
+  faqs: { q: string; a: string }[];
+  metrics: { label: string; value: string }[];
 }
 
 export interface Testimonial {
