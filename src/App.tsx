@@ -5,7 +5,6 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { LiveSimulator } from './components/LiveSimulator';
 import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
@@ -286,8 +285,6 @@ export default function App() {
                 />
 
                 <About darkMode={darkMode} />
-
-                <LiveSimulator darkMode={darkMode} />
 
                 <Skills darkMode={darkMode} />
 

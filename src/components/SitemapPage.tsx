@@ -33,7 +33,6 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
     { title: 'Production Experience', path: '/experience', desc: 'Work history at Code Expert Solutions, Enterprise Web Technologies, and deliverables.', priority: '0.9', freq: 'Monthly' },
     { title: 'Architectural Projects', path: '/projects', desc: 'Full case study portfolio of production applications and microservices.', priority: '0.9', freq: 'Weekly' },
     { title: 'Engineering Services', path: '/services', desc: 'High-throughput microservices, payments, QA automation, and cloud consulting.', priority: '0.9', freq: 'Weekly' },
-    { title: 'Architecture Simulator', path: '/simulator', desc: 'Interactive real-time Redis cache, BullMQ queue, and DLQ simulation engine.', priority: '0.85', freq: 'Monthly' },
     { title: 'Verified Achievements', path: '/achievements', desc: 'Quantified system metrics: 99.9% uptime, zero data loss, sub-40ms cache latencies.', priority: '0.8', freq: 'Monthly' },
     { title: 'Client Testimonials', path: '/testimonials', desc: 'Endorsements and enterprise recommendations from Dubai and global stakeholders.', priority: '0.8', freq: 'Monthly' },
     { title: 'Contact & Consultation', path: '/contact', desc: 'Direct inquiry dispatch, calendar scheduling, phone, and WhatsApp contact.', priority: '0.9', freq: 'Monthly' },

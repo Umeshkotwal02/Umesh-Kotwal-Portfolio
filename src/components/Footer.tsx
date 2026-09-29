@@ -114,7 +114,6 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
                   { name: 'Production Experience', href: '/experience' },
                   { name: 'Engineering Services', href: '/services' },
                   { name: 'Core Skillset', href: '/skills' },
-                  { name: 'Architecture Simulator', href: '/simulator' },
                   { name: 'Terms of Service', href: '/terms' },
                   { name: 'Privacy Policy', href: '/privacy' },
                   { name: 'HTML Sitemap', href: '/sitemap' },

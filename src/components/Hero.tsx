@@ -38,20 +38,6 @@ interface HeroProps {
 
 const UMESH_OFFICIAL_PHOTO = "https://umeshkotwal.vercel.app/assets/about-us-BJhTeHfc.jpeg";
 
-const TECH_FOCUS_PILLS = [
-  { name: 'React 18', category: 'Frontend', icon: 'react' },
-  { name: 'Next.js 14', category: 'SSR & Vitals', icon: 'next.js' },
-  { name: 'Node.js', category: 'Backend Engine', icon: 'node.js' },
-  { name: 'Express.js', category: 'Microservices', icon: 'express' },
-  { name: 'MongoDB', category: 'NoSQL Database', icon: 'mongodb' },
-  { name: 'PostgreSQL', category: 'ACID Relational', icon: 'postgresql' },
-  { name: 'Redis', category: 'sub-10ms Cache', icon: 'redis' },
-  { name: 'BullMQ', category: '0% Data Loss DLQ', icon: 'bullmq' },
-  { name: 'TypeScript', category: 'Strict Types', icon: 'typescript' },
-  { name: 'Docker', category: 'Containers', icon: 'docker' },
-  { name: 'Stripe', category: 'Escrow Payouts', icon: 'stripe' },
-];
-
 const ROTATING_SKILLS = [
   'Full-Stack Developer',
   'Next.js & React 18 Specialist',
@@ -515,39 +501,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
             </div>
           </motion.div>
         </div>
-
-        {/* Digital Tech Stack Ribbon: Full-Stack Technologies */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="space-y-3 pt-2"
-        >
-          <div className="text-center">
-            <span className={`text-[11px] font-mono tracking-widest uppercase font-semibold ${
-              darkMode ? 'text-zinc-500' : 'text-zinc-400'
-            }`}>
-              CORE PRODUCTION TECHNOLOGY STACK
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-5xl mx-auto px-2">
-            {TECH_FOCUS_PILLS.map((tech) => (
-              <div
-                key={tech.name}
-                className={`px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium flex items-center gap-2 transition-all duration-200 shadow-2xs ${
-                  darkMode
-                    ? 'bg-zinc-900/60 border-white/[0.08] text-zinc-300 hover:border-[#FF5722]/50 hover:text-white'
-                    : 'bg-white border-black/[0.06] text-zinc-700 hover:border-[#FF5722]/60 hover:text-zinc-950'
-                }`}
-              >
-                <TechIcon name={tech.icon} className="w-4 h-4 shrink-0" darkMode={darkMode} />
-                <span>{tech.name}</span>
-                <span className="text-[10px] text-zinc-400 font-normal">({tech.category})</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Expandable Developer CLI Terminal */}
         <AnimatePresence>

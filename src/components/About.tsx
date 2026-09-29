@@ -389,10 +389,10 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
               </div>
 
               <a
-                href="#simulator"
+                href="#projects"
                 className="px-4 py-2.5 rounded-full font-medium text-xs transition-all duration-200 shrink-0 flex items-center gap-2 bg-[#FF5722] hover:bg-[#F4511E] text-white shadow-md shadow-[#FF5722]/25"
               >
-                <span>Live Gateway Simulator</span>
+                <span>Explore Projects</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </motion.div>
