@@ -7,6 +7,32 @@ interface TestimonialsProps {
   darkMode: boolean;
 }
 
+const getInitials = (name: string) => {
+  return name
+    .trim()
+    .split(/\s+/)
+    .map((part) => part[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+};
+
+const TEXT_AVATAR_THEMES = [
+  {
+    gradient: 'from-[#FF5722] to-amber-600',
+    shadow: 'shadow-[#FF5722]/25',
+  },
+  {
+    gradient: 'from-blue-600 to-indigo-600',
+    shadow: 'shadow-blue-500/25',
+  },
+  {
+    gradient: 'from-emerald-600 to-teal-600',
+    shadow: 'shadow-emerald-500/25',
+  },
+];
+
 export const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
   return (
     <section className={`py-28 lg:py-32 relative border-t transition-colors duration-300 ${
@@ -56,23 +82,26 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
                 </p>
               </div>
 
-              <div className={`pt-4 border-t flex items-center gap-3 ${
+              <div className={`pt-4 border-t flex items-center gap-3.5 ${
                 darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'
               }`}>
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  referrerPolicy="no-referrer"
-                  className={`w-10 h-10 rounded-full object-cover border ${
-                    darkMode ? 'border-white/10' : 'border-black/10'
-                  }`}
-                />
-                <div>
-                  <h4 className={`text-xs sm:text-sm font-bold tracking-tight ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
+                {/* Modern Text Avatar with Initials */}
+                <div
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center font-outfit font-extrabold text-sm tracking-wide text-white bg-gradient-to-br ${
+                    TEXT_AVATAR_THEMES[idx % TEXT_AVATAR_THEMES.length].gradient
+                  } shadow-md ${
+                    TEXT_AVATAR_THEMES[idx % TEXT_AVATAR_THEMES.length].shadow
+                  } border border-white/20 shrink-0 select-none`}
+                  aria-hidden="true"
+                >
+                  {getInitials(t.name)}
+                </div>
+                <div className="min-w-0">
+                  <h4 className={`text-xs sm:text-sm font-bold tracking-tight truncate ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
                     {t.name}
                   </h4>
-                  <p className={`text-[11px] font-mono ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                    {t.role} • {t.company}
+                  <p className={`text-[11px] font-mono truncate ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                    {t.company ? `${t.role} • ${t.company}` : t.role}
                   </p>
                   <p className={`text-[10px] font-mono ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
                     {t.location}

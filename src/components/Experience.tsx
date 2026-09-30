@@ -30,7 +30,7 @@ const COMPANY_ACCENTS: Record<string, { gradient: string; text: string; bg: stri
     bg: "rgba(255, 87, 34, 0.08)",
     border: "rgba(255, 87, 34, 0.25)"
   },
-  "Enterprise Web Technologies": {
+  "Sridix Technology LLP": {
     gradient: "from-blue-500 to-indigo-600",
     text: "#3B82F6",
     bg: "rgba(59, 130, 246, 0.08)",
@@ -104,7 +104,7 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
   return (
     <section
       id="experience"
-      className={`py-24 sm:py-32 relative border-t transition-colors duration-300 overflow-hidden ${
+      className={`pt-16 pb-14 sm:pt-20 sm:pb-16 relative border-t transition-colors duration-300 overflow-hidden ${
         darkMode ? 'bg-[#09090b] border-white/[0.06]' : 'bg-[#fafafa] border-black/[0.06]'
       }`}
     >
@@ -114,7 +114,7 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
         <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -213,11 +213,11 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
         </div>
 
         {/* Dynamic Animated Timeline Section */}
-        <div ref={containerRef} className="relative pt-4">
+        <div ref={containerRef} className="relative pt-2">
           
           {/* Background Timeline Spine (Static Rail) */}
           <div
-            className={`absolute left-[19px] sm:left-[27px] top-6 bottom-6 w-[3px] rounded-full transition-colors ${
+            className={`absolute left-[20px] sm:left-[28px] -translate-x-1/2 top-4 bottom-4 w-[3px] rounded-full transition-colors ${
               darkMode ? 'bg-zinc-800/80' : 'bg-zinc-200'
             }`}
           />
@@ -225,11 +225,11 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
           {/* Foreground Animated Laser Beam Spine (Scroll-Linked) */}
           <motion.div
             style={{ scaleY, transformOrigin: 'top' }}
-            className="absolute left-[19px] sm:left-[27px] top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-[#FF5722] via-orange-400 to-amber-400 shadow-[0_0_12px_rgba(255,87,34,0.6)] z-10"
+            className="absolute left-[20px] sm:left-[28px] -translate-x-1/2 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[#FF5722] via-orange-400 to-amber-400 shadow-[0_0_12px_rgba(255,87,34,0.6)] z-10"
           />
 
           {/* Experience Cards Stack */}
-          <div className="space-y-8 sm:space-y-12">
+          <div className="space-y-8 sm:space-y-10">
             {filteredExperiences.map((exp, index) => {
               const isExpanded = !!expandedCards[exp.id];
               const accent = COMPANY_ACCENTS[exp.company] || {
@@ -249,15 +249,15 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
               return (
                 <motion.div
                   key={exp.id}
-                  initial={{ opacity: 0, y: 35, scale: 0.98 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.98 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="relative pl-12 sm:pl-16 group"
                 >
-                  {/* Timeline Glowing Node Beacon */}
+                  {/* Timeline Glowing Node Beacon - Perfectly Centered on the Timeline Spine */}
                   <div
-                    className={`absolute left-[10px] sm:left-[18px] top-7 -translate-x-1/2 w-6 h-6 rounded-full border-2 transition-all duration-300 flex items-center justify-center z-20 ${
+                    className={`absolute left-[20px] sm:left-[28px] top-7 -translate-x-1/2 w-6 h-6 rounded-full border-2 transition-all duration-300 flex items-center justify-center z-20 ${
                       exp.current
                         ? 'bg-[#FF5722] border-white dark:border-zinc-900 ring-4 ring-[#FF5722]/30 shadow-lg shadow-[#FF5722]/40 scale-110'
                         : darkMode

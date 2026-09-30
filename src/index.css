@@ -1,10 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-digital: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-poppins: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-dmsans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   body {
@@ -14,6 +25,7 @@
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   code, pre, .font-mono {
@@ -21,15 +33,23 @@
   }
 
   .font-display, .font-heading {
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .font-digital {
-    font-family: 'Syne', 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .font-outfit {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .font-poppins {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .font-dmsans {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   /* 3D Flip Card Utilities */
@@ -68,23 +88,51 @@
     color: #ffffff;
   }
 
-  /* Custom Minimal Scrollbar */
+  /* Custom Right-Side Matching Brand Scrollbar */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #FF5722 rgba(24, 24, 27, 0.4);
+  }
+
+  html:not(.dark) {
+    scrollbar-color: #FF5722 rgba(228, 228, 231, 0.6);
+  }
+
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(9, 9, 11, 0.7);
+  }
+
+  html:not(.dark) ::-webkit-scrollbar-track {
+    background: rgba(244, 244, 245, 0.85);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(161, 161, 170, 0.2);
+    background: linear-gradient(180deg, #FF5722 0%, #E64A19 100%);
     border-radius: 9999px;
+    border: 1.5px solid rgba(9, 9, 11, 0.5);
+  }
+
+  html:not(.dark) ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #FF5722 0%, #F4511E 100%);
+    border: 1.5px solid rgba(244, 244, 245, 0.7);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(161, 161, 170, 0.4);
+    background: linear-gradient(180deg, #FF7043 0%, #FF5722 100%);
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: #D84315;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 

@@ -26,7 +26,7 @@ interface PrivacyPolicyProps {
 }
 
 export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ darkMode, onNavigate }) => {
-  const lastUpdated = "September 20, 2026";
+  const lastUpdated = "September 30, 2026";
 
   const handlePrint = () => {
     window.print();

@@ -9,9 +9,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Copy,
-  Check,
-  Camera,
   ChevronDown,
   ChevronUp,
   Activity,
@@ -36,7 +33,7 @@ interface HeroProps {
   darkMode: boolean;
 }
 
-const UMESH_OFFICIAL_PHOTO = "https://umeshkotwal.vercel.app/assets/about-us-BJhTeHfc.jpeg";
+const UMESH_OFFICIAL_PHOTO = "/profile-portrait.png";
 
 const ROTATING_SKILLS = [
   'Full-Stack Developer',
@@ -52,35 +49,31 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
   // Rotating subtitle index
   const [skillIdx, setSkillIdx] = useState(0);
   useEffect(() => {
+    localStorage.removeItem('umesh_custom_photo');
     const timer = setInterval(() => {
       setSkillIdx((prev) => (prev + 1) % ROTATING_SKILLS.length);
     }, 2600);
     return () => clearInterval(timer);
   }, []);
 
-  // Active showcase state: always starts on 'portrait' (Developer Portfolio),
-  // then flips to 'services' after 3s, and continues flipping every 3s
+  // Active showcase state: user-controlled, smooth transition
   const [activeShowcase, setActiveShowcase] = useState<'services' | 'portrait'>('portrait');
-  const [isAutoFlipping, setIsAutoFlipping] = useState(true);
+  const [isAutoFlipping, setIsAutoFlipping] = useState(false); // Disabled auto-flip to prevent mobile freeze/lag
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    // Only auto-flip on desktop with user opt-in, never hijack mobile view
     if (!isAutoFlipping || isHovered) return;
 
     const timer = setInterval(() => {
       setActiveShowcase((prev) => (prev === 'portrait' ? 'services' : 'portrait'));
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAutoFlipping, isHovered]);
 
-  // Photo state (defaults strictly to Umesh's requested photo URL)
-  const [photoUrl, setPhotoUrl] = useState<string>(() => {
-    return localStorage.getItem('umesh_custom_photo') || UMESH_OFFICIAL_PHOTO;
-  });
-  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
-  const [customPhotoInput, setCustomPhotoInput] = useState('');
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  // Photo state (strictly uses Umesh's requested profile portrait)
+  const photoUrl = UMESH_OFFICIAL_PHOTO;
 
   // Terminal state
   const [showTerminal, setShowTerminal] = useState(false);
@@ -205,12 +198,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
 
     setTerminalHistory((prev) => [...prev, { command: terminalInput, output: response }]);
     setTerminalInput('');
-  };
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText('umeshkotwal658@gmail.com');
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   const whatsappUrl = `https://wa.me/916352001332?text=${encodeURIComponent(
@@ -349,29 +336,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
                 <Download className="w-3.5 h-3.5 text-[#FF5722]" />
                 <span>Resume</span>
               </button>
-
-              {/* Copy Email Fast */}
-              <button
-                onClick={copyEmail}
-                className={`px-3.5 py-3.5 text-xs font-mono rounded-full border transition-all duration-200 flex items-center gap-1.5 ${
-                  darkMode
-                    ? 'bg-zinc-900/60 border-white/[0.08] text-zinc-400 hover:text-white'
-                    : 'bg-zinc-50 border-black/[0.08] text-zinc-600 hover:text-zinc-900'
-                }`}
-                title="Copy email to clipboard"
-              >
-                {copiedEmail ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-emerald-500">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5 text-zinc-400" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
             </motion.div>
 
             {/* Key Production Proof Metrics Bar */}
@@ -457,10 +421,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
               </button>
             </div>
 
-            {/* Showcase Container: 3D Flip between Developer Portfolio & Services We Provide */}
+            {/* Showcase Container: Smooth hardware-accelerated card transition without mobile lag */}
             <div
               className="w-full max-w-lg"
-              style={{ perspective: 1200 }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -468,29 +431,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
                 {activeShowcase === 'services' ? (
                   <motion.div
                     key="services"
-                    initial={{ opacity: 0, rotateY: 75, scale: 0.96 }}
-                    animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotateY: -75, scale: 0.96 }}
-                    transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, scale: 0.97, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97, y: -8 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                     className="w-full"
-                    style={{ transformStyle: 'preserve-3d' }}
                   >
                     <ServicesFloatingCloud darkMode={darkMode} />
                   </motion.div>
                 ) : (
                   <motion.div
                     key="portrait"
-                    initial={{ opacity: 0, rotateY: -75, scale: 0.96 }}
-                    animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotateY: 75, scale: 0.96 }}
-                    transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, scale: 0.97, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97, y: -8 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                     className="w-full"
-                    style={{ transformStyle: 'preserve-3d' }}
                   >
                     <DeveloperPortfolioCard
                       darkMode={darkMode}
                       photoUrl={photoUrl}
-                      onOpenPhotoModal={() => setIsPhotoModalOpen(true)}
                       onOpenTerminal={() => setShowTerminal((prev) => !prev)}
                       showTerminal={showTerminal}
                       onOpenAiModal={onOpenAiModal}
@@ -562,71 +522,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
           )}
         </AnimatePresence>
       </div>
-
-      {/* Photo URL Customization Modal */}
-      <AnimatePresence>
-        {isPhotoModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className={`w-full max-w-md rounded-2xl border p-6 space-y-4 shadow-2xl ${
-                darkMode ? 'bg-zinc-900 border-white/[0.1] text-zinc-100' : 'bg-white border-black/[0.1] text-zinc-900'
-              }`}
-            >
-              <h3 className="text-lg font-bold font-display">Update Profile Portrait</h3>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Provide an image URL to customize the hero portrait.
-              </p>
-
-              <input
-                type="url"
-                value={customPhotoInput}
-                onChange={(e) => setCustomPhotoInput(e.target.value)}
-                placeholder="https://example.com/photo.jpg"
-                className={`w-full px-3 py-2 text-xs rounded-xl border font-mono ${
-                  darkMode ? 'bg-zinc-800 border-white/10 text-white' : 'bg-zinc-50 border-black/10 text-black'
-                }`}
-              />
-
-              <div className="flex items-center justify-end gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPhotoUrl(UMESH_OFFICIAL_PHOTO);
-                    localStorage.removeItem('umesh_custom_photo');
-                    setIsPhotoModalOpen(false);
-                  }}
-                  className="px-3 py-1.5 text-xs text-zinc-400 hover:text-white transition-colors font-mono"
-                >
-                  Reset Default
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsPhotoModalOpen(false)}
-                  className="px-3 py-1.5 text-xs rounded-xl border border-zinc-700 hover:bg-zinc-800 transition-colors font-mono"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (customPhotoInput.trim()) {
-                      setPhotoUrl(customPhotoInput.trim());
-                      localStorage.setItem('umesh_custom_photo', customPhotoInput.trim());
-                    }
-                    setIsPhotoModalOpen(false);
-                  }}
-                  className="px-4 py-1.5 text-xs rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-medium transition-colors font-mono"
-                >
-                  Apply
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

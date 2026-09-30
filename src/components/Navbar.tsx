@@ -122,7 +122,6 @@ const BASE_NAV_LINKS = [
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
-  { name: "Architecture", href: "#architecture" },
   { name: "Contact", href: "#contact" }
 ];
 

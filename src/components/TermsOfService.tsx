@@ -27,7 +27,7 @@ interface TermsOfServiceProps {
 }
 
 export const TermsOfService: React.FC<TermsOfServiceProps> = ({ darkMode, onNavigate }) => {
-  const lastUpdated = "September 20, 2026";
+  const lastUpdated = "September 30, 2026";
 
   const handlePrint = () => {
     window.print();

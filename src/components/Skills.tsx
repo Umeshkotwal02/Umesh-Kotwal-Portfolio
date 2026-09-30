@@ -117,16 +117,13 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "qa",
     title: "QA & Reliability Testing",
-    tagline: "Automated end-to-end testing, API validation & load benchmarks",
+    tagline: "Automated test suites, API validation & regression workflows",
     icon: CheckCircle2,
     accentColor: "#00BF88",
     skills: [
       { name: "Jest", tag: "Unit & Integration Test Suites", level: "Production" },
-      { name: "Playwright", tag: "Cross-Browser E2E Automation", level: "Specialist" },
-      { name: "Cypress", tag: "Component & Visual Regression", level: "Production" },
-      { name: "Postman", tag: "Automated Collection Runners", level: "Core" },
-      { name: "k6", tag: "Concurrency & Stress Benchmarks", level: "Production" },
-      { name: "Manual QA", tag: "Exploratory Bug Hunting", level: "Verified" }
+      { name: "Postman", tag: "Automated API Collections & Monitoring", level: "Core" },
+      { name: "Manual QA", tag: "Exploratory & Edge-Case Bug Hunting", level: "Verified" }
     ]
   }
 ];
@@ -176,7 +173,7 @@ export const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
   return (
     <section
       id="skills"
-      className={`py-24 sm:py-32 relative border-t transition-colors duration-300 ${
+      className={`pt-16 pb-14 sm:pt-20 sm:pb-16 relative border-t transition-colors duration-300 ${
         darkMode ? 'bg-[#09090b] border-white/[0.06]' : 'bg-zinc-50/80 border-black/[0.06]'
       }`}
     >

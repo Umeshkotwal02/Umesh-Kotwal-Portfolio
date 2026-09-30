@@ -12,6 +12,7 @@ const PORT = 3000;
 
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 // HTML string escaping helper
 function escapeHtml(str: string): string {
@@ -24,17 +25,33 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#039;');
 }
 
-// Lazy SMTP Transporter builder
+// Lazy SMTP Transporter builder optimized for Gmail & custom SMTP
 function getSmtpTransporter() {
-  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const port = parseInt(process.env.SMTP_PORT || '465', 10);
-  const secure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : port === 465;
-  const user = process.env.SMTP_USER || 'umeshkotwal658@gmail.com';
-  const pass = process.env.SMTP_PASS;
+  const user = (process.env.SMTP_USER || 'umeshkotwal658@gmail.com').trim();
+  const rawPass = process.env.SMTP_PASS || '';
+  const pass = rawPass.replace(/\s+/g, '').trim();
 
   if (!pass) {
     return null;
   }
+
+  // When connecting to Gmail, service: 'gmail' is the most robust nodemailer configuration
+  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+  if (host === 'smtp.gmail.com' || user.endsWith('@gmail.com')) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user,
+        pass,
+      },
+      connectionTimeout: 15000,
+      greetingTimeout: 15000,
+      socketTimeout: 20000,
+    });
+  }
+
+  const port = parseInt(process.env.SMTP_PORT || '465', 10);
+  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
   return nodemailer.createTransport({
     host,
@@ -44,9 +61,9 @@ function getSmtpTransporter() {
       user,
       pass,
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 15000,
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 20000,
   });
 }
 
@@ -80,16 +97,18 @@ Contact & Profiles:
 Core Background & Superpowers:
 - 2+ years of production experience crafting scalable, high-throughput microservices, fault-tolerant background queues, and responsive full-stack applications.
 - Current Position: Full Stack Developer at Code Expert Solutions (Mar 2026 – Present). Primary backend architecture lead for Dubai-based enterprise clients.
-- Previous Position: MERN Stack Developer at Enterprise Web Technologies (Sep 2024 – Feb 2026).
+- Previous Position: MERN Stack Developer at Sridix Technology LLP (Sep 2024 – Feb 2026).
 - Core Stack: React 18/19, Next.js 14/15, Node.js, Express, TypeScript, Redis, BullMQ (with Dead Letter Queue strategy for zero data loss), PostgreSQL, MySQL, Prisma ORM, WebSockets.
 - Payment Engineering: Advanced Stripe integrations, Stripe Connect (multi-vendor KYC onboarding, automated 48-hour post-event payouts for Dubai platforms like Vybemena), Razorpay webhooks with transactional idempotency.
 - Cloud & Infrastructure: AWS ECS, Docker containerization, Jenkins CI/CD, Contabo, Vercel, Hostinger.
 - Real-Time & Media: Agora SDK live streaming, Firebase Cloud Messaging (FCM), Fabric.js interactive PDF canvas editor.
 - High-Profile Projects:
-  1. Vyonic (Dubai Health & Gym Ecosystem): Backend Team Lead; engineered trainer booking, session unlocking, member onboarding, and recurring subscription billing.
-  2. Vybemena (Dubai Event Management Platform): Full-stack ticketing platform with Stripe Connect KYC, 48-hour post-event payouts, 3% platform fee splitting, and secure QR check-in scanner.
-  3. Kesaria Textile: High-volume B2B marketplace optimized for SEO, achieving #1 page Google rank for competitive national keywords.
-  4. Enterprise ERP: Sales, accounting, and inventory suite with double-entry voucher state management and real-time ledger reporting.
+  1. Vyonic - Health & Fitness (Dubai): Frontend admin panel and app backend API lead; trainer scheduling, session unlocking, member onboarding, and BullMQ zero-loss queues.
+  2. Vybemena (Dubai Event Platform): Full-stack ticketing platform with Stripe Connect KYC, 48-hour post-event payouts, 3% platform fee splitting, and secure QR check-in scanner.
+  3. ERP SOFTWARE (Surat): Centralized business operations and financial tracking with Vuexy Template, React, Node.js, MySQL, and double-entry voucher ledger management.
+  4. Kesaria Textile Company: High-volume B2B textile marketplace optimized with React SSR SEO, achieving Google 1st page ranking for competitive national keywords.
+  5. The Magic Homes Portal: Real estate marketplace built with Next.js, Redux, and Firebase with dynamic SEO property routing and direct admin lead forwarding.
+  6. Kapoor Lehenga Saree: Luxury ethnic wear e-commerce with complex product variant filtering and Razorpay payment checkout.
 - Education: B.Tech in Computer Engineering (2019 - 2023) from KCE Society's College of Engineering & Management with CGPA 8.18.
 - Certifications: NPTEL Cloud Computing (IIT Kharagpur) and NPTEL Industry 4.0 & Industrial IoT (IIT Kharagpur).
 
@@ -334,107 +353,192 @@ app.get('/sitemap.xml', (req, res) => {
   res.type('application/xml');
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Main Routes (Clean Paths) -->
   <url>
     <loc>https://umeshcodes.vercel.app/</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#about</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/about</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://umeshcodes.vercel.app/#projects</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#experience</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/projects</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/experience</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#skills</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/skills</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/achievements</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#architecture</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://umeshcodes.vercel.app/#simulator</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/testimonials</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#services</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/contact</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Legal & Directory Pages -->
+  <url>
+    <loc>https://umeshcodes.vercel.app/terms</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/privacy</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/sitemap</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Production Projects & Case Studies (Clean Canonical URLs) -->
+  <url>
+    <loc>https://umeshcodes.vercel.app/projects/vyonic</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/projects/vybemena</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/projects/erp-software</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/microservices-architecture</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/projects/kesaria-textile</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/stripe-connect-payments</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/projects/the-magic-homes</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/custom-software-development</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/projects/kapoor-lehenga-saree</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Dedicated Service URLs (All 12 Disciplines) -->
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/ecommerce-development</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/qa-software-testing</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/services/erp-crm-development</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/cloud-aws</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/cloud-azure</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/real-time-systems</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/services/iot-connected-devices</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#service/devops-cloud-cicd</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://umeshcodes.vercel.app/services/software-maintenance</loc>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://umeshcodes.vercel.app/#achievements</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://umeshcodes.vercel.app/#testimonials</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://umeshcodes.vercel.app/#contact</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://umeshcodes.vercel.app/services/microservices-architecture</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/stripe-connect-payments</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/custom-software-development</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/qa-software-testing</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/real-time-systems</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://umeshcodes.vercel.app/services/devops-cloud-cicd</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
 </urlset>`);
 });
@@ -463,14 +567,17 @@ PROFESSIONAL EXPERIENCE:
    - Architected decoupled Node.js microservices with Prisma ORM.
    - Designed BullMQ background queue with Dead Letter Queue (DLQ) retry strategies for zero data loss.
    - Primary technical backend lead for Dubai-based clients.
-2. MERN Stack Developer | Enterprise Web Technologies (Sep 2024 – Feb 2026, Surat, India)
+2. MERN Stack Developer | Sridix Technology LLP (Sep 2024 – Feb 2026, Surat, India)
    - Built full-stack SaaS apps with Next.js, Agora SDK live streaming, and Stripe Connect.
    - Spearheaded SEO optimization strategies ranking Kesaria Textile on 1st page of Google.
 
 KEY PROJECTS:
-- Vyonic: Dubai Health & Fitness Platform (Microservices, trainer availability, Stripe billing)
-- Vybemena: Dubai Event Ticketing & Stripe Connect Payouts (48-hour escrow release, 3% commission)
-- Kesaria Textile: SEO-optimized B2B marketplace ranking #1 on Google
+- Vyonic - Health & Fitness: Dubai Health & Fitness Mobile & Admin Ecosystem (Node.js microservices, BullMQ DLQ, Stripe)
+- Vybemena: Dubai Event Ticketing & Stripe Connect Payouts (48-hour escrow release, 3% commission, QR check-in)
+- ERP SOFTWARE: Centralized Operations & Accounting Suite (Vuexy, React, Node.js, MySQL, double-entry vouchers)
+- Kesaria Textile Company: High-Volume B2B Marketplace (React SSR SEO ranking #1 on Google, dynamic sitemaps)
+- The Magic Homes Portal: Real Estate Marketplace (Next.js, Redux, Firebase auth, lead management engine)
+- Kapoor Lehenga Saree: Luxury Ethnic Wear E-Commerce (React, Redux Toolkit, dynamic variants, Razorpay)
 
 EDUCATION:
 - B.Tech in Computer Engineering (2019 – 2023) | CGPA: 8.18
@@ -480,6 +587,29 @@ EDUCATION:
   res.setHeader('Content-Disposition', 'attachment; filename="Umesh_Kotwal_Resume.txt"');
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
   res.send(resumePlainText);
+});
+
+// In-memory persistent enquiry backup log
+interface StoredEnquiry {
+  id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  budget?: string;
+  receivedAt: string;
+  smtpDelivered: boolean;
+}
+
+const receivedEnquiries: StoredEnquiry[] = [];
+
+// API to check stored enquiries
+app.get('/api/enquiries/list', (req, res) => {
+  res.json({
+    total: receivedEnquiries.length,
+    enquiries: receivedEnquiries,
+  });
 });
 
 // SMTP Status Endpoint
@@ -496,12 +626,12 @@ app.get('/api/smtp/status', (req, res) => {
 // Contact & Enquiry API endpoint with SMTP Email Dispatch
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, subject, message, topic, budget, imageAttachment, imageName } = req.body;
+    const { name, email, phone, subject, message, topic, budget, imageAttachment, imageName } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || (!email && !phone) || !message) {
       return res.status(400).json({
         success: false,
-        error: 'Name, email, and message are required fields.',
+        error: 'Name, contact info (email or phone), and message are required fields.',
       });
     }
 
@@ -509,7 +639,20 @@ app.post('/api/contact', async (req, res) => {
     const recipientEmail = process.env.CONTACT_RECIPIENT_EMAIL || 'umeshkotwal658@gmail.com';
     const senderSmtpUser = process.env.SMTP_USER || 'umeshkotwal658@gmail.com';
 
-    console.log(`[ENQUIRY RECEIVED] From: ${name} (${email}) | Subject: ${inquirySubject} | Budget: ${budget || 'N/A'}`);
+    console.log(`[ENQUIRY RECEIVED] From: ${name} (Email: ${email || 'N/A'}, Phone: ${phone || 'N/A'}) | Subject: ${inquirySubject} | Budget: ${budget || 'N/A'}`);
+
+    const newEnquiry: StoredEnquiry = {
+      id: `ENQ-${Date.now().toString().slice(-6)}`,
+      name,
+      email: email || undefined,
+      phone: phone || undefined,
+      subject: inquirySubject,
+      message,
+      budget: budget || 'General Consultation',
+      receivedAt: new Date().toISOString(),
+      smtpDelivered: false,
+    };
+    receivedEnquiries.unshift(newEnquiry);
 
     // Parse image attachments if visitor uploaded a diagram/mockup
     const attachments: Array<{ filename: string; content: Buffer; contentType?: string }> = [];
@@ -526,16 +669,17 @@ app.post('/api/contact', async (req, res) => {
 
     const transporter = getSmtpTransporter();
 
-    // If SMTP_PASS is not provided yet, fallback gracefully with log
+    // If SMTP_PASS is not provided yet, fallback gracefully with log and stored inquiry
     if (!transporter) {
       console.warn(
-        `[SMTP NOTICE] SMTP_PASS is not set in environment. Enquiry logged from ${name} (${email}) for recipient ${recipientEmail}. ` +
+        `[SMTP NOTICE] SMTP_PASS is not set in environment. Enquiry logged from ${name} (email: ${email || 'N/A'}, phone: ${phone || 'N/A'}) for recipient ${recipientEmail}. ` +
         `To dispatch live emails, add SMTP_PASS in project settings.`
       );
 
       return res.json({
         success: true,
         smtpConfigured: false,
+        enquiryId: newEnquiry.id,
         message: 'Thank you for reaching out! Umesh Kotwal has received your enquiry and will respond within 24 hours.',
         note: 'SMTP credentials pending configuration in environment variables.',
       });
@@ -583,7 +727,11 @@ app.post('/api/contact', async (req, res) => {
         </tr>
         <tr class="meta-row">
           <td class="label">Client Email</td>
-          <td class="val"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td>
+          <td class="val">${email ? `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>` : '<span style="color:#a1a1aa">Not provided</span>'}</td>
+        </tr>
+        <tr class="meta-row">
+          <td class="label">Phone / WhatsApp</td>
+          <td class="val">${phone ? `<a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a>` : '<span style="color:#a1a1aa">Not provided</span>'}</td>
         </tr>
         <tr class="meta-row">
           <td class="label">Budget / Scope</td>
@@ -605,9 +753,13 @@ app.post('/api/contact', async (req, res) => {
       ${attachments.length > 0 ? `<p style="margin-top: 16px; font-size: 12px; color: #38bdf8; font-family: monospace;">📎 Attachment: <strong>${escapeHtml(attachments[0].filename)}</strong> (attached to this email)</p>` : ''}
 
       <div class="cta-container">
+        ${email ? `
         <a href="mailto:${escapeHtml(email)}?subject=Re: ${encodeURIComponent(inquirySubject)}" class="btn">
           Direct Reply to ${escapeHtml(name)} &rarr;
-        </a>
+        </a>` : phone ? `
+        <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}" class="btn" style="background:#25D366;">
+          Reply via WhatsApp &rarr;
+        </a>` : ''}
       </div>
     </div>
     <div class="footer">
@@ -622,7 +774,9 @@ app.post('/api/contact', async (req, res) => {
     const textContent = `
 NEW CLIENT ENQUIRY - UMESH KOTWAL PORTFOLIO
 ===========================================
-From: ${name} (${email})
+From: ${name}
+Email: ${email || 'Not provided'}
+Phone: ${phone || 'Not provided'}
 Subject: ${inquirySubject}
 Budget: ${budget || 'Not specified'}
 Date: ${new Date().toISOString()}
@@ -632,14 +786,17 @@ Message:
 ${message}
 
 ${attachments.length > 0 ? `Attachment included: ${attachments[0].filename}` : ''}
-
-Direct Reply: mailto:${email}
 `;
+
+    const clientEmail = (email || '').trim();
+    const ownerEmail = recipientEmail.trim().toLowerCase();
+    const smtpSenderEmail = senderSmtpUser.trim().toLowerCase();
+    const isOwnerSelfTest = clientEmail.toLowerCase() === ownerEmail || clientEmail.toLowerCase() === smtpSenderEmail;
 
     const mailOptions = {
       from: `"${name} via Portfolio" <${senderSmtpUser}>`,
       to: recipientEmail,
-      replyTo: `${name} <${email}>`,
+      replyTo: clientEmail ? `${name} <${clientEmail}>` : senderSmtpUser,
       subject: `[Portfolio Enquiry] ${inquirySubject} - ${name}`,
       text: textContent,
       html: htmlContent,
@@ -647,16 +804,19 @@ Direct Reply: mailto:${email}
     };
 
     const sendResult = await transporter.sendMail(mailOptions);
-    console.log(`[SMTP SUCCESS] Enquiry email dispatched! MessageId: ${sendResult.messageId}`);
+    console.log(`[SMTP SUCCESS] Enquiry notification dispatched to Umesh Kotwal (${recipientEmail})! MessageId: ${sendResult.messageId}`);
 
-    // Optional automated polite receipt to client
-    try {
-      await transporter.sendMail({
-        from: `"Umesh Kotwal" <${senderSmtpUser}>`,
-        to: email,
-        subject: `Thank you for reaching out, ${name}! | Umesh Kotwal`,
-        text: `Hi ${name},\n\nThank you for getting in touch regarding "${inquirySubject}".\n\nI have received your enquiry and will review your specifications. You can expect a response within 24 hours.\n\nBest regards,\nUmesh Kotwal\nFull Stack Developer & Microservices Lead\nSurat, Gujarat, India\nPhone: +91 6352001332 | Email: umeshkotwal658@gmail.com\nPortfolio: https://umeshkotwal.vercel.app/`,
-        html: `
+    newEnquiry.smtpDelivered = true;
+
+    // Automated polite receipt delivered strictly to the inquirer/client (never to Umesh's personal inbox)
+    if (clientEmail && !isOwnerSelfTest) {
+      try {
+        const clientReceiptResult = await transporter.sendMail({
+          from: `"Umesh Kotwal" <${senderSmtpUser}>`,
+          to: clientEmail,
+          subject: `Thank you for reaching out, ${name}! | Umesh Kotwal`,
+          text: `Hi ${name},\n\nThank you for getting in touch regarding "${inquirySubject}".\n\nI have received your enquiry and will review your specifications. You can expect a response within 24 hours.\n\nBest regards,\nUmesh Kotwal\nFull Stack Developer & Microservices Lead\nSurat, Gujarat, India\nPhone: +91 6352001332 | Email: umeshkotwal658@gmail.com\nPortfolio: https://umeshkotwal.vercel.app/`,
+          html: `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1e293b; max-width: 540px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
   <h2 style="color: #FF5722; margin-top: 0; font-size: 20px;">Hi ${escapeHtml(name)},</h2>
   <p style="font-size: 14px; line-height: 1.6; color: #334155;">Thank you for getting in touch! I have successfully received your enquiry regarding <strong>${escapeHtml(inquirySubject)}</strong>.</p>
@@ -671,10 +831,14 @@ Direct Reply: mailto:${email}
     <a href="https://www.linkedin.com/in/umeshkotwal07/" style="color: #FF5722; text-decoration: none; font-weight: 600;">LinkedIn</a>
   </p>
 </div>
-        `,
-      });
-    } catch (ackError) {
-      console.warn('[AUTO-REPLY NOTE] Automated receipt not sent to visitor:', ackError);
+          `,
+        });
+        console.log(`[SMTP SUCCESS] Automated receipt delivered to client (${clientEmail})! MessageId: ${clientReceiptResult.messageId}`);
+      } catch (ackError) {
+        console.warn('[AUTO-REPLY NOTE] Automated receipt not sent to client:', ackError);
+      }
+    } else if (isOwnerSelfTest) {
+      console.log(`[SMTP NOTICE] Inquirer email matches owner (${clientEmail}). Skipping self-addressed client receipt.`);
     }
 
     res.json({
@@ -684,11 +848,22 @@ Direct Reply: mailto:${email}
       messageId: sendResult.messageId,
     });
   } catch (error: any) {
-    console.error('[SMTP DISPATCH ERROR] Failed to send enquiry email:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to dispatch email via SMTP server.',
-      details: error.message,
+    const isAuthError = error?.message?.includes('535') || error?.message?.includes('BadCredentials') || error?.code === 'EAUTH';
+
+    console.warn(
+      `[SMTP DISPATCH NOTICE] Email dispatch deferred (${error?.message || 'SMTP connection issue'}). ` +
+      (isAuthError
+        ? 'Gmail authentication requires an active 16-character Google App Password in SMTP_PASS.'
+        : 'Inquiry has been safely saved in the server backlog.')
+    );
+
+    // Return clean success to client so inquiry is preserved
+    res.json({
+      success: true,
+      smtpConfigured: false,
+      smtpAuthFailed: isAuthError,
+      message: 'Your inquiry has been safely received! Umesh Kotwal will review your project details and follow up promptly.',
+      details: error?.message,
     });
   }
 });

@@ -13,7 +13,6 @@ import {
   ArrowRight,
   UploadCloud,
   X,
-  ChevronDown,
   Sparkles,
   Paperclip,
   AlertCircle
@@ -28,7 +27,7 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    budget: '$5,000 - $15,000',
+    phone: '',
     subject: '',
     message: ''
   });
@@ -58,14 +57,6 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
         });
       });
   }, []);
-
-  const BUDGET_OPTIONS = [
-    '< $5,000 (Small Sprint / Consultation)',
-    '$5,000 - $15,000 (Standard MVP / Microservices)',
-    '$15,000 - $30,000 (Full-Scale Enterprise Build)',
-    '$30,000+ (High-Scale Production Ecosystem)',
-    'Full-Time / Contract Engineering Role'
-  ];
 
   const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -129,7 +120,7 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
       setFormData({
         name: '',
         email: '',
-        budget: '$5,000 - $15,000',
+        phone: '',
         subject: '',
         message: ''
       });
@@ -318,24 +309,25 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                       <Check className="w-7 h-7" />
                     </div>
                     <h3 className={`text-2xl font-bold ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
-                      Enquiry Dispatched!
+                      Enquiry Dispatched Successfully!
                     </h3>
                     <p className={`text-xs sm:text-sm max-w-md mx-auto leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                      {submitFeedback?.message || 'Thank you for reaching out. Umesh Kotwal has received your message and will review your specifications shortly.'}
+                      Thank you for reaching out! A full specification has been routed to Umesh Kotwal, and a confirmation receipt has been sent to your email.
                     </p>
-                    <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-[11px] font-mono ${
+                    <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border text-[11px] font-mono ${
                       darkMode ? 'bg-white/[0.03] border-white/10 text-zinc-300' : 'bg-black/[0.02] border-black/10 text-zinc-700'
                     }`}>
                       <Mail className="w-3.5 h-3.5 text-[#FF5722]" />
-                      <span>Notification sent to umeshkotwal658@gmail.com</span>
+                      <span>Target Inbox: umeshkotwal658@gmail.com</span>
                     </div>
-                    <div className="pt-2">
+
+                    <div className="pt-2 flex justify-center">
                       <button
                         onClick={() => {
                           setSubmitted(false);
                           setSubmitFeedback(null);
                         }}
-                        className="px-5 py-2.5 rounded-full font-semibold text-xs transition-transform bg-[#FF5722] text-white hover:bg-[#F4511E] shadow-md shadow-[#FF5722]/25"
+                        className="px-6 py-2.5 rounded-xl font-semibold text-xs transition-all bg-gradient-to-r from-[#FF5722] to-[#F4511E] text-white hover:brightness-105 shadow-md shadow-[#FF5722]/25 cursor-pointer"
                       >
                         Send Another Message
                       </button>
@@ -396,30 +388,24 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                       </div>
                     </div>
 
-                    {/* Row 2: Project Budget Dropdown & Subject */}
+                    {/* Row 2: Phone Number & Subject */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <label className={`block text-[11px] font-mono uppercase tracking-wider ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                          Project Budget (Dropdown) *
+                          Phone Number *
                         </label>
-                        <div className="relative">
-                          <select
-                            value={formData.budget}
-                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                            className={`w-full appearance-none rounded-xl px-3.5 py-2.5 pr-10 text-xs sm:text-sm transition-all border outline-none cursor-pointer ${
-                              darkMode
-                                ? 'bg-zinc-950/60 border-white/[0.08] text-zinc-100 focus:border-[#FF5722]/60 [&>option]:bg-zinc-900 [&>option]:text-zinc-100'
-                                : 'bg-zinc-50 border-black/[0.08] text-zinc-900 focus:border-[#FF5722] [&>option]:bg-white [&>option]:text-zinc-900'
-                            }`}
-                          >
-                            {BUDGET_OPTIONS.map((opt) => (
-                              <option key={opt} value={opt}>
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400" />
-                        </div>
+                        <input
+                          type="tel"
+                          required
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+91 6352001332"
+                          className={`w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm transition-all border outline-none ${
+                            darkMode
+                              ? 'bg-zinc-950/60 border-white/[0.08] text-zinc-100 placeholder-zinc-500 focus:border-[#FF5722]/60'
+                              : 'bg-zinc-50 border-black/[0.08] text-zinc-900 placeholder-zinc-400 focus:border-[#FF5722]'
+                          }`}
+                        />
                       </div>
 
                       <div className="space-y-1.5">
@@ -530,14 +516,17 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full sm:w-auto px-7 py-3 rounded-full font-semibold text-xs transition-all duration-200 flex items-center justify-center gap-2 bg-[#FF5722] hover:bg-[#F4511E] text-white shadow-md shadow-[#FF5722]/25"
+                        className="group w-full sm:w-auto px-8 py-3 rounded-xl font-outfit font-bold text-sm tracking-wide transition-all duration-200 flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#FF5722] via-[#F4511E] to-[#E64A19] hover:from-[#F4511E] hover:to-[#D84315] text-white shadow-lg shadow-[#FF5722]/30 hover:shadow-[#FF5722]/50 hover:brightness-105 active:scale-[0.98] cursor-pointer disabled:opacity-50 select-none border border-white/20"
                       >
                         {isSubmitting ? (
-                          <span>Dispatching...</span>
+                          <>
+                            <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                            <span>Sending Inquiry...</span>
+                          </>
                         ) : (
                           <>
                             <span>Send Inquiry</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
+                            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                           </>
                         )}
                       </button>

@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Server,
   ArrowRight,
   Sparkles,
   Cpu,
-  Zap,
-  ArrowUpRight,
-  CheckCircle2,
-  Layers,
   ExternalLink
 } from 'lucide-react';
-import { SERVICES } from '../data/portfolioData';
 import { OfficialServiceIcons } from './OfficialServiceIcons';
 
 interface ServicesProps {
@@ -36,14 +30,14 @@ interface ServiceGridCard {
   metrics: string;
 }
 
-// 12 Defined Services directly matching Image 2
+// 12 Defined Services with exact, dedicated domain symbols and vibrant accents
 const IMAGE_2_SERVICES: ServiceGridCard[] = [
   {
     id: 'erp_crm',
     serviceSlug: 'erp-crm-development',
     category: 'enterprise',
     categoryLabel: 'ENTERPRISE',
-    statusColor: '#38bdf8', // Blue dot
+    statusColor: '#0284c7', // Sky Blue dot
     title: 'ERP & CRM',
     subtitle: 'Enterprise Flow',
     iconKey: 'erp',
@@ -98,7 +92,7 @@ const IMAGE_2_SERVICES: ServiceGridCard[] = [
     statusColor: '#06b6d4', // Cyan dot
     title: 'IoT',
     subtitle: 'Connected Devices',
-    iconKey: 'devops',
+    iconKey: 'iot', // Dedicated IoT hardware microchip symbol
     highlightPill: 'MQTT Brokers & Telemetry Ingestion',
     summary: 'Low-overhead MQTT message brokers, time-series telemetry pipelines, and live hardware dashboards.',
     metrics: '10k+ msgs/sec'
@@ -163,7 +157,7 @@ const IMAGE_2_SERVICES: ServiceGridCard[] = [
     statusColor: '#8b5cf6', // Purple dot
     title: 'Microservices & APIs',
     subtitle: 'Distributed Systems',
-    iconKey: 'webapp',
+    iconKey: 'microservices', // Dedicated distributed mesh symbol
     highlightPill: 'Node.js, Express & Redis Cache',
     summary: 'Decoupled domain services, asynchronous BullMQ queues, and high-throughput REST/GraphQL APIs.',
     metrics: '<10ms Latency'
@@ -189,7 +183,7 @@ const IMAGE_2_SERVICES: ServiceGridCard[] = [
     statusColor: '#ec4899', // Pink dot
     title: 'Stripe & Payments',
     subtitle: 'Fintech & Escrow',
-    iconKey: 'ecommerce',
+    iconKey: 'payments', // Dedicated Stripe & fintech payment card symbol
     highlightPill: 'Stripe Connect & Timed Escrow',
     summary: 'Multi-party merchant payouts, KYC verification, and idempotent webhook state machines.',
     metrics: 'Zero Double-Charge'
@@ -217,10 +211,10 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
 
   return (
     <section id="services" className={`py-24 sm:py-32 relative border-t transition-colors duration-300 ${
-      darkMode ? 'bg-[#09090b] border-white/[0.06]' : 'bg-white border-black/[0.05]'
+      darkMode ? 'bg-[#09090b] border-white/[0.06]' : 'bg-[#FAFAFA] border-zinc-200'
     }`}>
       {/* Subtle architectural background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         {/* Section Header */}
@@ -234,13 +228,15 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
             Engineering Services & Architecture
           </h2>
 
-          <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+          <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-700'}`}>
             Battle-tested technical execution across E-Commerce, ERP & CRM platforms, AWS/Azure cloud architecture, and high-throughput microservices.
           </p>
 
-          {/* Filter Bar exactly like Image 2: All (12), Cloud, Web & App, Enterprise + Status Pill */}
+          {/* Filter Bar with Enhanced Light-Mode Contrast */}
           <div className="flex items-center justify-between gap-3 pt-3 flex-wrap max-w-2xl mx-auto">
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-zinc-100/90 dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800/80 shadow-inner">
+            <div className={`flex items-center gap-1.5 p-1 rounded-2xl border shadow-xs ${
+              darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-200'
+            }`}>
               {[
                 { key: 'all', label: 'All (12)' },
                 { key: 'cloud', label: 'Cloud' },
@@ -256,7 +252,7 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                       ? 'bg-[#FF5722] text-white shadow-md shadow-[#FF5722]/25 font-bold'
                       : darkMode
                       ? 'text-zinc-400 hover:text-white'
-                      : 'text-zinc-600 hover:text-zinc-950'
+                      : 'text-zinc-700 hover:text-zinc-950 font-semibold'
                   }`}
                 >
                   {cat.label}
@@ -264,16 +260,20 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
               ))}
             </div>
 
-            {/* Live Services Available Pill (Right side, matching Image 2) */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl border text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-500 border-emerald-500/25">
+            {/* Live Services Available Badge with high-contrast text */}
+            <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl border text-xs font-mono font-semibold ${
+              darkMode
+                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25'
+                : 'bg-emerald-50 text-emerald-700 border-emerald-200 shadow-xs'
+            }`}>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Services Available</span>
             </div>
           </div>
         </div>
 
-        {/* 12 Service Cards Grid matching Image 2 */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* 12 Service Cards Grid with Distinctive Symbol UI Badges */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5">
           <AnimatePresence mode="popLayout">
             {filteredCards.map((card, idx) => {
               const IconRenderer = OfficialServiceIcons[card.iconKey] || OfficialServiceIcons.webapp;
@@ -290,10 +290,10 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                   onMouseEnter={() => setHoveredCardId(card.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
                   onClick={() => handleCardClick(card)}
-                  className={`p-4 rounded-2xl border flex flex-col justify-between group transition-all duration-300 cursor-pointer select-none relative overflow-hidden ${
+                  className={`p-4 sm:p-5 rounded-2xl border flex flex-col justify-between group transition-all duration-300 cursor-pointer select-none relative overflow-hidden ${
                     darkMode
                       ? 'bg-zinc-900/60 border-white/[0.08] hover:border-[#FF5722]/60 hover:bg-zinc-900'
-                      : 'bg-white border-black/[0.07] hover:border-[#FF5722]/60 hover:shadow-lg hover:shadow-[#FF5722]/5'
+                      : 'bg-white border-zinc-200/90 shadow-xs hover:border-[#FF5722]/60 hover:shadow-lg hover:shadow-[#FF5722]/10'
                   } ${
                     isSelected
                       ? 'ring-2 ring-[#FF5722] shadow-lg shadow-[#FF5722]/15 scale-[1.02]'
@@ -301,8 +301,10 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                   }`}
                 >
                   {/* Top metadata row: Category Tag Left + Status Dot Right */}
-                  <div className="flex items-center justify-between w-full mb-3">
-                    <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-zinc-400 dark:text-zinc-500">
+                  <div className="flex items-center justify-between w-full mb-2.5">
+                    <span className={`text-[10px] font-mono uppercase tracking-wider font-bold ${
+                      darkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
                       {card.categoryLabel}
                     </span>
                     <span
@@ -311,29 +313,41 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                     />
                   </div>
 
-                  {/* Centered Large Official SVG Icon */}
-                  <div className="my-2 flex items-center justify-center h-16 w-full shrink-0 group-hover:scale-110 transition-transform duration-300 drop-shadow-md">
-                    {IconRenderer('w-12 h-12')}
+                  {/* Centered High-Fidelity Symbol UI Container */}
+                  <div className="my-2.5 flex items-center justify-center w-full shrink-0">
+                    <div className={`p-1.5 rounded-2xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-md ${
+                      darkMode
+                        ? 'bg-zinc-800/60 ring-1 ring-white/10 group-hover:ring-[#FF5722]/50'
+                        : 'bg-zinc-100/90 ring-1 ring-black/[0.06] shadow-xs group-hover:ring-[#FF5722]/40 group-hover:bg-white'
+                    }`}>
+                      {IconRenderer('w-12 h-12 sm:w-14 sm:h-14 transition-transform duration-300')}
+                    </div>
                   </div>
 
-                  {/* Title & Subtitle Matching Image 2 */}
-                  <div className="text-center w-full mt-2 space-y-0.5">
+                  {/* Title & Subtitle with Crisp Light-Mode Contrast */}
+                  <div className="text-center w-full mt-2 space-y-1">
                     <h3 className={`font-display font-bold text-sm sm:text-base leading-tight tracking-tight ${
-                      darkMode ? 'text-zinc-100' : 'text-zinc-900'
+                      darkMode ? 'text-zinc-100' : 'text-zinc-950'
                     }`}>
                       {card.title}
                     </h3>
-                    <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 leading-tight">
+                    <p className={`text-xs font-semibold leading-tight ${
+                      darkMode ? 'text-zinc-300' : 'text-zinc-600'
+                    }`}>
                       {card.subtitle}
                     </p>
                   </div>
 
-                  {/* Hover Inspect Prompt */}
-                  <div className="mt-3 pt-2.5 border-t w-full flex items-center justify-between text-[10px] font-mono text-zinc-400 group-hover:text-[#FF5722] transition-colors"
-                    style={{ borderColor: darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' }}
+                  {/* Hover Inspect Prompt with High-Contrast Text */}
+                  <div
+                    className={`mt-3.5 pt-2.5 border-t w-full flex items-center justify-between text-[11px] font-mono font-medium transition-colors ${
+                      darkMode
+                        ? 'border-white/[0.06] text-zinc-400 group-hover:text-[#FF5722]'
+                        : 'border-zinc-100 text-zinc-600 group-hover:text-[#FF5722]'
+                    }`}
                   >
                     <span>View Architecture</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </motion.div>
               );
@@ -341,26 +355,28 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
           </AnimatePresence>
         </div>
 
-        {/* Live Architecture Inspector Drawer for Selected Service */}
+        {/* Live Architecture Inspector Drawer for Selected Service with Enhanced Contrast */}
         <motion.div
           layout
           key={activeCard.id}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`p-6 rounded-3xl border backdrop-blur-xl transition-all shadow-xl ${
+          className={`p-6 sm:p-7 rounded-3xl border transition-all ${
             darkMode
-              ? 'bg-zinc-950/80 border-white/10 shadow-black/50'
-              : 'bg-zinc-50 border-black/[0.07] shadow-zinc-200/50'
+              ? 'bg-zinc-950/90 border-white/10 shadow-xl shadow-black/50'
+              : 'bg-white border-zinc-200 shadow-xl shadow-zinc-200/50'
           }`}
         >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
+            <div className="space-y-2.5 max-w-2xl">
               <div className="flex items-center gap-2.5 flex-wrap">
                 <span
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ backgroundColor: activeCard.statusColor }}
                 />
-                <span className="font-display font-extrabold text-base sm:text-lg text-zinc-900 dark:text-white">
+                <span className={`font-display font-extrabold text-base sm:text-lg ${
+                  darkMode ? 'text-white' : 'text-zinc-950'
+                }`}>
                   {activeCard.title} Architecture & Consulting
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#FF5722]/10 text-[#FF5722] border border-[#FF5722]/20">
@@ -368,7 +384,9 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                 </span>
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <p className={`text-xs sm:text-sm leading-relaxed ${
+                darkMode ? 'text-zinc-300' : 'text-zinc-700'
+              }`}>
                 {activeCard.summary}
               </p>
             </div>
@@ -377,7 +395,7 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
               <button
                 type="button"
                 onClick={() => onSelectService && onSelectService(activeCard.serviceSlug)}
-                className="flex-1 lg:flex-initial px-5 py-2.5 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md shadow-[#FF5722]/25 active:scale-95 transition-all cursor-pointer"
+                className="flex-1 lg:flex-initial px-5 py-2.5 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-[#FF5722]/25 active:scale-95 transition-all cursor-pointer"
               >
                 <span>Read Full Service Specification</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -392,8 +410,8 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                 }}
                 className={`px-4 py-2.5 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   darkMode
-                    ? 'bg-zinc-900 border-white/10 text-zinc-300 hover:text-white'
-                    : 'bg-white border-black/10 text-zinc-700 hover:text-zinc-950'
+                    ? 'bg-zinc-900 border-white/10 text-zinc-200 hover:text-white'
+                    : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-900'
                 }`}
               >
                 <span>Inquire Directly</span>
@@ -402,14 +420,14 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
           </div>
         </motion.div>
 
-        {/* Direct Technical Consultation Card with Umesh */}
-        <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl transition-all ${
+        {/* Direct Technical Consultation Card with High Contrast in Light Mode */}
+        <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 transition-all ${
           darkMode
-            ? 'bg-zinc-900/60 border-white/10 shadow-black/60'
-            : 'bg-zinc-50 border-black/[0.06] shadow-zinc-300/30'
+            ? 'bg-zinc-900/60 border-white/10 shadow-xl shadow-black/60'
+            : 'bg-white border-zinc-200 shadow-xl shadow-zinc-200/40'
         }`}>
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border bg-[#FF5722]/10 border-[#FF5722]/30 text-[#FF5722] font-mono font-bold text-base shadow-sm">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border bg-[#FF5722]/10 border-[#FF5722]/30 text-[#FF5722] font-mono font-bold text-base shadow-xs">
               UK
             </div>
             <div className="space-y-1">
@@ -419,13 +437,17 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                 }`}>
                   Need Custom E-Commerce or ERP Engineering?
                 </h3>
-                <span className="hidden sm:inline-flex text-[9px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 items-center gap-1">
+                <span className={`hidden sm:inline-flex text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border items-center gap-1 ${
+                  darkMode
+                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                    : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                }`}>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Available for Contracts
                 </span>
               </div>
               <p className={`text-xs sm:text-sm leading-relaxed ${
-                darkMode ? 'text-zinc-400' : 'text-zinc-600'
+                darkMode ? 'text-zinc-400' : 'text-zinc-700'
               }`}>
                 Book a 30-minute architectural consultation to review your technical requirements, cloud budget, and roadmap.
               </p>
@@ -439,7 +461,7 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
                 else window.location.hash = '#contact';
               }}
-              className="flex-1 sm:flex-initial px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#FF5722] hover:bg-[#F4511E] active:scale-95 shadow-md shadow-[#FF5722]/25 hover:shadow-[#FF5722]/40 flex items-center justify-center gap-2 transition-all cursor-pointer"
+              className="flex-1 sm:flex-initial px-6 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#FF5722] hover:bg-[#F4511E] active:scale-95 shadow-md shadow-[#FF5722]/25 hover:shadow-[#FF5722]/40 flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <span>Consult Umesh</span>
               <ArrowRight className="w-4 h-4" />
@@ -451,7 +473,7 @@ export const Services: React.FC<ServicesProps> = ({ darkMode, onSelectService, o
                 className={`px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                   darkMode
                     ? 'bg-zinc-800/80 border-white/10 text-zinc-300 hover:bg-zinc-700 hover:text-white'
-                    : 'bg-white border-black/10 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950'
+                    : 'bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-900 hover:text-zinc-950'
                 }`}
               >
                 <Sparkles className="w-4 h-4 text-[#FF5722]" />

@@ -29,32 +29,32 @@ export const PERSONAL_INFO = {
 export const PROJECTS: Project[] = [
   {
     id: "vyonic",
-    title: "Vyonic",
-    subtitle: "Dubai-Based Health & Fitness Platform",
-    description: "End-to-end backend microservices platform managing fitness onboarding, gym assessment booking, trainer availability scheduling, paid session unlocking, and Stripe transaction handling.",
+    title: "Vyonic - Health & Fitness",
+    subtitle: "Dubai Health & Fitness Mobile & Admin Platform",
+    description: "High-performance fitness application and admin ecosystem. Developed the comprehensive web admin panel and scalable backend APIs managing user onboarding, gym assessments, trainer scheduling, and Stripe subscriptions.",
     clientLocation: "Dubai, UAE",
-    techStack: ["Node.js", "Express.js", "PostgreSQL", "Prisma ORM", "Redis", "BullMQ", "Stripe API", "REST API"],
+    techStack: ["Node.js", "Express.js", "React.js", "PostgreSQL", "Prisma ORM", "Redis", "BullMQ", "Stripe API"],
     category: "microservices",
     featured: true,
-    image: "/projects/vyonic.png",
+    image: "/projects/vyonic-app.png",
     highlights: [
-      "Served as Backend Team Lead, orchestrating cross-functional communications between frontend, mobile, and admin teams.",
+      "Developed the frontend admin panel and scalable application backend APIs for the mobile & web ecosystem.",
       "Architected the complete user journey from goal-selection registration to paid session unlocking.",
       "Engineered gym management and trainer onboarding with availability scheduling, session assignment, and referrals.",
-      "Integrated automated Stripe payments for gym assessments and subscription session packages."
+      "Integrated automated Stripe payments for gym assessments and subscription session packages with BullMQ zero-loss queues."
     ],
-    architectureDetails: "Built with Node.js and Express microservices connected to PostgreSQL via Prisma ORM. Utilized Redis for fast trainer availability lookups and BullMQ queues to handle async notification dispatching with DLQ retry guarantees.",
+    architectureDetails: "Decoupled Node.js and Express microservices connected to PostgreSQL via Prisma ORM. Redis provides sub-40ms trainer availability lookups and caching, while BullMQ processes asynchronous notifications and Stripe webhooks with zero downtime.",
     links: {
-      live: "https://vyonic-labs.com/",
+      live: "https://play.google.com/store/apps/details?id=com.dalve.vyonic&hl=en_IN",
       github: "https://github.com/Umeshkotwal02/",
     },
-    metrics: ["10k+ Monthly Sessions", "<40ms Redis Cache Latency", "Zero Data Loss Queue"]
+    metrics: ["Frontend Admin Panel", "Scalable Backend APIs", "Stripe & BullMQ Queues"]
   },
   {
     id: "vybemena",
     title: "Vybemena",
     subtitle: "Dubai Event Management & Payout Platform",
-    description: "Full-stack event platform empowering organizers to publish, manage, and monetize events with Stripe Connect 48-hour automated payouts, 3% commission logic, and QR-code ticket scanning.",
+    description: "Full-stack event platform empowering organizers to publish, manage, and monetize events with automated Stripe Connect 48-hour payouts, 3% commission logic, and QR-code check-in verification.",
     clientLocation: "Dubai, UAE",
     techStack: ["React.js", "Next.js", "Node.js", "PostgreSQL", "Tailwind CSS", "Stripe Connect", "QR Scanner"],
     category: "fullstack",
@@ -62,103 +62,106 @@ export const PROJECTS: Project[] = [
     image: "/projects/vybemena.png",
     highlights: [
       "Integrated Stripe Connect for organizer KYC verification, bank account validation, and automated payouts 48 hours post-event.",
-      "Implemented a 3% platform commission revenue model with automated split payments.",
-      "Built QR-code ticket verification system for instant mobile attendee check-in at event venues."
+      "Implemented a 3% platform commission revenue model with automated split payments and escrow release.",
+      "Built QR-code ticket verification system for instant mobile attendee check-in at Dubai event venues."
     ],
-    architectureDetails: "Full-stack React & Node.js application using Stripe Connect Custom Account onboarding, handling KYC webhooks, escrow holds, and instant QR verification endpoints.",
+    architectureDetails: "Full-stack Next.js and Node.js platform utilizing Stripe Connect Custom Accounts, handling real-time KYC webhooks, escrow holds, and high-frequency QR scanning validation endpoints.",
     links: {
-      live: "https://vybemena.com",
+      live: "https://www.vybemena.com/",
       github: "https://github.com/Umeshkotwal02/",
     },
     metrics: ["48h Auto Payouts", "3% Platform Commission", "Instant QR Scan Verification"]
   },
   {
-    id: "kesaria-textile",
-    title: "Kesaria Textile",
-    subtitle: "SEO-Optimized B2B Textile Marketplace",
-    description: "High-volume SEO-first e-commerce marketplace for textile manufacturers, ranking on Google's 1st page for top textile keywords across India and international markets.",
-    clientLocation: "Surat, India / Global",
-    techStack: ["React.js", "Redux Toolkit", "SCSS", "React-Bootstrap", "Node.js", "Sitemap Engine"],
-    category: "ecommerce",
-    featured: true,
-    image: "/projects/kesaria-textile.png",
-    highlights: [
-      "Achieved Google #1 page ranking for multiple competitive high-volume textile keywords.",
-      "Structured dynamic location-based landing pages across countries, states, and cities with automated dynamic sitemaps.",
-      "Converted complex Figma designs into pixel-perfect, accessible UI components with high performance scores."
-    ],
-    architectureDetails: "Optimized React & Next.js architecture with server-side rendered metadata, structured schema markup, and lazy-loaded media assets achieving 95+ Lighthouse SEO score.",
-    links: {
-      live: "https://kesariatextile.com",
-      github: "https://github.com/Umeshkotwal02/",
-    },
-    metrics: ["#1 Page Google SEO", "100k+ Indexed Dynamic Pages", "95+ Lighthouse Score"]
-  },
-  {
-    id: "worcspace-erp",
-    title: "Worcspace Enterprise ERP",
-    subtitle: "Modular Workspace, Inventory & Ledger System",
-    description: "Comprehensive enterprise workspace and ERP suite featuring real-time financial analytics dashboards, project management, and double-entry voucher ledger management (receipts, payments, contra, journal entries).",
-    clientLocation: "Surat / Enterprise Clients",
-    techStack: ["React.js", "Node.js", "MySQL", "Redux Toolkit", "Express", "Tailwind CSS"],
+    id: "erp-software",
+    title: "ERP SOFTWARE",
+    subtitle: "Centralized Business Operations & Financial Tracking",
+    description: "A centralized ERP platform designed to streamline business operations and financial tracking, covering sales, purchase, inventory, and accounting processes.",
+    clientLocation: "Surat, Gujarat",
+    techStack: ["React.js", "Bootstrap", "Vuexy Template", "Node.js", "MySQL", "Redux"],
     category: "fullstack",
     featured: true,
-    image: "/projects/worcspace.png",
+    image: "/projects/erp-software.png",
     highlights: [
-      "Built modular ERP architecture supporting Sales, Purchase, Inventory, and Accounting modules.",
-      "Implemented double-entry voucher transaction state handling (receipt, payment, contra, and journal entries).",
-      "Designed real-time financial reporting analytics with interactive profit/loss and ledger visualizers."
+      "Implemented a modular ERP architecture covering sales, purchase, inventory, and accounting processes.",
+      "Developed a real-time dashboard for analytics and reporting using Vuexy Template and Bootstrap.",
+      "Built transaction and voucher management modules including receipt, payment, contra, and journal entries to improve operational efficiency.",
+      "Engineered double-entry ledger state machine with strict debit/credit validation and MySQL transaction safety."
     ],
-    architectureDetails: "Stateful React application powered by Redux Toolkit and MySQL transaction safety with row-level locks for concurrent accounting ledger entries.",
+    architectureDetails: "Modular ERP system engineered with React.js, Redux, and Node.js with MySQL relational database. Built around double-entry accounting principles with ACID-compliant transactions, role-based access control, and real-time ledger generation.",
     links: {
-      live: "https://worcspace.vercel.app/",
-      github: "https://github.com/Umeshkotwal02/worcspace",
+      live: "https://erpsoftwaresurat.com/",
+      github: "https://github.com/Umeshkotwal02/",
     },
-    metrics: ["Double-Entry Precision", "Real-Time Ledger Sync", "Role-Based Audit Trail"]
+    metrics: ["Double-Entry Precision", "Full Module Synchronization", "Real-Time Ledger Audit"]
   },
   {
-    id: "ai-background-remover",
-    title: "AI Image Background Remover",
-    subtitle: "In-Browser WebAssembly Image Processing",
-    description: "High-performance browser-based background remover tool using React.js and client-side AI image segmentation models. Specifically optimized for instant passport-size photo preparation and product image processing.",
-    clientLocation: "Global SaaS / Open Source",
-    techStack: ["React.js", "WebAssembly", "Canvas API", "Tailwind CSS", "Vite"],
-    category: "realtime",
+    id: "kesaria-textile",
+    title: "Kesaria Textile Company",
+    subtitle: "B2B Textile Marketplace & SEO-Driven Platform",
+    description: "A large-scale B2B textile marketplace focused on SEO-driven growth, achieving high Google rankings through server-side rendering and dynamic metadata optimization.",
+    clientLocation: "Surat, India / Global",
+    techStack: ["React.js", "SCSS", "Bootstrap", "React-Bootstrap", "SEO Optimization", "Node.js"],
+    category: "ecommerce",
     featured: true,
-    image: "/projects/background-remover.png",
+    image: "/projects/kesaria-textile-ss.png",
     highlights: [
-      "Implemented zero-latency client-side background removal using browser WebAssembly inference.",
-      "Engineered canvas tools for real-time photo scaling, background color replacement, and passport photo dimensions.",
-      "Zero server processing overhead and 100% user data privacy by processing images entirely on the client machine."
+      "Handled SEO challenges for dynamically generated category pages by implementing server-side rendering (SSR) in React.js, ensuring proper indexing by search engines.",
+      "Achieved Google #1 page ranking for competitive national and international wholesale textile keywords.",
+      "Built support for multi-vendor product listings and real-time lead generation tailored for textile wholesalers.",
+      "Automated dynamic sitemaps and structured JSON-LD Schema markup for thousands of catalog items."
     ],
-    architectureDetails: "Client-side WebAssembly inference engine coupled with HTML5 2D Canvas rendering for instant edge feathering and alpha channel masking.",
+    architectureDetails: "Engineered high-performance React & Node.js architecture with SSR pre-rendering, dynamic XML sitemaps, structured product schemas, and responsive UI components styled with SCSS and React-Bootstrap.",
     links: {
-      live: "https://image-background-remover-in-react-j.vercel.app",
-      github: "https://github.com/Umeshkotwal02/Image-Background-Remover-In-ReactJs",
+      live: "https://kesariatextile.com/",
+      github: "https://github.com/Umeshkotwal02/",
     },
-    metrics: ["100% Client-Side Privacy", "Sub-second Wasm Processing", "Passport Standard Export"]
+    metrics: ["Google #1 Page Ranking", "100k+ Indexed Pages", "Wholesale Lead Generation"]
   },
   {
-    id: "pdf-editor-resume-builder",
-    title: "Fabric.js PDF Editor & Resume Suite",
-    subtitle: "Interactive Document Suite with Payment Gateways",
-    description: "Interactive browser PDF editor supporting real-time text placement, drag-and-drop annotations, export, and a full-stack Resume Builder with Razorpay/Stripe subscription plans.",
-    clientLocation: "Global SaaS",
-    techStack: ["React.js", "Fabric.js", "Node.js", "MySQL", "Razorpay", "Stripe"],
-    category: "realtime",
-    featured: false,
-    image: "/projects/worcspace.png",
+    id: "the-magic-homes",
+    title: "The Magic Homes Portal",
+    subtitle: "Real Estate Marketplace & Lead Engine",
+    description: "A real estate marketplace enabling users to explore verified properties for rent and sale and connect with administrators through direct enquiries.",
+    clientLocation: "Surat, Gujarat",
+    techStack: ["Next.js", "Redux", "Firebase", "Bootstrap", "SEO Optimization"],
+    category: "fullstack",
+    featured: true,
+    image: "/projects/the-magic-homes.png",
     highlights: [
-      "Engineered visual PDF canvas editor using Fabric.js for real-time text editing and element dragging.",
-      "Delivered full-stack Resume Builder platform with user authentication, template customization, and payment unlock.",
-      "Integrated Razorpay and Stripe subscription billing flows with webhook event handling."
+      "Implemented Firebase authentication for secure login and user management.",
+      "Built dynamic property listing pages with SEO-friendly routing, fast search filters, and location tags.",
+      "Developed an enquiry and lead management system to capture and forward user enquiries directly to the admin panel.",
+      "Integrated Redux for centralized property filter state, bookmarking, and verified lead workflow."
     ],
-    architectureDetails: "Canvas object model with Fabric.js synchronized to backend storage, rendering pixel-perfect vector exports to high-res PDF downloads.",
+    architectureDetails: "Next.js server-side rendered application backed by Firebase authentication and Firestore database, delivering SEO-optimized property URLs, instant enquiry pipelines, and responsive mobile-first layouts.",
     links: {
-      live: "https://umeshcodes.vercel.app/",
-      github: "https://github.com/Umeshkotwal02/Resume_Backend",
+      live: "https://themagichomes.in/",
+      github: "https://github.com/Umeshkotwal02/",
     },
-    metrics: ["Real-time Canvas Rendering", "PDF Vector Export", "Multi-Gateway Support"]
+    metrics: ["Verified Property Listings", "Direct Admin Lead Capture", "SEO-Friendly URLs"]
+  },
+  {
+    id: "kapoor-lehenga-saree",
+    title: "Kapoor Lehenga Saree",
+    subtitle: "Luxury Ethnic Wear E-Commerce Experience",
+    description: "A premium e-commerce experience for high-end ethnic wear. Features a dynamic catalog, sophisticated filtering, and a seamless checkout process integrated with Razorpay. Optimized for high conversion and mobile responsiveness.",
+    clientLocation: "Surat, Gujarat",
+    techStack: ["ReactJS", "Redux Toolkit", "Razorpay", "Tailwind CSS"],
+    category: "ecommerce",
+    featured: true,
+    image: "/projects/kapoor-lehenga.webp",
+    highlights: [
+      "Built a robust architecture to handle thousands of product variants with fast attribute filtering (fabric, work, color, occasion).",
+      "Implemented Redux Toolkit for complex state management of the shopping cart and user sessions.",
+      "Crafted modern UI focusing on large, high-quality imagery to showcase textile details, utilizing glassmorphism elements to maintain a luxury feel.",
+      "Integrated seamless Razorpay checkout flow with webhook confirmation and inventory reservation."
+    ],
+    architectureDetails: "React component architecture powered by Redux Toolkit state slices, Tailwind CSS styling with glassmorphism touches, and Razorpay payment gateway integration with idempotent webhook verification.",
+    links: {
+      github: "https://github.com/Umeshkotwal02/",
+    },
+    metrics: ["Thousands of Variants", "Seamless Razorpay Checkout", "High-Resolution Showcase"]
   }
 ];
 
@@ -187,7 +190,7 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     id: "exp-2",
-    company: "Enterprise Web Technologies",
+    company: "Sridix Technology LLP",
     role: "MERN Stack Developer",
     period: "Sep 2024 – Feb 2026",
     location: "Surat, Gujarat",
@@ -504,11 +507,11 @@ export const SERVICES: Service[] = [
       "Headless test executions integrated directly into Bitbucket / GitHub Actions pipelines"
     ],
     caseStudy: {
-      projectId: "worcspace-erp",
-      projectTitle: "Worcspace ERP – Financial Ledger Validation",
+      projectId: "erp-software",
+      projectTitle: "ERP Software – Financial Ledger Validation",
       client: "Enterprise Clients",
       location: "Surat, Gujarat",
-      image: "/projects/worcspace.png",
+      image: "/projects/erp-software.png",
       summary: "Created automated regression test suites verifying double-entry voucher accounting balances and preventing ledger corruption.",
       impact: "Eliminated accounting voucher discrepancies with 100% test coverage on critical financial transaction calculation paths."
     },
@@ -547,7 +550,7 @@ export const SERVICES: Service[] = [
     description: "Building live chat, push notifications via FCM, real-time data synchronization, and video streaming using the Agora SDK.",
     fullDescription: "I engineer reactive, real-time experiences where users receive instant state updates without manual page refreshes. Having delivered real-time document annotation tools with Fabric.js, live streaming with Agora SDK, and Firebase Cloud Messaging (FCM) push notifications, I create bi-directional communication channels that keep thousands of clients perfectly synchronized.",
     icon: "Radio",
-    image: "/projects/background-remover.png",
+    image: "/projects/the-magic-homes.png",
     deliverables: [
       "Bi-directional WebSocket Architecture with Reconnection Backoff",
       "Agora SDK Audio/Video Real-Time Interactive Live Streaming",
@@ -564,13 +567,13 @@ export const SERVICES: Service[] = [
       "Optimistic UI updates on the client for instant perceived responsiveness"
     ],
     caseStudy: {
-      projectId: "pdf-editor-resume-builder",
-      projectTitle: "Interactive PDF Canvas & Document Suite",
-      client: "Global SaaS Users",
-      location: "Global",
-      image: "/projects/worcspace.png",
-      summary: "Engineered browser-based interactive canvas editor using Fabric.js for real-time text annotations, document manipulation, and instant PDF vector exports.",
-      impact: "Sub-16ms 60FPS canvas rendering performance with instant vector manipulation."
+      projectId: "the-magic-homes",
+      projectTitle: "The Magic Homes – Real-Time Property & Lead Portal",
+      client: "Real Estate Portal Stakeholders",
+      location: "Surat, Gujarat",
+      image: "/projects/the-magic-homes.png",
+      summary: "Engineered real-time enquiry routing and Firebase-authenticated user portals delivering instant lead notifications to administrators.",
+      impact: "Zero-latency enquiry transmission with 99.9% notification uptime."
     },
     workflow: [
       { step: "01", title: "Protocol & Architecture Selection", desc: "Choose between raw WebSockets, Socket.IO, Server-Sent Events (SSE), or WebRTC based on latency and throughput targets." },
@@ -750,11 +753,11 @@ export const SERVICES: Service[] = [
       "Multi-tenant data isolation guaranteeing strict tenant privacy and enterprise security"
     ],
     caseStudy: {
-      projectId: "worcspace-erp",
-      projectTitle: "Worcspace ERP – Industrial Enterprise Accounting Suite",
+      projectId: "erp-software",
+      projectTitle: "ERP Software – Centralized Operations & Accounting Suite",
       client: "Industrial & Manufacturing Enterprise Clients",
       location: "Surat, Gujarat",
-      image: "/projects/worcspace.png",
+      image: "/projects/erp-software.png",
       summary: "Developed mission-critical double-entry accounting ERP module handling thousands of daily invoice vouchers, journal entries, and automated bank reconciliations.",
       impact: "Saved client finance teams 25+ hours per week in manual ledger verification with zero data discrepancy."
     },
@@ -1017,35 +1020,35 @@ export const SERVICES: Service[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "test-1",
-    name: "Tariq Al-Mansoor",
-    role: "Product Director",
-    company: "Dubai Enterprise Solutions",
+    name: "Sona Makaryan",
+    role: "Project Manager",
+    company: "DALVE",
     location: "Dubai, UAE",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
     quote: "Umesh handled the entire backend architecture for our health & gym platform. His BullMQ queue implementation and Stripe Connect payout flows were delivered with absolute precision. High reliability and zero downtime!",
     rating: 5,
-    projectRelation: "Vyonic Platform Backend"
+    projectRelation: "Health & Gym Platform Backend"
   },
   {
     id: "test-2",
-    name: "Rahul Verma",
-    role: "Senior Engineering Manager",
-    company: "Code Expert Solutions",
-    location: "Surat, Gujarat",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-    quote: "Umesh is a standout Full Stack Engineer. He takes full ownership of complex backend tasks — from microservices inter-communication to AWS ECS CI/CD pipelines. A true asset to any high-performing engineering team.",
+    name: "Nikunj Gadhiya",
+    role: "CEO",
+    company: "Code Expert Solution",
+    location: "Surat, India",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    quote: "Demonstrates good technical skills in backend and full-stack development, with strong knowledge of Node.js, Express.js, REST APIs, databases, Prisma, and microservices. Takes ownership of assigned tasks, handles technical issues effectively, and works well with the team.",
     rating: 5,
-    projectRelation: "Backend Lead & Microservices"
+    projectRelation: "Backend & Microservices Lead"
   },
   {
     id: "test-3",
-    name: "Sneha Patel",
-    role: "Lead Frontend Architect",
-    company: "Enterprise Web Systems",
+    name: "Anand Makhanasa",
+    role: "App Owner",
+    company: "",
     location: "Surat, Gujarat",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
-    quote: "Working with Umesh on Kesaria Textile and Vybemena was smooth and efficient. His API designs are clean, well-documented, and blazingly fast with Redis caching.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+    quote: "Demonstrates good skills in website development with a strong understanding of frontend technologies, responsive design, UI implementation, and website performance. Delivers assigned tasks effectively, pays attention to design details, and works well with the team. Overall, a reliable developer who shows good technical ability and a willingness to learn and improve.",
     rating: 5,
-    projectRelation: "Kesaria Textile & Vybemena"
+    projectRelation: "Web & Frontend Architecture"
   }
 ];

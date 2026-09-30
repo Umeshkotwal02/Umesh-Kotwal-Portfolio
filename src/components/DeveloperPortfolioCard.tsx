@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Camera,
   ExternalLink,
   MapPin,
   Mail,
@@ -13,7 +12,6 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 interface DeveloperPortfolioCardProps {
   darkMode: boolean;
   photoUrl: string;
-  onOpenPhotoModal: () => void;
   onOpenTerminal: () => void;
   showTerminal: boolean;
   onOpenAiModal: () => void;
@@ -22,7 +20,6 @@ interface DeveloperPortfolioCardProps {
 export const DeveloperPortfolioCard: React.FC<DeveloperPortfolioCardProps> = ({
   darkMode,
   photoUrl,
-  onOpenPhotoModal,
   onOpenTerminal,
   showTerminal,
   onOpenAiModal,
@@ -93,18 +90,6 @@ export const DeveloperPortfolioCard: React.FC<DeveloperPortfolioCardProps> = ({
                 <span>Surat, India • Dubai Client Lead</span>
               </p>
             </div>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpenPhotoModal();
-              }}
-              className="p-2 rounded-xl bg-black/60 backdrop-blur-md hover:bg-[#FF5722] text-white transition-colors cursor-pointer shadow-md"
-              title="Change Photo"
-            >
-              <Camera className="w-4 h-4" />
-            </button>
           </div>
         </div>
 

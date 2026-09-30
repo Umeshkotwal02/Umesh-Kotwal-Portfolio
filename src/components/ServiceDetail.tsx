@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import confetti from 'canvas-confetti';
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -18,7 +19,10 @@ import {
   Terminal,
   Clock,
   Send,
-  MessageSquareCode
+  MessageSquareCode,
+  Phone,
+  RotateCcw,
+  AlertCircle
 } from 'lucide-react';
 import { Service } from '../types';
 import { SERVICES, PERSONAL_INFO } from '../data/portfolioData';
@@ -50,9 +54,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
 }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [inquirySent, setInquirySent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorText, setErrorText] = useState<string | null>(null);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
+    phone: '',
     message: `Hi Umesh, I'd like to discuss your "${service.title}" service for my project.`
   });
 
@@ -61,9 +68,48 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
   // Find other services for "Other Capabilities" footer
   const otherServices = SERVICES.filter(s => s.id !== service.id);
 
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setInquirySent(true);
+    if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorText(null);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          phone: formState.phone.trim() || undefined,
+          subject: `Service Inquiry: ${service.title}`,
+          message: formState.message.trim(),
+          budget: `Direct Service Engagement (${service.shortTitle})`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || data.details || 'Failed to dispatch inquiry.');
+      }
+
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } catch {}
+
+      setInquirySent(true);
+    } catch (err: any) {
+      console.error('Service inquiry submission error:', err);
+      setErrorText(err.message || 'Error dispatching inquiry. Please try again or reach out directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -605,37 +651,79 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 <div className={`p-8 rounded-2xl border text-center space-y-4 ${
                   darkMode ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-emerald-50 border-emerald-200 text-emerald-900'
                 }`}>
-                  <CheckCircle2 className="w-10 h-10 mx-auto text-emerald-500" />
-                  <h3 className="text-lg font-bold">Inquiry Sent Successfully</h3>
-                  <p className="text-xs">
-                    Thank you! Umesh has received your inquiry for {service.title} and will respond within 24 hours.
-                  </p>
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-500 border border-emerald-500/30 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-7 h-7" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold text-emerald-500">Inquiry Dispatched Successfully!</h3>
+                    <p className="text-xs leading-relaxed max-w-sm mx-auto">
+                      Thank you{formState.name ? `, ${formState.name}` : ''}! Umesh Kotwal has received your inquiry for <strong>{service.title}</strong>, and an automated confirmation receipt has been sent to your email.
+                    </p>
+                  </div>
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInquirySent(false);
+                        setFormState({
+                          name: '',
+                          email: '',
+                          phone: '',
+                          message: `Hi Umesh, I'd like to discuss your "${service.title}" service for my project.`
+                        });
+                      }}
+                      className="px-5 py-2.5 rounded-xl font-semibold text-xs transition-all bg-gradient-to-r from-[#FF5722] to-[#F4511E] text-white hover:brightness-105 shadow-md shadow-[#FF5722]/25 inline-flex items-center gap-2 cursor-pointer"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Submit Another Inquiry</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleInquirySubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {errorText && (
+                    <div className="p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-300 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                      <span>{errorText}</span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">Your Name</label>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                         placeholder="e.g. Alex Morgan"
-                        className={`w-full px-4 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
                           darkMode ? 'bg-zinc-950 border-white/10 focus:border-[#FF5722] text-white' : 'bg-zinc-50 border-black/10 focus:border-[#FF5722] text-zinc-900'
                         }`}
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">Your Email</label>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">Your Email *</label>
                       <input
                         type="email"
                         required
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         placeholder="alex@company.com"
-                        className={`w-full px-4 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
+                          darkMode ? 'bg-zinc-950 border-white/10 focus:border-[#FF5722] text-white' : 'bg-zinc-50 border-black/10 focus:border-[#FF5722] text-zinc-900'
+                        }`}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-mono text-zinc-400 mb-1">Phone Number *</label>
+                      <input
+                        type="tel"
+                        required
+                        value={formState.phone}
+                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
+                        placeholder="+91 6352001332"
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
                           darkMode ? 'bg-zinc-950 border-white/10 focus:border-[#FF5722] text-white' : 'bg-zinc-50 border-black/10 focus:border-[#FF5722] text-zinc-900'
                         }`}
                       />
@@ -643,13 +731,13 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">Project Requirements</label>
+                    <label className="block text-[11px] font-mono text-zinc-400 mb-1">Project Requirements *</label>
                     <textarea
                       rows={3}
                       required
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      className={`w-full px-4 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
+                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs outline-none transition-colors ${
                         darkMode ? 'bg-zinc-950 border-white/10 focus:border-[#FF5722] text-white' : 'bg-zinc-50 border-black/10 focus:border-[#FF5722] text-zinc-900'
                       }`}
                     />
@@ -657,10 +745,20 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
 
                   <button
                     type="submit"
-                    className="w-full py-3 px-6 text-xs font-bold text-white bg-[#FF5722] hover:bg-[#F4511E] rounded-xl flex items-center justify-center gap-2 shadow-md shadow-[#FF5722]/25 transition-all"
+                    disabled={isSubmitting}
+                    className="w-full py-3 px-6 text-xs font-bold text-white bg-gradient-to-r from-[#FF5722] to-[#F4511E] hover:from-[#F4511E] hover:to-[#E64A19] disabled:opacity-60 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-[#FF5722]/25 transition-all cursor-pointer"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Send Service Inquiry</span>
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>Dispatching Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Service Inquiry</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}

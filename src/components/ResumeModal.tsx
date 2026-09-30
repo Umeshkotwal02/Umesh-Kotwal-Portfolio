@@ -7,7 +7,6 @@ import {
   Download,
   Copy,
   Check,
-  Printer,
   Sparkles
 } from 'lucide-react';
 import { PERSONAL_INFO, EXPERIENCES, PROJECTS, CERTIFICATIONS } from '../data/portfolioData';
@@ -41,10 +40,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, darkM
     } finally {
       setDownloading(false);
     }
-  };
-
-  const handlePrint = () => {
-    window.print();
   };
 
   const handleCopyText = () => {
@@ -111,17 +106,6 @@ ${CERTIFICATIONS.map((c) => `• ${c.title} - ${c.issuer} (${c.year})`).join('\n
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy Text'}</span>
-            </button>
-
-            <button
-              onClick={handlePrint}
-              className={`hidden md:flex px-3 py-1.5 rounded-full text-xs font-mono items-center gap-1.5 border transition-colors ${
-                darkMode ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-white/[0.08]' : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-black/[0.06]'
-              }`}
-              title="Print Resume"
-            >
-              <Printer className="w-3.5 h-3.5 text-zinc-400" />
-              <span>Print</span>
             </button>
 
             <button
