@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp, Clock, MessageCircle, ExternalLink, Shield, Mail, Phone, MapPin, Building, Sparkles } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { BrandLogo } from './BrandLogo';
 
 interface FooterProps {
   darkMode: boolean;
@@ -73,11 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
             {/* Col 1: Brand & Professional Profile */}
             <div className="lg:col-span-4 space-y-4">
               <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center font-mono font-bold text-sm tracking-tight ${
-                  darkMode ? 'bg-zinc-900 border-white/[0.1] text-white shadow-inner' : 'bg-zinc-950 text-white border-zinc-900 shadow-md'
-                }`}>
-                  UK
-                </div>
+                <BrandLogo className="w-10 h-10" />
                 <div>
                   <h3 className={`text-base font-bold tracking-tight ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
                     Umesh Kotwal

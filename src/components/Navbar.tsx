@@ -30,6 +30,7 @@ import {
   Wifi
 } from 'lucide-react';
 import { SERVICES } from '../data/portfolioData';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -251,15 +252,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2.5 group shrink-0"
             id="nav-logo"
           >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-xs tracking-tighter transition-transform duration-200 group-hover:scale-105 border ${
-                darkMode
-                  ? 'bg-zinc-900 border-white/10 text-white shadow-inner'
-                  : 'bg-zinc-900 text-white border-zinc-900'
-              }`}
-            >
-              UK
-            </div>
+            <BrandLogo className="w-8 h-8" />
             <div className="flex flex-col">
               <span className="font-semibold text-xs tracking-tight leading-none group-hover:opacity-80 transition-opacity">
                 Umesh Kotwal
