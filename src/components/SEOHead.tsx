@@ -11,7 +11,7 @@ export interface SEOHeadProps {
 }
 
 const BASE_URL = 'https://umeshcodes.vercel.app';
-const DEFAULT_IMAGE = `${BASE_URL}/assets/about-us-BJhTeHfc.jpeg`;
+const DEFAULT_IMAGE = `${BASE_URL}/profile-portrait.png`;
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
