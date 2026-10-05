@@ -162,7 +162,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           </p>
 
           <p className={`text-sm sm:text-base leading-relaxed ${
-            darkMode ? 'text-zinc-400' : 'text-zinc-600'
+            darkMode ? 'text-zinc-300' : 'text-zinc-800'
           }`}>
             {project.description}
           </p>
@@ -189,7 +189,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all inline-flex items-center gap-2 ${
                   darkMode
                     ? 'bg-zinc-900 border-white/10 text-zinc-200 hover:bg-zinc-800'
-                    : 'bg-white border-black/10 text-zinc-800 hover:bg-zinc-100 shadow-xs'
+                    : 'bg-white border-zinc-200 text-zinc-800 hover:bg-zinc-100 shadow-xs'
                 }`}
               >
                 <Github className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 className={`px-4 py-2.5 rounded-xl text-xs font-semibold border transition-all inline-flex items-center gap-1.5 cursor-pointer ${
                   darkMode
                     ? 'bg-zinc-900/60 border-white/10 text-zinc-300 hover:text-white hover:bg-zinc-800'
-                    : 'bg-white border-black/10 text-zinc-700 hover:bg-zinc-100 shadow-xs'
+                    : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 shadow-xs'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5 text-[#FF5722]" />
@@ -212,6 +212,45 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
             )}
           </div>
         </motion.div>
+
+        {/* Full-Fidelity Uncut Project Screenshot Showcase */}
+        <div className={`rounded-3xl border overflow-hidden relative shadow-xl ${
+          darkMode ? 'bg-zinc-950 border-white/[0.08]' : 'bg-zinc-100 border-zinc-200'
+        }`}>
+          {/* Top Window Bar */}
+          <div className={`px-4 py-2.5 border-b flex items-center justify-between text-xs font-mono ${
+            darkMode ? 'border-white/[0.08] bg-black/40 text-zinc-400' : 'border-zinc-200 bg-zinc-200/70 text-zinc-700'
+          }`}>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+              <span className={`ml-2 text-[11px] hidden sm:inline ${darkMode ? 'text-zinc-400' : 'text-zinc-700 font-semibold'}`}>
+                {project.title} • Production Interface
+              </span>
+            </div>
+            <div className={`text-[11px] flex items-center gap-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-700 font-medium'}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Full Interface Preview</span>
+            </div>
+          </div>
+
+          <div className={`relative p-2 sm:p-4 flex items-center justify-center ${
+            darkMode ? 'bg-zinc-950' : 'bg-zinc-100/90'
+          }`}>
+            <img
+              src={project.image}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 pointer-events-none scale-105"
+            />
+            <img
+              src={project.image}
+              alt={`${project.title} Full Screenshot Preview`}
+              className="relative z-10 w-full h-auto max-h-[580px] object-contain rounded-xl shadow-2xl"
+            />
+          </div>
+        </div>
 
         {/* Metrics Grid */}
         {project.metrics && project.metrics.length > 0 && (
@@ -222,7 +261,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 className={`p-4 rounded-2xl border text-center ${
                   darkMode
                     ? 'bg-zinc-900/50 border-white/[0.08]'
-                    : 'bg-white border-black/[0.06] shadow-xs'
+                    : 'bg-white border-zinc-200 shadow-xs'
                 }`}
               >
                 <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">Key Milestone #{idx + 1}</span>
@@ -238,7 +277,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
         <div className={`p-8 rounded-3xl border space-y-8 ${
           darkMode
             ? 'bg-zinc-900/40 border-white/[0.08]'
-            : 'bg-white border-black/[0.06] shadow-sm'
+            : 'bg-white border-zinc-200 shadow-sm'
         }`}>
           {/* Section: Architectural Blueprint */}
           <div className="space-y-3">
@@ -249,7 +288,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               <span>Architectural Blueprint & Core Engineering</span>
             </h2>
             <p className={`text-sm leading-relaxed ${
-              darkMode ? 'text-zinc-300' : 'text-zinc-700'
+              darkMode ? 'text-zinc-300' : 'text-zinc-800'
             }`}>
               {project.architectureDetails}
             </p>
@@ -268,11 +307,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 <div
                   key={idx}
                   className={`p-4 rounded-xl border flex items-start gap-3 ${
-                    darkMode ? 'bg-zinc-900/80 border-white/[0.06]' : 'bg-zinc-50 border-black/[0.04]'
+                    darkMode ? 'bg-zinc-900/80 border-white/[0.06]' : 'bg-zinc-50 border-zinc-200'
                   }`}
                 >
                   <CheckCircle2 className="w-4 h-4 text-[#FF5722] shrink-0 mt-0.5" />
-                  <span className={`text-xs sm:text-sm leading-relaxed ${darkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
+                  <span className={`text-xs sm:text-sm leading-relaxed ${darkMode ? 'text-zinc-300' : 'text-zinc-800'}`}>
                     {highlight}
                   </span>
                 </div>

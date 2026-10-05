@@ -168,9 +168,9 @@ export const PROJECTS: Project[] = [
 export const EXPERIENCES: Experience[] = [
   {
     id: "exp-1",
-    company: "Code Expert Solutions",
+    company: "CodExpert Solutions",
     role: "Full Stack Developer",
-    period: "Mar 2026 – Present",
+    period: "Mar 2024 – Present",
     location: "Surat, Gujarat",
     type: "Full-time",
     current: true,
@@ -190,64 +190,20 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     id: "exp-2",
-    company: "Sridix Technology LLP",
-    role: "MERN Stack Developer",
-    period: "Sep 2024 – Feb 2026",
-    location: "Surat, Gujarat",
-    type: "Full-time",
-    summary: "Built high-performance web applications with React, Next.js, Redux Toolkit, third-party AI APIs, Stripe Connect KYC, and Agora live-streaming.",
-    responsibilities: [
-      "Converted Figma wireframes into pixel-perfect, accessible React components for major e-commerce platforms (Kesaria Textile, Kapoor Lehenga Saree).",
-      "Architected RESTful API structures and integrated AI APIs; implemented real-time live-streaming using Agora SDK.",
-      "Engineered secure checkout flows with Razorpay and Stripe, handling webhooks, state machines, and subscription billing.",
-      "Built a Document Management System (DMS) with Role-Based Access Control (RBAC), automated email triggers, and secure upload handling.",
-      "Developed an interactive Fabric.js PDF editor and delivered full-stack ownership of a Resume Builder platform with Node.js/MySQL.",
-      "Improved organic SEO visibility through metadata optimization, dynamic sitemaps, and deployment on Hostinger."
-    ],
-    skills: ["React.js", "Next.js", "Redux Toolkit", "Node.js", "MySQL", "Fabric.js", "Agora SDK", "Stripe Connect", "Razorpay", "SEO Optimization"],
-    impactMetrics: ["Google 1st Page Ranking", "Fabric.js Canvas PDF Editor", "Stripe Connect KYC Implementation"]
-  },
-  {
-    id: "exp-3",
-    company: "Webito Infotech",
-    role: "ReactJs Developer Intern",
-    period: "Aug 2024 – Sep 2024",
-    location: "Surat, Gujarat",
-    type: "Internship",
-    summary: "Built responsive user interfaces using React.js, JavaScript, and Bootstrap in collaboration with senior front-end engineers.",
-    responsibilities: [
-      "Developed modular and responsive front-end components using React.js, HTML5, CSS3, and Bootstrap.",
-      "Worked closely with UI/UX designers and senior developers to optimize component reusability and page speed."
-    ],
-    skills: ["React.js", "JavaScript", "HTML5", "CSS3", "Bootstrap"],
-  },
-  {
-    id: "exp-4",
-    company: "Profound Edutech Pvt Ltd",
-    role: "Trainee Engineer",
-    period: "July 2023 – Feb 2024",
+    company: "ProfoundEdutech",
+    role: "Trainee",
+    period: "Jul 2023 – Feb 2024",
     location: "Pune, Maharashtra",
     type: "Trainee",
+    current: false,
     summary: "Intensive engineering training in Java, MySQL, MERN stack, REST APIs, and microservices architecture fundamentals.",
     responsibilities: [
       "Trained in Java, MySQL, React.js, Node.js, Express.js, RESTful API design, and microservices fundamentals.",
-      "Developed full-stack web applications to solidify backend development and relational database structures."
+      "Developed full-stack web applications to solidify backend development and relational database structures.",
+      "Built structured modules and practiced relational schema normalization, query optimization, and REST API integration."
     ],
-    skills: ["Java", "MySQL", "React.js", "Node.js", "Express.js", "REST APIs"],
-  },
-  {
-    id: "exp-5",
-    company: "R3 Systems India Pvt. Ltd.",
-    role: "Web Development Intern",
-    period: "Nov 2021 – Jan 2022",
-    location: "Remote",
-    type: "Internship",
-    summary: "Learned core web engineering fundamentals including HTML, CSS, JavaScript, and responsive layout workflows.",
-    responsibilities: [
-      "Learned foundational web technologies (HTML5, CSS3, JavaScript ES6) and cross-browser responsive design principles.",
-      "Assisted senior engineers in building basic UI components and testing layout responsiveness across mobile devices."
-    ],
-    skills: ["HTML5", "CSS3", "JavaScript", "Responsive Web"],
+    skills: ["Java", "MySQL", "React.js", "Node.js", "Express.js", "REST APIs", "Database Design"],
+    impactMetrics: ["Full-Stack Engineering Training", "Relational Schema Normalization", "RESTful API Mastery"]
   }
 ];
 

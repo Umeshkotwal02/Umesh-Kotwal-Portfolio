@@ -50,7 +50,10 @@ interface LegalLinkItem {
 }
 
 export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }) => {
-  const BASE_URL = 'https://umeshcodes.vercel.app';
+  const currentOrigin = typeof window !== 'undefined' && window.location.origin
+    ? window.location.origin
+    : 'https://umeshcodes.vercel.app';
+  const BASE_URL = currentOrigin;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'core' | 'projects' | 'services' | 'legal'>('all');
 
@@ -98,10 +101,10 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
     {
       title: 'Production Experience',
       path: '/experience',
-      desc: 'Work history at Code Expert Solutions, Sridix Technology LLP, client deliverables, and milestones.',
+      desc: 'Work history at CodExpert Solutions, ProfoundEdutech, client deliverables, and milestones.',
       priority: '0.9',
       freq: 'Monthly',
-      keywords: ['Experience', 'Work History', 'Code Expert Solutions', 'Sridix Technology', 'Enterprise']
+      keywords: ['Experience', 'Work History', 'CodExpert Solutions', 'ProfoundEdutech', 'Enterprise']
     },
     {
       title: 'Architectural Projects',
@@ -479,10 +482,16 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredCore.map((item) => (
-                <div
+                <a
                   key={item.path}
-                  onClick={() => onNavigate(item.path)}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between ${
+                  href={item.path}
+                  onClick={(e) => {
+                    if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                      e.preventDefault();
+                      onNavigate(item.path);
+                    }
+                  }}
+                  className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between block ${
                     darkMode
                       ? 'bg-zinc-900/40 border-white/[0.08] hover:border-[#FF5722]/50 hover:bg-zinc-900/80 shadow-xs'
                       : 'bg-white border-black/[0.06] hover:border-[#FF5722]/50 hover:shadow-md'
@@ -516,7 +525,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
                       {BASE_URL}{item.path === '/' ? '' : item.path}
                     </span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </section>
@@ -539,10 +548,16 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
               {filteredProjects.map((proj) => {
                 const projectPath = `/projects/${proj.id}`;
                 return (
-                  <div
+                  <a
                     key={proj.id}
-                    onClick={() => onNavigate(projectPath)}
-                    className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between ${
+                    href={projectPath}
+                    onClick={(e) => {
+                      if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                        e.preventDefault();
+                        onNavigate(projectPath);
+                      }
+                    }}
+                    className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between block ${
                       darkMode
                         ? 'bg-zinc-900/40 border-white/[0.08] hover:border-[#FF5722]/50 hover:bg-zinc-900/80 shadow-xs'
                         : 'bg-white border-black/[0.06] hover:border-[#FF5722]/50 hover:shadow-md'
@@ -585,7 +600,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
@@ -609,10 +624,16 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
               {filteredServices.map((serv) => {
                 const servicePath = `/services/${serv.slug}`;
                 return (
-                  <div
+                  <a
                     key={serv.id}
-                    onClick={() => onNavigate(servicePath)}
-                    className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between ${
+                    href={servicePath}
+                    onClick={(e) => {
+                      if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                        e.preventDefault();
+                        onNavigate(servicePath);
+                      }
+                    }}
+                    className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between block ${
                       darkMode
                         ? 'bg-zinc-900/40 border-white/[0.08] hover:border-[#FF5722]/50 hover:bg-zinc-900/80 shadow-xs'
                         : 'bg-white border-black/[0.06] hover:border-[#FF5722]/50 hover:shadow-md'
@@ -654,7 +675,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
@@ -676,16 +697,19 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredLegal.map((item) => (
-                <div
+                <a
                   key={item.path}
-                  onClick={() => {
-                    if (item.external) {
-                      window.open(item.path, '_blank');
-                    } else {
+                  href={item.path}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
+                  onClick={(e) => {
+                    if (item.external) return;
+                    if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                      e.preventDefault();
                       onNavigate(item.path);
                     }
                   }}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between ${
+                  className={`p-5 rounded-2xl border transition-all cursor-pointer group flex flex-col justify-between block ${
                     darkMode
                       ? 'bg-zinc-900/40 border-white/[0.08] hover:border-[#FF5722]/50 hover:bg-zinc-900/80 shadow-xs'
                       : 'bg-white border-black/[0.06] hover:border-[#FF5722]/50 hover:shadow-md'
@@ -718,7 +742,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ darkMode, onNavigate }
                       {BASE_URL}{item.path}
                     </span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </section>

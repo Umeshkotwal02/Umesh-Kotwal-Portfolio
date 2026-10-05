@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import { LoadingScreen } from './components/LoadingScreen';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -42,7 +41,6 @@ type ActiveView =
   | 'contact';
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [aiInitialPrompt, setAiInitialPrompt] = useState<string | undefined>(undefined);
@@ -56,7 +54,8 @@ export default function App() {
   useEffect(() => {
     const parseHash = () => {
       const hash = window.location.hash || '';
-      const pathname = window.location.pathname || '';
+      const rawPathname = window.location.pathname || '';
+      const pathname = rawPathname.replace(/\/+$/, '') || '/';
 
       // Project Detail page via hash (#project/id) or path (/projects/id)
       if (
@@ -65,8 +64,8 @@ export default function App() {
         hash.startsWith('#projects/') ||
         hash.startsWith('#/projects/')
       ) {
-        const query = hash.replace(/^#(projects?\/|\/projects?\/)/, '').trim();
-        const found = PROJECTS.find(p => p.id === query);
+        const query = hash.replace(/^#(projects?\/|\/projects?\/)/, '').replace(/\/+$/, '').trim().toLowerCase();
+        const found = PROJECTS.find(p => p.id.toLowerCase() === query);
         if (found) {
           setSelectedProjectId(found.id);
           setSelectedServiceId(null);
@@ -76,8 +75,8 @@ export default function App() {
         }
       }
       if (pathname.startsWith('/projects/') || pathname.startsWith('/project/')) {
-        const query = pathname.replace(/^\/(projects?\/)/, '').trim();
-        const found = PROJECTS.find(p => p.id === query);
+        const query = pathname.replace(/^\/(projects?\/)/, '').replace(/\/+$/, '').trim().toLowerCase();
+        const found = PROJECTS.find(p => p.id.toLowerCase() === query);
         if (found) {
           setSelectedProjectId(found.id);
           setSelectedServiceId(null);
@@ -94,8 +93,8 @@ export default function App() {
         hash.startsWith('#services/') ||
         hash.startsWith('#/services/')
       ) {
-        const query = hash.replace(/^#(services?\/|\/services?\/)/, '').trim();
-        const found = SERVICES.find(s => s.slug === query || s.id === query);
+        const query = hash.replace(/^#(services?\/|\/services?\/)/, '').replace(/\/+$/, '').trim().toLowerCase();
+        const found = SERVICES.find(s => (s.slug && s.slug.toLowerCase() === query) || s.id.toLowerCase() === query);
         if (found) {
           setSelectedServiceId(found.id);
           setSelectedProjectId(null);
@@ -105,8 +104,8 @@ export default function App() {
         }
       }
       if (pathname.startsWith('/services/') || pathname.startsWith('/service/')) {
-        const query = pathname.replace(/^\/(services?\/)/, '').trim();
-        const found = SERVICES.find(s => s.slug === query || s.id === query);
+        const query = pathname.replace(/^\/(services?\/)/, '').replace(/\/+$/, '').trim().toLowerCase();
+        const found = SERVICES.find(s => (s.slug && s.slug.toLowerCase() === query) || s.id.toLowerCase() === query);
         if (found) {
           setSelectedServiceId(found.id);
           setSelectedProjectId(null);
@@ -187,7 +186,7 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (pathname === '/achievements') {
+      if (pathname === '/achievements' || pathname === '/education') {
         setActiveView('achievements');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -221,7 +220,11 @@ export default function App() {
 
     parseHash();
     window.addEventListener('hashchange', parseHash);
-    return () => window.removeEventListener('hashchange', parseHash);
+    window.addEventListener('popstate', parseHash);
+    return () => {
+      window.removeEventListener('hashchange', parseHash);
+      window.removeEventListener('popstate', parseHash);
+    };
   }, []);
 
   useEffect(() => {
@@ -237,23 +240,33 @@ export default function App() {
       handleNavigate('/');
       return;
     }
-    const found = SERVICES.find(s => s.id === serviceId || s.slug === serviceId);
+    const cleanId = serviceId.replace(/\/+$/, '').toLowerCase();
+    const found = SERVICES.find(
+      s => s.id.toLowerCase() === cleanId || (s.slug && s.slug.toLowerCase() === cleanId)
+    );
     if (found) {
       setSelectedServiceId(found.id);
       setSelectedProjectId(null);
       setActiveView('service');
-      window.location.hash = `#service/${found.slug}`;
+      const targetPath = `/services/${found.slug || found.id}`;
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState(null, '', targetPath);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handleSelectProject = (projectId: string) => {
-    const found = PROJECTS.find(p => p.id === projectId);
+    const cleanId = projectId.replace(/\/+$/, '').toLowerCase();
+    const found = PROJECTS.find(p => p.id.toLowerCase() === cleanId);
     if (found) {
       setSelectedProjectId(found.id);
       setSelectedServiceId(null);
       setActiveView('project');
-      window.location.hash = `#project/${found.id}`;
+      const targetPath = `/projects/${found.id}`;
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState(null, '', targetPath);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -268,7 +281,9 @@ export default function App() {
       setActiveView('home');
       setSelectedServiceId(null);
       setSelectedProjectId(null);
-      window.location.hash = '';
+      if (window.location.pathname !== '/' || window.location.hash) {
+        window.history.pushState(null, '', '/');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -278,7 +293,7 @@ export default function App() {
       path.startsWith('/services/') ||
       path.startsWith('/service/')
     ) {
-      const slug = path.replace(/^(#services?\/|\/services?\/)/, '');
+      const slug = path.replace(/^(#services?\/|\/services?\/)/, '').replace(/\/+$/, '');
       handleSelectService(slug);
       return;
     }
@@ -288,7 +303,7 @@ export default function App() {
       path.startsWith('/projects/') ||
       path.startsWith('/project/')
     ) {
-      const id = path.replace(/^(#projects?\/|\/projects?\/)/, '');
+      const id = path.replace(/^(#projects?\/|\/projects?\/)/, '').replace(/\/+$/, '');
       handleSelectProject(id);
       return;
     }
@@ -302,7 +317,7 @@ export default function App() {
       setActiveView('terms');
       setSelectedServiceId(null);
       setSelectedProjectId(null);
-      window.location.hash = '#terms';
+      window.history.pushState(null, '', '/terms');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -316,7 +331,7 @@ export default function App() {
       setActiveView('privacy');
       setSelectedServiceId(null);
       setSelectedProjectId(null);
-      window.location.hash = '#privacy';
+      window.history.pushState(null, '', '/privacy');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -325,63 +340,63 @@ export default function App() {
       setActiveView('sitemap');
       setSelectedServiceId(null);
       setSelectedProjectId(null);
-      window.location.hash = '#sitemap';
+      window.history.pushState(null, '', '/sitemap');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/about') {
       setActiveView('about');
-      window.location.hash = '#about';
+      window.history.pushState(null, '', '/about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/skills') {
       setActiveView('skills');
-      window.location.hash = '#skills';
+      window.history.pushState(null, '', '/skills');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/experience') {
       setActiveView('experience');
-      window.location.hash = '#experience';
+      window.history.pushState(null, '', '/experience');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/projects') {
       setActiveView('projects');
-      window.location.hash = '#projects';
+      window.history.pushState(null, '', '/projects');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/services') {
       setActiveView('services');
-      window.location.hash = '#services';
+      window.history.pushState(null, '', '/services');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    if (path === '/achievements') {
+    if (path === '/achievements' || path === '/education') {
       setActiveView('achievements');
-      window.location.hash = '#achievements';
+      window.history.pushState(null, '', path);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/testimonials') {
       setActiveView('testimonials');
-      window.location.hash = '#testimonials';
+      window.history.pushState(null, '', '/testimonials');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
     if (path === '/contact') {
       setActiveView('contact');
-      window.location.hash = '#contact';
+      window.history.pushState(null, '', '/contact');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -411,26 +426,19 @@ export default function App() {
     <div className={`min-h-screen font-sans antialiased transition-colors duration-300 ${darkMode ? 'dark bg-[#09090b] text-zinc-100' : 'bg-[#fafafa] text-zinc-900'}`}>
       <CustomCursor />
 
-      {/* Boot Loading Screen */}
-      <AnimatePresence>
-        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
-
-      {!loading && (
-        <>
-          <Navbar
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-            onOpenAiModal={() => {
-              setAiInitialPrompt(undefined);
-              setAiModalOpen(true);
-            }}
-            onOpenResumeModal={() => setResumeModalOpen(true)}
-            onSelectService={handleSelectService}
-            selectedServiceId={selectedServiceId}
-            onNavigate={handleNavigate}
-            currentPath={window.location.hash || window.location.pathname}
-          />
+      <Navbar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        onOpenAiModal={() => {
+          setAiInitialPrompt(undefined);
+          setAiModalOpen(true);
+        }}
+        onOpenResumeModal={() => setResumeModalOpen(true)}
+        onSelectService={handleSelectService}
+        selectedServiceId={selectedServiceId}
+        onNavigate={handleNavigate}
+        currentPath={window.location.hash || window.location.pathname}
+      />
 
           <main>
             {activeView === 'service' && activeService && (
@@ -513,11 +521,11 @@ export default function App() {
               <StandalonePage
                 title="Professional Experience"
                 subtitle="Production Roles & Engineering Milestones"
-                description="Review Umesh Kotwal's work history as Full Stack Developer at Code Expert Solutions and Sridix Technology LLP."
+                description="Review Umesh Kotwal's work history as Full Stack Developer at CodExpert Solutions and Trainee at ProfoundEdutech."
                 canonicalPath="/experience"
                 darkMode={darkMode}
                 onNavigate={handleNavigate}
-                keywords={["Work Experience", "Code Expert Solutions", "Sridix Technology", "Backend Lead"]}
+                keywords={["Work Experience", "CodExpert Solutions", "ProfoundEdutech", "Backend Lead"]}
               >
                 <Experience darkMode={darkMode} />
               </StandalonePage>
@@ -613,11 +621,13 @@ export default function App() {
 
                 <About darkMode={darkMode} />
 
-                <Skills darkMode={darkMode} />
-
                 <Experience darkMode={darkMode} />
 
+                <Skills darkMode={darkMode} />
+
                 <Projects darkMode={darkMode} />
+
+                <Achievements darkMode={darkMode} />
 
                 <TechStack darkMode={darkMode} />
 
@@ -629,8 +639,6 @@ export default function App() {
                     setAiModalOpen(true);
                   }}
                 />
-
-                <Achievements darkMode={darkMode} />
 
                 <Testimonials darkMode={darkMode} />
 
@@ -671,8 +679,6 @@ export default function App() {
             isOpen={resumeModalOpen}
             onClose={() => setResumeModalOpen(false)}
           />
-        </>
-      )}
-    </div>
-  );
-}
+        </div>
+      );
+    }

@@ -239,15 +239,15 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
           {/* Modern Infinite Architectural Typography Ribbon */}
           <div className="pt-10 pb-6 border-t border-dashed" style={{ borderColor: darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}>
             {/* Tech Spec Header */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-4 text-[10px] font-mono tracking-widest uppercase">
-              <div className="flex items-center gap-2 text-[#FF5722] font-bold">
+            <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-4 mb-4 text-[10px] font-mono tracking-widest uppercase">
+              <div className="flex items-center gap-2 text-[#FF5722] font-bold shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-ping" />
                 <span>// ENTERPRISE ARCHITECTURE & FULL STACK SYSTEMS</span>
               </div>
-              <div className="text-zinc-500 hidden sm:block">
+              <div className="text-zinc-500 hidden lg:block truncate max-w-md">
                 NODE.JS • REDIS CACHING • BULLMQ DLQ • STRIPE CONNECT • NEXT.JS 15
               </div>
-              <div className="flex items-center gap-1.5 text-emerald-500 font-semibold">
+              <div className="flex items-center gap-1.5 text-emerald-500 font-semibold shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>SURAT / DUBAI • AVAILABLE FOR HIRE</span>
               </div>
@@ -269,7 +269,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
               <div className="animate-marquee flex items-center gap-10">
                 {/* Loop Chunk 1 */}
                 <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap">
-                  {/* 1. FULL STACK DEVELOP */}
+                  {/* 1. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
                     <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
@@ -278,7 +278,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
                     <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
                       darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
                     }`}>
-                      FULL STACK DEVELOP
+                      FULL STACK DEVELOPER
                     </span>
                   </div>
 
@@ -344,7 +344,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                 {/* Loop Chunk 2 (Identical for seamless infinite wrapping) */}
                 <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap" aria-hidden="true">
-                  {/* 1. FULL STACK DEVELOP */}
+                  {/* 1. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
                     <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
@@ -353,7 +353,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
                     <span className={`transition-all duration-300 cursor-pointer inline-block group-hover/item:scale-105 group-hover/item:tracking-wider ${
                       darkMode ? 'text-zinc-800 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.7)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.5)]'
                     }`}>
-                      FULL STACK DEVELOP
+                      FULL STACK DEVELOPER
                     </span>
                   </div>
 

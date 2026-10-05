@@ -97,11 +97,12 @@ export const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
 
   return (
     <section
-      id="achievements"
+      id="education"
       className={`py-24 sm:py-32 relative border-t transition-colors duration-300 ${
         darkMode ? 'bg-[#09090b] border-white/[0.06]' : 'bg-[#FAFAFA] border-zinc-200'
       }`}
     >
+      <span id="achievements" className="sr-only" />
       {/* Subtle architectural background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
@@ -517,3 +518,5 @@ export const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
     </section>
   );
 };
+
+export const Education = Achievements;

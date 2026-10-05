@@ -109,32 +109,41 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                 }`}
               >
                 <div>
-                  {/* Image Preview Container */}
-                  <div className="relative h-52 sm:h-56 overflow-hidden bg-zinc-950">
+                  {/* Image Preview Container - Full Screenshot Preservation without crop */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-950 flex items-center justify-center">
+                    {/* Ambient blurred backdrop for seamless edge transition */}
+                    <img
+                      src={project.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-110 pointer-events-none"
+                    />
+
+                    {/* Main Full-Fidelity Uncut Screenshot */}
                     <img
                       src={project.image}
                       alt={project.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                      className="relative z-10 w-full h-full object-contain p-1 group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-md"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
 
                     {/* Top Left: Client / Location Badge */}
-                    <div className="absolute top-3.5 left-3.5 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200 font-medium">
+                    <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200 font-medium">
                       <Globe className="w-3 h-3 text-[#FF5722]" />
                       <span>{project.clientLocation || 'Global'}</span>
                     </div>
 
                     {/* Top Right: Featured Badge */}
                     {project.featured && (
-                      <div className="absolute top-3.5 right-3.5 flex items-center gap-1 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30 text-[10px] font-mono text-amber-300 font-medium">
+                      <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30 text-[10px] font-mono text-amber-300 font-medium">
                         <Sparkles className="w-3 h-3 text-amber-400" />
                         <span>Featured</span>
                       </div>
                     )}
 
                     {/* Quick Category overlay chip at bottom left of image */}
-                    <div className="absolute bottom-3 left-3.5">
+                    <div className="absolute bottom-3 left-3.5 z-20">
                       <span className="text-[10px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#FF5722]/90 text-white shadow-sm">
                         {project.category}
                       </span>
@@ -251,7 +260,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
         {/* Modal: Architectural Deep Dive Inspector */}
         <AnimatePresence>
           {activeModalProject && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -265,55 +274,108 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
                 className={`relative w-full max-w-2xl rounded-3xl border shadow-2xl overflow-hidden z-10 my-auto ${
-                  darkMode ? 'bg-zinc-950 border-white/15 text-white' : 'bg-white border-black/10 text-zinc-900'
+                  darkMode ? 'bg-zinc-950 border-white/15 text-zinc-100' : 'bg-white border-zinc-200 text-zinc-900 shadow-2xl'
                 }`}
               >
                 <div className="h-1.5 w-full bg-gradient-to-r from-[#FF5722] via-orange-400 to-amber-500" />
 
                 <div className="p-6 sm:p-8 space-y-6 max-h-[85vh] overflow-y-auto">
-                  <div className="flex items-start justify-between gap-4 border-b pb-4 border-zinc-800/40">
-                    <div>
-                      <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-[#FF5722] font-semibold">
-                        <Code2 className="w-3 h-3 text-[#FF5722]" />
+                  {/* Modal Header */}
+                  <div className={`flex items-start justify-between gap-4 border-b pb-4 ${
+                    darkMode ? 'border-zinc-800/80' : 'border-zinc-200'
+                  }`}>
+                    <div className="space-y-1">
+                      <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-[#FF5722] font-bold">
+                        <Code2 className="w-3.5 h-3.5 text-[#FF5722]" />
                         <span>{activeModalProject.category} System</span>
+                        {activeModalProject.clientLocation && (
+                          <>
+                            <span className="text-zinc-400">·</span>
+                            <span className={darkMode ? 'text-zinc-400' : 'text-zinc-600'}>{activeModalProject.clientLocation}</span>
+                          </>
+                        )}
                       </div>
-                      <h3 className="text-2xl font-bold font-display mt-1">
+                      <h3 className={`text-2xl sm:text-3xl font-bold font-display tracking-tight ${
+                        darkMode ? 'text-zinc-100' : 'text-zinc-950'
+                      }`}>
                         {activeModalProject.title}
                       </h3>
-                      <p className="text-xs text-zinc-400 mt-1">
-                        {activeModalProject.subtitle} • {activeModalProject.clientLocation}
+                      <p className={`text-xs sm:text-sm font-semibold text-[#FF5722]`}>
+                        {activeModalProject.subtitle}
                       </p>
                     </div>
 
                     <button
                       onClick={() => setActiveModalProject(null)}
-                      className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                      className={`p-2 rounded-xl transition-colors cursor-pointer shrink-0 ${
+                        darkMode ? 'text-zinc-400 hover:text-white hover:bg-zinc-800' : 'text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100'
+                      }`}
+                      aria-label="Close dialog"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   </div>
 
-                  {/* Architecture Details Box */}
-                  <div className={`p-4 rounded-2xl border space-y-2 ${
-                    darkMode ? 'bg-zinc-900/60 border-white/10' : 'bg-zinc-50 border-black/10'
+                  {/* Screenshot Preview Showcase Container */}
+                  <div className={`rounded-2xl border overflow-hidden relative ${
+                    darkMode ? 'bg-zinc-900/60 border-white/10' : 'bg-zinc-100 border-zinc-200'
+                  }`}>
+                    <div className="relative aspect-[16/9] w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+                      <img
+                        src={activeModalProject.image}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover blur-xl opacity-25 scale-105 pointer-events-none"
+                      />
+                      <img
+                        src={activeModalProject.image}
+                        alt={activeModalProject.title}
+                        className="relative z-10 w-full h-full object-contain p-2"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Project Overview Description */}
+                  <div className="space-y-1.5">
+                    <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                      darkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
+                      Overview & Business Purpose
+                    </h4>
+                    <p className={`text-xs sm:text-sm leading-relaxed ${
+                      darkMode ? 'text-zinc-300' : 'text-zinc-800 font-normal'
+                    }`}>
+                      {activeModalProject.description}
+                    </p>
+                  </div>
+
+                  {/* Architecture & Data Safety Box - Crisp High Contrast */}
+                  <div className={`p-4 sm:p-5 rounded-2xl border-l-4 border-l-[#FF5722] border space-y-2 ${
+                    darkMode ? 'bg-zinc-900/80 border-white/10' : 'bg-zinc-50 border-zinc-200 shadow-2xs'
                   }`}>
                     <h4 className="text-xs font-mono font-bold text-[#FF5722] uppercase tracking-wider flex items-center gap-2">
                       <Layers className="w-3.5 h-3.5" />
                       <span>Architecture & Data Safety Controls</span>
                     </h4>
-                    <p className="text-xs leading-relaxed text-zinc-300">
+                    <p className={`text-xs sm:text-sm leading-relaxed ${
+                      darkMode ? 'text-zinc-200' : 'text-zinc-900 font-medium'
+                    }`}>
                       {activeModalProject.architectureDetails}
                     </p>
                   </div>
 
-                  {/* Deliverable Highlights */}
-                  <div className="space-y-2.5">
-                    <h4 className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
-                      Key Deliverables & Engineered Features
+                  {/* Key Deliverables & Engineered Features */}
+                  <div className="space-y-3">
+                    <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                      darkMode ? 'text-zinc-400' : 'text-zinc-700'
+                    }`}>
+                      Key Deliverables & Engineered Solutions
                     </h4>
                     <ul className="space-y-2">
                       {activeModalProject.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs text-zinc-300 leading-relaxed">
+                        <li key={i} className={`p-3 rounded-xl border flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed ${
+                          darkMode ? 'bg-zinc-900/40 border-white/[0.06] text-zinc-300' : 'bg-zinc-50/80 border-zinc-200 text-zinc-800'
+                        }`}>
                           <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                           <span>{h}</span>
                         </li>
@@ -321,36 +383,68 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                     </ul>
                   </div>
 
-                  {/* Action Buttons in Modal */}
-                  <div className="pt-4 border-t border-zinc-800/60 flex items-center justify-between gap-3">
-                    <div className="flex flex-wrap gap-2">
-                      {activeModalProject.links.github && (
-                        <a
-                          href={activeModalProject.links.github}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-mono font-medium flex items-center gap-2 transition-colors"
+                  {/* Tech Stack Tags */}
+                  <div className="space-y-2">
+                    <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                      darkMode ? 'text-zinc-400' : 'text-zinc-700'
+                    }`}>
+                      Technologies & Frameworks
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {activeModalProject.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className={`text-xs font-mono px-2.5 py-1 rounded-xl border flex items-center gap-1.5 ${
+                            darkMode
+                              ? 'bg-zinc-900 text-zinc-200 border-white/10'
+                              : 'bg-zinc-100 text-zinc-800 border-zinc-200 shadow-2xs'
+                          }`}
                         >
-                          <Github className="w-4 h-4" />
-                          <span>Source Code</span>
-                        </a>
-                      )}
+                          <TechIcon name={tech} size={14} darkMode={darkMode} />
+                          <span>{tech}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons in Modal */}
+                  <div className={`pt-4 border-t flex flex-wrap items-center justify-between gap-3 ${
+                    darkMode ? 'border-zinc-800/80' : 'border-zinc-200'
+                  }`}>
+                    <div className="flex flex-wrap gap-2">
                       {activeModalProject.links.live && (
                         <a
                           href={activeModalProject.links.live}
                           target="_blank"
                           rel="noreferrer"
-                          className="px-4 py-2 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white text-xs font-mono font-medium flex items-center gap-2 shadow-md transition-colors"
+                          className="px-4 py-2 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white text-xs font-mono font-bold flex items-center gap-2 shadow-md shadow-[#FF5722]/20 transition-all active:scale-95"
                         >
                           <span>Open Live Site</span>
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {activeModalProject.links.github && (
+                        <a
+                          href={activeModalProject.links.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold flex items-center gap-2 border transition-all ${
+                            darkMode
+                              ? 'bg-zinc-800 border-zinc-700 text-white hover:bg-zinc-700'
+                              : 'bg-zinc-100 border-zinc-300 text-zinc-800 hover:bg-zinc-200'
+                          }`}
+                        >
+                          <Github className="w-4 h-4" />
+                          <span>Source Code</span>
                         </a>
                       )}
                     </div>
 
                     <button
                       onClick={() => setActiveModalProject(null)}
-                      className="text-xs font-mono text-zinc-400 hover:text-white"
+                      className={`text-xs font-mono font-semibold transition-colors cursor-pointer px-4 py-2 rounded-xl border ${
+                        darkMode ? 'bg-zinc-900 border-white/10 text-zinc-300 hover:text-white' : 'bg-zinc-100 border-zinc-200 text-zinc-700 hover:text-zinc-950'
+                      }`}
                     >
                       Close
                     </button>

@@ -96,8 +96,8 @@ Contact & Profiles:
 
 Core Background & Superpowers:
 - 2+ years of production experience crafting scalable, high-throughput microservices, fault-tolerant background queues, and responsive full-stack applications.
-- Current Position: Full Stack Developer at Code Expert Solutions (Mar 2026 – Present). Primary backend architecture lead for Dubai-based enterprise clients.
-- Previous Position: MERN Stack Developer at Sridix Technology LLP (Sep 2024 – Feb 2026).
+- Current Position: Full Stack Developer at CodExpert Solutions (Mar 2024 – Present). Primary backend architecture lead for Dubai-based enterprise clients.
+- Previous Training: Trainee at ProfoundEdutech (Jul 2023 – Feb 2024).
 - Core Stack: React 18/19, Next.js 14/15, Node.js, Express, TypeScript, Redis, BullMQ (with Dead Letter Queue strategy for zero data loss), PostgreSQL, MySQL, Prisma ORM, WebSockets.
 - Payment Engineering: Advanced Stripe integrations, Stripe Connect (multi-vendor KYC onboarding, automated 48-hour post-event payouts for Dubai platforms like Vybemena), Razorpay webhooks with transactional idempotency.
 - Cloud & Infrastructure: AWS ECS, Docker containerization, Jenkins CI/CD, Contabo, Vercel, Hostinger.
@@ -563,13 +563,13 @@ CORE TECHNICAL SKILLS:
 - QA & Testing: Playwright, Cypress, Jest, Postman API Regression Suites
 
 PROFESSIONAL EXPERIENCE:
-1. Full Stack Developer | Code Expert Solutions (Mar 2026 – Present, Surat / Remote)
+1. Full Stack Developer | CodExpert Solutions (Mar 2024 – Present, Surat / Remote)
    - Architected decoupled Node.js microservices with Prisma ORM.
    - Designed BullMQ background queue with Dead Letter Queue (DLQ) retry strategies for zero data loss.
    - Primary technical backend lead for Dubai-based clients.
-2. MERN Stack Developer | Sridix Technology LLP (Sep 2024 – Feb 2026, Surat, India)
-   - Built full-stack SaaS apps with Next.js, Agora SDK live streaming, and Stripe Connect.
-   - Spearheaded SEO optimization strategies ranking Kesaria Textile on 1st page of Google.
+2. Trainee | ProfoundEdutech (Jul 2023 – Feb 2024, Pune, India)
+   - Trained in Java, MySQL, React.js, Node.js, Express.js, RESTful APIs, and microservices fundamentals.
+   - Built full-stack web applications and relational schema designs.
 
 KEY PROJECTS:
 - Vyonic - Health & Fitness: Dubai Health & Fitness Mobile & Admin Ecosystem (Node.js microservices, BullMQ DLQ, Stripe)

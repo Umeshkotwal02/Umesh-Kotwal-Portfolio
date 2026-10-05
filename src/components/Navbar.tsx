@@ -120,9 +120,10 @@ const MEGA_MENU_CATEGORIES: MegaMenuCategory[] = [
 
 const BASE_NAV_LINKS = [
   { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Education", href: "#education" },
   { name: "Contact", href: "#contact" }
 ];
 
@@ -207,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ['hero', 'about', 'services', 'projects', 'experience', 'skills', 'architecture', 'contact'];
+      const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'education', 'architecture', 'services', 'testimonials', 'contact'];
       const scrollPosition = window.scrollY + 160;
 
       for (const section of sections) {

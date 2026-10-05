@@ -4,17 +4,10 @@ import {
   User,
   ShieldCheck,
   Building2,
-  Cpu,
   Layers,
   Zap,
   CheckCircle2,
-  ArrowRight,
-  Database,
-  Radio,
-  Server,
-  Workflow,
   Sparkles,
-  Code2,
   Terminal,
   Globe,
   GraduationCap,
@@ -26,57 +19,8 @@ interface AboutProps {
   darkMode: boolean;
 }
 
-const ARCHITECTURE_NODES = [
-  {
-    id: 'api-gateway',
-    title: 'API Gateway & Routing',
-    category: 'Ingress & Auth',
-    description: 'Stateless ingress layer handling JWT validation, SSL termination, and client rate limiting before routing to internal domain microservices.',
-    metrics: '<5ms Auth Verification',
-    icon: Server,
-    color: '#FF5722'
-  },
-  {
-    id: 'redis-cache',
-    title: 'Redis In-Memory Tier',
-    category: 'Low-Latency Cache',
-    description: 'Sub-40ms key-value store caching hot user profiles, product catalogs, and token bucket counters to prevent unnecessary database hits.',
-    metrics: '99.2% Cache Hit Ratio',
-    icon: Zap,
-    color: '#DC382D'
-  },
-  {
-    id: 'bullmq-queues',
-    title: 'BullMQ Async Queues',
-    category: 'Zero-Loss Workflows',
-    description: 'Decoupled queue workers processing heavy image conversions, email dispatch, push notifications, and payment webhooks with Dead Letter Queues (DLQ).',
-    metrics: '0% Message Drop Guarantee',
-    icon: Workflow,
-    color: '#FF6600'
-  },
-  {
-    id: 'database-tier',
-    title: 'PostgreSQL & MySQL',
-    category: 'Persistence Layer',
-    description: 'ACID-compliant relational schemas with indexed foreign keys, Prisma ORM type-safety, and automated database connection pooling.',
-    metrics: 'Optimized Query Indexes',
-    icon: Database,
-    color: '#4169E1'
-  },
-  {
-    id: 'realtime-layer',
-    title: 'WebSockets & Agora RTC',
-    category: 'Live Data Streaming',
-    description: 'Bi-directional socket connections for live venue chat, instant order status broadcasts, and low-latency audio/video streaming via Agora.',
-    metrics: '<120ms Global Latency',
-    icon: Radio,
-    color: '#099DFD'
-  }
-];
-
 export const About: React.FC<AboutProps> = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState<'journey' | 'principles' | 'dubai'>('journey');
-  const [selectedArchNode, setSelectedArchNode] = useState<string>('api-gateway');
 
   return (
     <section
@@ -96,19 +40,19 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-mono tracking-tight font-semibold bg-[#FF5722]/10 text-[#FF5722] border-[#FF5722]/25 shadow-xs">
             <User className="w-3.5 h-3.5 text-[#FF5722]" />
-            <span>BACKGROUND & ARCHITECTURE</span>
+            <span>BIOGRAPHY & BACKGROUND</span>
           </div>
 
           <h2 className={`text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] ${
             darkMode ? 'text-zinc-100' : 'text-zinc-950'
           }`}>
-            Behind the Systems
+            Engineering Background
           </h2>
 
           <p className={`text-sm sm:text-base leading-relaxed ${
             darkMode ? 'text-zinc-400' : 'text-zinc-600'
           }`}>
-            A deep look into Umesh Kotwal's engineering philosophy, architecture standards, and direct client delivery across Indian and Dubai enterprises.
+            A deep look into Umesh Kotwal's engineering philosophy, background journey, and direct client delivery across Indian and Dubai enterprises.
           </p>
         </div>
 
@@ -412,104 +356,6 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Architecture Pipeline Cards */}
-        <div className={`pt-8 border-t space-y-6 ${darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
-          <div className="text-center max-w-xl mx-auto space-y-2">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF5722] font-semibold">
-              SYSTEM ARCHITECTURE
-            </span>
-            <h3 className={`text-xl sm:text-2xl font-bold tracking-tight ${
-              darkMode ? 'text-zinc-100' : 'text-zinc-950'
-            }`}>
-              Production Microservices Stack
-            </h3>
-            <p className={`text-xs sm:text-sm ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-              Select any component to inspect data flow, caching strategies, and resilience controls.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-            {ARCHITECTURE_NODES.map((node) => {
-              const Icon = node.icon;
-              const isSelected = selectedArchNode === node.id;
-              return (
-                <button
-                  key={node.id}
-                  onClick={() => setSelectedArchNode(node.id)}
-                  className={`p-4 rounded-2xl border text-left transition-all duration-200 relative group cursor-pointer ${
-                    isSelected
-                      ? darkMode
-                        ? 'bg-zinc-900 border-[#FF5722]/80 shadow-lg shadow-[#FF5722]/10 ring-1 ring-[#FF5722]/40'
-                        : 'bg-white border-[#FF5722] shadow-md shadow-[#FF5722]/10 ring-1 ring-[#FF5722]/30'
-                      : darkMode
-                      ? 'bg-zinc-900/40 border-white/[0.06] hover:border-[#FF5722]/40 hover:bg-zinc-900/70'
-                      : 'bg-white/80 border-black/[0.06] hover:border-[#FF5722]/40 shadow-2xs'
-                  }`}
-                >
-                  <div className={`p-2.5 rounded-xl border w-fit mb-3 transition-transform duration-200 group-hover:scale-105 ${
-                    isSelected
-                      ? 'bg-[#FF5722] text-white border-[#FF5722]'
-                      : darkMode
-                      ? 'bg-zinc-950 text-zinc-300 border-white/[0.08]'
-                      : 'bg-zinc-100 text-zinc-800 border-black/[0.06]'
-                  }`}>
-                    <Icon className="w-4 h-4" />
-                  </div>
-
-                  <h4 className={`text-xs font-bold leading-tight ${
-                    darkMode ? 'text-zinc-100' : 'text-zinc-950'
-                  }`}>
-                    {node.title}
-                  </h4>
-                  <span className={`text-[10px] font-mono block mt-1 ${
-                    darkMode ? 'text-zinc-500' : 'text-zinc-400'
-                  }`}>
-                    {node.category}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Node Detail Inspector Card */}
-          {selectedArchNode && (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`p-5 sm:p-6 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left ${
-                darkMode ? 'bg-zinc-950/70 border-white/[0.08]' : 'bg-white border-black/[0.06] shadow-sm'
-              }`}
-            >
-              <div className="space-y-1.5 max-w-2xl">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono text-[#FF5722] font-semibold uppercase">
-                    ACTIVE NODE INSPECTOR
-                  </span>
-                  <span className="text-zinc-400">•</span>
-                  <span className="text-xs font-mono font-medium text-emerald-500">
-                    {ARCHITECTURE_NODES.find((n) => n.id === selectedArchNode)?.metrics}
-                  </span>
-                </div>
-                <h4 className={`text-base font-bold ${darkMode ? 'text-zinc-100' : 'text-zinc-950'}`}>
-                  {ARCHITECTURE_NODES.find((n) => n.id === selectedArchNode)?.title}
-                </h4>
-                <p className={`text-xs sm:text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                  {ARCHITECTURE_NODES.find((n) => n.id === selectedArchNode)?.description}
-                </p>
-              </div>
-
-              <a
-                href="#projects"
-                className="px-4 py-2.5 rounded-full font-medium text-xs transition-all duration-200 shrink-0 flex items-center gap-2 bg-[#FF5722] hover:bg-[#F4511E] text-white shadow-md shadow-[#FF5722]/25 self-start sm:self-center"
-              >
-                <span>Explore Projects</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </motion.div>
-          )}
-        </div>
 
       </div>
     </section>
