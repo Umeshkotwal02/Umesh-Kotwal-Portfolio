@@ -247,7 +247,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
             <img
               src={project.image}
               alt={`${project.title} Full Screenshot Preview`}
-              className="relative z-10 w-full h-auto max-h-[580px] object-contain rounded-xl shadow-2xl"
+              className="relative z-10 w-full h-auto max-h-[720px] object-contain rounded-xl shadow-2xl"
             />
           </div>
         </div>

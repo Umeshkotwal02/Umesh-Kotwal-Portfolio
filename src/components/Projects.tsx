@@ -109,52 +109,71 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                 }`}
               >
                 <div>
-                  {/* Image Preview Container - Full Screenshot Preservation without crop */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-950 flex items-center justify-center">
+                  {/* Clean Browser Frame Header - Badges outside screenshot so zero text is cut or obscured */}
+                  <div className={`px-4 py-2.5 border-b flex items-center justify-between text-xs font-mono select-none ${
+                    darkMode ? 'bg-zinc-950 border-white/[0.08]' : 'bg-zinc-100 border-black/[0.06]'
+                  }`}>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                      <span className={`ml-2 text-[10px] font-mono hidden sm:inline truncate max-w-[120px] ${
+                        darkMode ? 'text-zinc-500' : 'text-zinc-600'
+                      }`}>
+                        {project.id}.app
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      {/* Location Badge */}
+                      <div className={`flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium ${
+                        darkMode ? 'bg-zinc-800 text-zinc-300' : 'bg-white text-zinc-700 border border-zinc-200 shadow-2xs'
+                      }`}>
+                        <Globe className="w-2.5 h-2.5 text-[#FF5722]" />
+                        <span>{project.clientLocation || 'Global'}</span>
+                      </div>
+
+                      {/* Featured Badge */}
+                      {project.featured && (
+                        <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium ${
+                          darkMode ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-amber-50 text-amber-700 border border-amber-200'
+                        }`}>
+                          <Sparkles className="w-2.5 h-2.5 text-amber-500" />
+                          <span>Featured</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Image Preview Container - 100% Uncut Screenshot Showcase with NO overlay badges */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-950 flex items-center justify-center p-2 group-hover:bg-zinc-900/90 transition-colors">
                     {/* Ambient blurred backdrop for seamless edge transition */}
                     <img
                       src={project.image}
                       alt=""
                       aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-110 pointer-events-none"
+                      className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-25 scale-105 pointer-events-none"
                     />
 
-                    {/* Main Full-Fidelity Uncut Screenshot */}
+                    {/* Main Full-Fidelity Uncut Screenshot - No badges or dark gradients covering any text */}
                     <img
                       src={project.image}
                       alt={project.title}
                       referrerPolicy="no-referrer"
-                      className="relative z-10 w-full h-full object-contain p-1 group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-md"
+                      className="relative z-10 w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-md"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-10" />
-
-                    {/* Top Left: Client / Location Badge */}
-                    <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200 font-medium">
-                      <Globe className="w-3 h-3 text-[#FF5722]" />
-                      <span>{project.clientLocation || 'Global'}</span>
-                    </div>
-
-                    {/* Top Right: Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/30 text-[10px] font-mono text-amber-300 font-medium">
-                        <Sparkles className="w-3 h-3 text-amber-400" />
-                        <span>Featured</span>
-                      </div>
-                    )}
-
-                    {/* Quick Category overlay chip at bottom left of image */}
-                    <div className="absolute bottom-3 left-3.5 z-20">
-                      <span className="text-[10px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#FF5722]/90 text-white shadow-sm">
-                        {project.category}
-                      </span>
-                    </div>
                   </div>
 
                   {/* Card Content Body */}
                   <div className="p-6 space-y-4">
                     <div className="space-y-1.5">
-                      <div className="text-[11px] font-mono font-medium text-zinc-400 uppercase tracking-wider">
-                        {project.subtitle}
+                      <div className="flex items-center justify-between gap-2 pb-0.5">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#FF5722]/10 text-[#FF5722] border border-[#FF5722]/20">
+                          {project.category}
+                        </span>
+                        <span className={`text-[11px] font-mono ${darkMode ? 'text-zinc-500' : 'text-zinc-500'}`}>
+                          {project.subtitle}
+                        </span>
                       </div>
 
                       <h3 className={`text-xl font-display font-bold tracking-tight group-hover:text-[#FF5722] transition-colors ${
@@ -320,7 +339,23 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                   <div className={`rounded-2xl border overflow-hidden relative ${
                     darkMode ? 'bg-zinc-900/60 border-white/10' : 'bg-zinc-100 border-zinc-200'
                   }`}>
-                    <div className="relative aspect-[16/9] w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+                    {/* Window Title Bar */}
+                    <div className={`px-4 py-2 border-b flex items-center justify-between text-xs font-mono select-none ${
+                      darkMode ? 'bg-zinc-950/90 border-white/[0.08] text-zinc-400' : 'bg-zinc-200/70 border-zinc-200 text-zinc-700 font-medium'
+                    }`}>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                        <span className="ml-2 text-[11px] truncate">{activeModalProject.title} • Production UI</span>
+                      </div>
+                      <span className="text-[10px] text-emerald-500 font-mono flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Uncut Screenshot Preview
+                      </span>
+                    </div>
+
+                    <div className="relative w-full flex items-center justify-center bg-zinc-950 p-2 sm:p-3 overflow-hidden">
                       <img
                         src={activeModalProject.image}
                         alt=""
@@ -330,7 +365,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
                       <img
                         src={activeModalProject.image}
                         alt={activeModalProject.title}
-                        className="relative z-10 w-full h-full object-contain p-2"
+                        className="relative z-10 w-full h-auto max-h-[460px] object-contain rounded-lg drop-shadow-xl"
                       />
                     </div>
                   </div>

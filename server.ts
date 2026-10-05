@@ -95,7 +95,7 @@ Contact & Profiles:
 - Availability: Open for Full-Time Roles, Technical Consulting, and Contract Engagements (Worldwide / Remote / On-Site Dubai / India).
 
 Core Background & Superpowers:
-- 2+ years of production experience crafting scalable, high-throughput microservices, fault-tolerant background queues, and responsive full-stack applications.
+- 2.5+ Year Experience crafting scalable, high-throughput microservices, fault-tolerant background queues, and responsive full-stack applications.
 - Current Position: Full Stack Developer at CodExpert Solutions (Mar 2024 – Present). Primary backend architecture lead for Dubai-based enterprise clients.
 - Previous Training: Trainee at ProfoundEdutech (Jul 2023 – Feb 2024).
 - Core Stack: React 18/19, Next.js 14/15, Node.js, Express, TypeScript, Redis, BullMQ (with Dead Letter Queue strategy for zero data loss), PostgreSQL, MySQL, Prisma ORM, WebSockets.

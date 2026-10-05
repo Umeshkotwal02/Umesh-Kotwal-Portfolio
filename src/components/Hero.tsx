@@ -181,7 +181,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
         </div>
       );
     } else if (trimmed === 'whoami') {
-      response = "Umesh Kotwal — Full-Stack Developer with 2+ years of production experience crafting responsive Next.js frontends and resilient Node.js microservices for Dubai & Indian enterprises.";
+      response = "Umesh Kotwal — Full-Stack Developer with 2.5+ years of production experience crafting responsive Next.js frontends and resilient Node.js microservices for Dubai & Indian enterprises.";
     } else if (trimmed === 'stack') {
       response = "Frontend: React 18, Next.js 14, Tailwind CSS, Motion\nBackend: Node.js, Express.js, Microservices, REST APIs, WebSockets\nDatabases: MongoDB (Mongoose), PostgreSQL, MySQL, Prisma ORM\nCaching & Queues: Redis (sub-10ms), BullMQ (Dead Letter Queues)\nIntegrations: Stripe Connect, Razorpay, Agora RTC, AWS S3, Docker";
     } else if (trimmed === 'projects') {
@@ -346,7 +346,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAiModal, onOpenResumeModal, da
               className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"
             >
               {[
-                { value: '2+ Yrs', label: 'Production Experience', highlight: true },
+                { value: '2.5+', label: 'Year Experience', highlight: true },
                 { value: '15+', label: 'Apps & Systems Deployed', highlight: false },
                 { value: '<10ms', label: 'Redis Cache Response', highlight: false },
                 { value: '99.9%', label: 'Production SLA Uptime', highlight: false },

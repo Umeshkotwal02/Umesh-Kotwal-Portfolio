@@ -404,17 +404,35 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({
                   </div>
                 </div>
 
-                {/* Case Study Image */}
-                <div className="relative rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 group aspect-video">
-                  <img
-                    src={service.caseStudy.image}
-                    alt={service.caseStudy.projectTitle}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-medium">
-                    {service.caseStudy.projectTitle}
+                {/* Case Study Image - Clean Full Uncut Screenshot */}
+                <div className={`relative rounded-2xl overflow-hidden border ${
+                  darkMode ? 'bg-zinc-950 border-white/[0.08]' : 'bg-zinc-100 border-black/[0.08]'
+                }`}>
+                  <div className={`px-3 py-1.5 border-b flex items-center justify-between text-[11px] font-mono ${
+                    darkMode ? 'bg-zinc-900/80 border-white/[0.06] text-zinc-400' : 'bg-zinc-200/60 border-zinc-200 text-zinc-600'
+                  }`}>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-rose-500/80 inline-block" />
+                      <span className="w-2 h-2 rounded-full bg-amber-500/80 inline-block" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500/80 inline-block" />
+                      <span className="ml-1.5 text-[10px] truncate">{service.caseStudy.projectTitle}</span>
+                    </div>
+                    <span className="text-[10px] text-emerald-500">Uncut Preview</span>
+                  </div>
+
+                  <div className="relative aspect-[16/10] w-full bg-zinc-950 flex items-center justify-center p-2 overflow-hidden">
+                    <img
+                      src={service.caseStudy.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover blur-xl opacity-25 scale-105 pointer-events-none"
+                    />
+                    <img
+                      src={service.caseStudy.image}
+                      alt={service.caseStudy.projectTitle}
+                      className="relative z-10 w-full h-full object-contain rounded-md drop-shadow-md"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </div>
 

@@ -238,14 +238,22 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
           {/* Modern Infinite Architectural Typography Ribbon */}
           <div className="pt-10 pb-6 border-t border-dashed" style={{ borderColor: darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}>
-            {/* Tech Spec Header */}
-            <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-4 mb-4 text-[10px] font-mono tracking-widest uppercase">
+            {/* Tech Spec Header - No text truncation or cutting */}
+            <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-4 mb-6 text-[10px] font-mono tracking-wider uppercase">
               <div className="flex items-center gap-2 text-[#FF5722] font-bold shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] animate-ping" />
                 <span>// ENTERPRISE ARCHITECTURE & FULL STACK SYSTEMS</span>
               </div>
-              <div className="text-zinc-500 hidden lg:block truncate max-w-md">
-                NODE.JS • REDIS CACHING • BULLMQ DLQ • STRIPE CONNECT • NEXT.JS 15
+              <div className="text-zinc-500 hidden md:flex items-center gap-2 shrink-0">
+                <span>NODE.JS</span>
+                <span>•</span>
+                <span>REDIS</span>
+                <span>•</span>
+                <span>BULLMQ</span>
+                <span>•</span>
+                <span>STRIPE</span>
+                <span>•</span>
+                <span>NEXT.JS</span>
               </div>
               <div className="flex items-center gap-1.5 text-emerald-500 font-semibold shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -255,7 +263,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
             {/* Seamless Infinite Marquee with Outline & Solid Typography and Kinetic Hover Animations */}
             <div
-              className="relative overflow-hidden py-8 select-none group cursor-pointer"
+              className="relative overflow-hidden pt-12 pb-8 sm:pt-14 sm:pb-10 select-none group cursor-pointer"
               data-cursor="FULL STACK"
             >
               {/* Subtle edge fade masks */}
@@ -271,7 +279,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
                 <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap">
                   {/* 1. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                       <span>⚡ ARCHITECT & LEAD ENGINEER</span>
                     </span>
@@ -289,9 +297,9 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 2. UMESH KOTWAL */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>✦ 5+ YRS DISTRIBUTED SYSTEMS</span>
+                      <span>✦ 2.5+ YEAR EXPERIENCE</span>
                     </span>
                     <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
                       darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
@@ -307,7 +315,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 3. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />
                       <span>🚀 NODE.JS • REACT • MICROSERVICES</span>
                     </span>
@@ -325,7 +333,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 4. UMESH KOTWAL */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                       <span>⚡ ZERO DATA LOSS ARCHITECT</span>
                     </span>
@@ -346,7 +354,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
                 <div className="flex items-center gap-8 sm:gap-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[-0.03em] whitespace-nowrap" aria-hidden="true">
                   {/* 1. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg shadow-[#FF5722]/40 whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                       <span>⚡ ARCHITECT & LEAD ENGINEER</span>
                     </span>
@@ -364,9 +372,9 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 2. UMESH KOTWAL */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-zinc-900 border border-[#FF5722]/50 shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>✦ 5+ YRS DISTRIBUTED SYSTEMS</span>
+                      <span>✦ 2.5+ YEAR EXPERIENCE</span>
                     </span>
                     <span className={`transition-all duration-300 cursor-pointer inline-block text-stroke-subtle group-hover/item:scale-105 group-hover/item:tracking-wider ${
                       darkMode ? 'text-zinc-700 hover:text-[#FF5722] hover:drop-shadow-[0_0_30px_rgba(255,87,34,0.8)]' : 'text-zinc-300 hover:text-[#FF5722] hover:drop-shadow-[0_0_20px_rgba(255,87,34,0.6)]'
@@ -382,7 +390,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 3. FULL STACK DEVELOPER */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-gradient-to-r from-blue-600 to-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />
                       <span>🚀 NODE.JS • REACT • MICROSERVICES</span>
                     </span>
@@ -400,7 +408,7 @@ export const Footer: React.FC<FooterProps> = ({ darkMode, onOpenResumeModal, onN
 
                   {/* 4. UMESH KOTWAL */}
                   <div className="relative group/item inline-flex items-center">
-                    <span className="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
+                    <span className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 -translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 pointer-events-none z-20 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold tracking-wider text-white bg-[#FF5722] shadow-lg whitespace-nowrap flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                       <span>⚡ ZERO DATA LOSS ARCHITECT</span>
                     </span>

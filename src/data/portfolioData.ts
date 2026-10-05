@@ -4,12 +4,12 @@ export const PERSONAL_INFO = {
   name: "Umesh Kotwal",
   title: "Full Stack Developer (React.js / Next.js / Node.js)",
   shortBio: "Architecting high-throughput microservices, fault-tolerant background queues (BullMQ/DLQ), Redis caching, and pixel-perfect Next.js/React web applications.",
-  fullBio: "Full Stack Developer with 2+ years of production experience crafting scalable backend architectures and modern frontend web apps. Specialized in microservices design, high-frequency Redis caching, BullMQ job queues with Dead Letter Queue strategies for zero data loss, WebSockets, Stripe Connect payouts, and AWS ECS CI/CD deployment. Trusted backend lead for Dubai-based enterprise clients.",
+  fullBio: "Full Stack Developer with 2.5+ Year Experience crafting scalable backend architectures and modern frontend web apps. Specialized in microservices design, high-frequency Redis caching, BullMQ job queues with Dead Letter Queue strategies for zero data loss, WebSockets, Stripe Connect payouts, and AWS ECS CI/CD deployment. Trusted backend lead for Dubai-based enterprise clients.",
   location: "Surat, Gujarat, India",
   phone: "+91 6352001332",
   email: "umeshkotwal658@gmail.com",
   avatarUrl: "https://umeshkotwal.vercel.app/assets/about-us-BJhTeHfc.jpeg",
-  portfolioUrl: "https://umeshkotwal.vercel.app/",
+  portfolioUrl: "https://umeshcodes.vercel.app/",
   githubUrl: "https://github.com/Umeshkotwal02/",
   linkedinUrl: "https://www.linkedin.com/in/umeshkotwal07/",
   cgpa: "8.18",
@@ -17,9 +17,9 @@ export const PERSONAL_INFO = {
   college: "KCE Society's College of Engineering & Management, Jalgaon, Maharashtra",
   graduationYear: "2019 – 2023",
   availabilityStatus: "Available for Senior / Full Stack Opportunities & High-Impact Contracts",
-  yearsExperience: "2+ Years Production Experience",
+  yearsExperience: "2.5+ Year Experience",
   keyMetrics: [
-    { label: "Years Experience", value: "2+" },
+    { label: "Years Experience", value: "2.5+ Year Experience" },
     { label: "Production Backend Systems", value: "15+" },
     { label: "System Uptime Rate", value: "99.9%" },
     { label: "Data Loss Prevention", value: "0% Loss (DLQ)" },
@@ -209,31 +209,31 @@ export const EXPERIENCES: Experience[] = [
 
 export const SKILLS: Skill[] = [
   // Backend & Architecture
-  { name: "Node.js & Express.js", category: "backend", level: 95, iconName: "Server", yearsOfExp: "2+ yrs", tags: ["RESTful API", "Microservices", "Middleware", "ESM/CJS"] },
-  { name: "Microservices Architecture", category: "backend", level: 90, iconName: "Layers", yearsOfExp: "2+ yrs", tags: ["Service Discovery", "Inter-service RPC", "Scalability", "Isolation"] },
-  { name: "BullMQ & Dead Letter Queue (DLQ)", category: "backend", level: 92, iconName: "Workflow", yearsOfExp: "2+ yrs", tags: ["Zero Data Loss", "Retry Strategies", "Async Processing", "Redis Queues"] },
-  { name: "Redis Caching & Session", category: "backend", level: 90, iconName: "Zap", yearsOfExp: "2+ yrs", tags: ["Key-Value Storage", "Rate Limiting", "Cache Invalidation", "Pub/Sub"] },
+  { name: "Node.js & Express.js", category: "backend", level: 95, iconName: "Server", yearsOfExp: "2.5+ yrs", tags: ["RESTful API", "Microservices", "Middleware", "ESM/CJS"] },
+  { name: "Microservices Architecture", category: "backend", level: 90, iconName: "Layers", yearsOfExp: "2.5+ yrs", tags: ["Service Discovery", "Inter-service RPC", "Scalability", "Isolation"] },
+  { name: "BullMQ & Dead Letter Queue (DLQ)", category: "backend", level: 92, iconName: "Workflow", yearsOfExp: "2.5+ yrs", tags: ["Zero Data Loss", "Retry Strategies", "Async Processing", "Redis Queues"] },
+  { name: "Redis Caching & Session", category: "backend", level: 90, iconName: "Zap", yearsOfExp: "2.5+ yrs", tags: ["Key-Value Storage", "Rate Limiting", "Cache Invalidation", "Pub/Sub"] },
   
   // Languages & Frameworks
-  { name: "TypeScript / JavaScript (ES6+)", category: "languages", level: 95, iconName: "Code2", yearsOfExp: "2+ yrs", tags: ["Async/Await", "Type Safety", "Generics", "Event Loop"] },
-  { name: "React.js & Next.js", category: "frontend", level: 92, iconName: "Atom", yearsOfExp: "2+ yrs", tags: ["App Router", "SSR/SSG", "Hooks", "State Management"] },
-  { name: "Redux Toolkit & Context", category: "frontend", level: 90, iconName: "Cpu", yearsOfExp: "2+ yrs", tags: ["Global State", "Async Thunks", "Immer", "Selectors"] },
-  { name: "Tailwind CSS / SCSS", category: "frontend", level: 95, iconName: "Palette", yearsOfExp: "2+ yrs", tags: ["Glassmorphism", "Responsive Layouts", "Custom Themes", "Animations"] },
+  { name: "TypeScript / JavaScript (ES6+)", category: "languages", level: 95, iconName: "Code2", yearsOfExp: "2.5+ yrs", tags: ["Async/Await", "Type Safety", "Generics", "Event Loop"] },
+  { name: "React.js & Next.js", category: "frontend", level: 92, iconName: "Atom", yearsOfExp: "2.5+ yrs", tags: ["App Router", "SSR/SSG", "Hooks", "State Management"] },
+  { name: "Redux Toolkit & Context", category: "frontend", level: 90, iconName: "Cpu", yearsOfExp: "2.5+ yrs", tags: ["Global State", "Async Thunks", "Immer", "Selectors"] },
+  { name: "Tailwind CSS / SCSS", category: "frontend", level: 95, iconName: "Palette", yearsOfExp: "2.5+ yrs", tags: ["Glassmorphism", "Responsive Layouts", "Custom Themes", "Animations"] },
 
   // Databases
-  { name: "PostgreSQL & MySQL", category: "database", level: 90, iconName: "Database", yearsOfExp: "2+ yrs", tags: ["Relational Schema", "ACID Transactions", "Indexes", "Row Locks"] },
-  { name: "Prisma ORM", category: "database", level: 92, iconName: "Binary", yearsOfExp: "2+ yrs", tags: ["Type-Safe Queries", "Migrations", "Relationships", "Connection Pooling"] },
+  { name: "PostgreSQL & MySQL", category: "database", level: 90, iconName: "Database", yearsOfExp: "2.5+ yrs", tags: ["Relational Schema", "ACID Transactions", "Indexes", "Row Locks"] },
+  { name: "Prisma ORM", category: "database", level: 92, iconName: "Binary", yearsOfExp: "2.5+ yrs", tags: ["Type-Safe Queries", "Migrations", "Relationships", "Connection Pooling"] },
 
   // Real-Time & Payments
-  { name: "Stripe & Stripe Connect", category: "realtime", level: 92, iconName: "CreditCard", yearsOfExp: "2+ yrs", tags: ["KYC Verification", "48h Payouts", "Webhooks", "Subscriptions"] },
-  { name: "Razorpay Integration", category: "realtime", level: 90, iconName: "ShieldCheck", yearsOfExp: "2+ yrs", tags: ["Payment Gateway", "Order State Machine", "Checkout UI"] },
-  { name: "WebSockets & FCM", category: "realtime", level: 88, iconName: "Radio", yearsOfExp: "2+ yrs", tags: ["Real-time Sync", "Push Notifications", "Live Chat", "Broadcast"] },
+  { name: "Stripe & Stripe Connect", category: "realtime", level: 92, iconName: "CreditCard", yearsOfExp: "2.5+ yrs", tags: ["KYC Verification", "48h Payouts", "Webhooks", "Subscriptions"] },
+  { name: "Razorpay Integration", category: "realtime", level: 90, iconName: "ShieldCheck", yearsOfExp: "2.5+ yrs", tags: ["Payment Gateway", "Order State Machine", "Checkout UI"] },
+  { name: "WebSockets & FCM", category: "realtime", level: 88, iconName: "Radio", yearsOfExp: "2.5+ yrs", tags: ["Real-time Sync", "Push Notifications", "Live Chat", "Broadcast"] },
   { name: "Agora SDK Live Stream", category: "realtime", level: 85, iconName: "Video", yearsOfExp: "1+ yr", tags: ["RTC Stream", "Video Calling", "Broadcast Roles"] },
 
   // DevOps & Tools
-  { name: "Docker & Containerization", category: "devops", level: 88, iconName: "Container", yearsOfExp: "2+ yrs", tags: ["Dockerfiles", "Multi-stage Builds", "Compose", "Images"] },
+  { name: "Docker & Containerization", category: "devops", level: 88, iconName: "Container", yearsOfExp: "2.5+ yrs", tags: ["Dockerfiles", "Multi-stage Builds", "Compose", "Images"] },
   { name: "AWS ECS & Contabo", category: "devops", level: 85, iconName: "Cloud", yearsOfExp: "1+ yr", tags: ["Task Definitions", "Container Deployment", "Cloud Infrastructure"] },
-  { name: "Jenkins & Bitbucket CI/CD", category: "devops", level: 86, iconName: "GitBranch", yearsOfExp: "2+ yrs", tags: ["Automated Pipelines", "PR Triggers", "Build Scripts"] },
+  { name: "Jenkins & Bitbucket CI/CD", category: "devops", level: 86, iconName: "GitBranch", yearsOfExp: "2.5+ yrs", tags: ["Automated Pipelines", "PR Triggers", "Build Scripts"] },
   { name: "Fabric.js & PDF Canvas", category: "frontend", level: 85, iconName: "FileCode", yearsOfExp: "1+ yr", tags: ["Canvas Editing", "Text Annotations", "Vector Export"] }
 ];
 

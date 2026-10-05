@@ -255,8 +255,8 @@ export const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
             <div className={`p-3.5 rounded-2xl border text-center transition-colors ${
               darkMode ? 'bg-zinc-900/60 border-white/[0.06]' : 'bg-white border-zinc-200 shadow-xs'
             }`}>
-              <div className="text-lg sm:text-xl font-bold font-mono text-[#FF5722]">{totalExp.short}</div>
-              <div className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider mt-0.5">Total Career Tenure</div>
+              <div className="text-lg sm:text-xl font-bold font-mono text-[#FF5722]">2.5+ Yrs</div>
+              <div className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider mt-0.5">Year Experience</div>
             </div>
 
             <div className={`p-3.5 rounded-2xl border text-center transition-colors ${

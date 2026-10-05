@@ -58,35 +58,35 @@ export const DeveloperPortfolioCard: React.FC<DeveloperPortfolioCardProps> = ({
       {/* Developer Profile Card Content */}
       <div className="p-3 sm:p-3.5 space-y-3">
         {/* Developer Hero Portrait Frame */}
-        <div className="relative rounded-2xl overflow-hidden aspect-[4/3.8] group bg-zinc-950 shadow-inner">
+        <div className="relative rounded-2xl overflow-hidden aspect-[4/4.2] group bg-zinc-950 shadow-inner">
           {/* Technical Corner Brackets */}
-          <div className="absolute top-2.5 left-2.5 z-20 font-mono text-[10px] text-white/50 pointer-events-none">
+          <div className="absolute top-2.5 left-2.5 z-20 font-mono text-[10px] text-white/60 pointer-events-none">
             ┌ uk.portfolio
           </div>
-          <div className="absolute top-2.5 right-2.5 z-20 font-mono text-[10px] text-white/50 pointer-events-none">
-            v2.4 ┐
+          <div className="absolute top-2.5 right-2.5 z-20 font-mono text-[10px] text-white/60 pointer-events-none">
+            v2.5 ┐
           </div>
 
           <img
             src={photoUrl}
             alt={PERSONAL_INFO.name}
-            className="w-full h-full object-cover object-center group-hover:scale-104 transition-all duration-700 ease-out"
+            className="w-full h-full object-cover object-top group-hover:scale-104 transition-all duration-700 ease-out"
           />
 
           {/* Subtle digital vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/25 to-transparent pointer-events-none" />
 
-          {/* Bottom Overlay Badge Info */}
+          {/* Bottom Overlay Badge Info - Crisp, never cut or clipped */}
           <div className="absolute bottom-3 left-3 right-3 z-20 flex items-end justify-between text-white">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#FF5722] text-white text-[10px] font-mono font-bold uppercase tracking-wider mb-1 shadow-xs">
-                Full-Stack Dev • 2+ Yrs
+            <div className="w-full">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#FF5722] text-white text-[10px] font-mono font-bold uppercase tracking-wider mb-1.5 shadow-xs">
+                Full-Stack Dev • 2.5+ Year Experience
               </div>
               <h3 className="font-display font-extrabold text-lg sm:text-xl text-white leading-tight">
                 {PERSONAL_INFO.name}
               </h3>
               <p className="text-[11px] text-zinc-300 font-mono flex items-center gap-1.5 mt-0.5">
-                <MapPin className="w-3 h-3 text-[#FF5722]" />
+                <MapPin className="w-3 h-3 text-[#FF5722] shrink-0" />
                 <span>Surat, India • Dubai Client Lead</span>
               </p>
             </div>
